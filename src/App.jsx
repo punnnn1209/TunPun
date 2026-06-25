@@ -452,7 +452,7 @@ function freshnessStage(score, flowerEmoji) {
   if (score >= 60) return { emoji: flower, label: "Tươi tắn", scale: "scale-100", opacity: "opacity-100", gray: "" };
   if (score >= 40) return { emoji: flower, label: "Hơi mệt mỏi", scale: "scale-100", opacity: "opacity-80", gray: "" };
   if (score >= 15) return { emoji: flower, label: "Hơi héo, cần quan tâm", scale: "scale-90", opacity: "opacity-70", gray: "grayscale" };
-  return { emoji: WILTED_EMOJI, label: "Héo úa rồi, cần được chăm sóc 💧", scale: "scale-90", opacity: "opacity-90", gray: "" };
+  return { emoji: WILTED_EMOJI, label: "Nhớ bạn rồi, cần được chăm sóc 💧", scale: "scale-90", opacity: "opacity-90", gray: "" };
 }
 
 function computeAlerts(data) {
@@ -534,15 +534,17 @@ function ProgressBar({ ratio, colorClass }) {
   );
 }
 
-// Progress bar with the "x / y unit" label embedded right in the middle of the bar itself,
-// used for every counter-based task (habits + assigned challenges) per request.
-function ProgressBarWithLabel({ ratio, colorClass, label }) {
+// Progress box with the icon/plant AND the "x / y unit" label both inside the bar itself,
+// so the visual (flower pot, hero emoji...) sits in the middle of the progress indicator
+// instead of living in a separate row above it.
+function ProgressBoxWithIcon({ ratio, colorClass, label, children }) {
   const pct = Math.max(0, Math.min(100, ratio * 100));
   return (
-    <div className="relative w-full h-8 rounded-full bg-gray-100 overflow-hidden">
-      <div className={`absolute inset-y-0 left-0 rounded-full ${colorClass} transition-all duration-500 ease-out`} style={{ width: `${pct}%` }} />
-      <div className="absolute inset-0 flex items-center justify-center px-2">
-        <span className="text-xs font-extrabold text-gray-700 truncate">{label}</span>
+    <div className="relative flex-1 h-20 rounded-2xl bg-gray-100 overflow-hidden">
+      <div className={`absolute inset-y-0 left-0 rounded-2xl ${colorClass} transition-all duration-500 ease-out`} style={{ width: `${pct}%` }} />
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
+        {children}
+        <span className="text-xs font-extrabold text-gray-700 drop-shadow-sm">{label}</span>
       </div>
     </div>
   );
@@ -554,13 +556,13 @@ const PLANT_MAX_STEM = 52; // px, height at 100% progress
 const PLANT_MIN_STEM = 6; // px, always-visible little sprout even at 0%
 const PLANT_LEAF_CHECKPOINTS = [14, 27, 40]; // px of stem height at which each leaf pair appears
 
-function GrowingPlant({ ratio, flowerEmoji, bump }) {
+function GrowingPlant({ ratio, flowerEmoji, bump, compact }) {
   const cappedRatio = Math.min(1, Math.max(0, ratio));
   const stemHeight = PLANT_MIN_STEM + cappedRatio * (PLANT_MAX_STEM - PLANT_MIN_STEM);
   const bloomed = ratio >= 1;
   const flower = flowerEmoji || "🌸";
 
-  return (
+  const plant = (
     <div key={bump} className="relative w-14 h-24 shrink-0" style={{ animation: "plantWater 0.4s ease-out" }}>
       {/* pot */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-9 h-5 bg-orange-400 rounded-b-xl rounded-t-sm" />
@@ -594,6 +596,14 @@ function GrowingPlant({ ratio, flowerEmoji, bump }) {
           {ratio >= 1.2 ? `${flower}✨` : flower}
         </span>
       )}
+    </div>
+  );
+
+  if (!compact) return plant;
+  // Scaled-down wrapper so the same plant fits neatly inside the progress box.
+  return (
+    <div className="w-14 h-[60px] flex items-end justify-center overflow-visible">
+      <div style={{ transform: "scale(0.62)", transformOrigin: "bottom center" }}>{plant}</div>
     </div>
   );
 }
@@ -1728,6 +1738,7 @@ function PendingTaskCard({ task, col, onChange }) {
   const target = task.target || 1;
   const step = task.step || 1;
   const unit = task.unit || "lần";
+  const challengeIcon = task.urgency ? task.urgency.trim().split(" ").pop() : "🎯";
 
   return (
     <div className="bg-white rounded-xl p-3 border border-rose-100">
@@ -1748,7 +1759,11 @@ function PendingTaskCard({ task, col, onChange }) {
         >
           –
         </button>
-        <ProgressBarWithLabel ratio={Math.min(1, ratio)} colorClass={col.solid} label={`${value} / ${target} ${unit}`} />
+        <ProgressBoxWithIcon ratio={Math.min(1, ratio)} colorClass={col.solid} label={`${value} / ${target} ${unit}`}>
+          <span key={value} className="text-2xl" style={{ animation: "heroPop 0.4s ease-out" }}>
+            {challengeIcon}
+          </span>
+        </ProgressBoxWithIcon>
         <button
           onClick={() => onChange((t) => ({ value: (t.value || 0) + step }))}
           className={`w-9 h-9 rounded-full ${col.solid} text-white font-bold flex items-center justify-center shrink-0`}
@@ -1801,18 +1816,7 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-3.5 shadow-sm">
-      <div className={`flex gap-3 mb-2 ${isWater ? "items-start" : "items-center"}`}>
-        {isWater ? (
-          <GrowingPlant ratio={ratio} flowerEmoji={flowerEmoji} bump={value} />
-        ) : (
-          <div
-            key={visual ? visual.emoji : task.emoji}
-            className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 ${col.light}`}
-            style={{ animation: ratio > 0 ? "heroPop 0.4s ease-out" : "none" }}
-          >
-            {visual ? visual.emoji : task.emoji}
-          </div>
-        )}
+      <div className="flex items-center gap-2 mb-2">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="font-bold text-gray-700 text-sm">{task.name}</span>
@@ -1826,7 +1830,7 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
           {visual && <div className="text-[11px] text-gray-400 truncate">{visual.label}</div>}
           {task.hint && <div className="text-[11px] text-gray-400 mt-1">💡 {task.hint}</div>}
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 shrink-0">
           <LevelBadge ratio={ratio} />
           {onRemoveCustom && (
             <button onClick={onRemoveCustom} className="text-gray-300 hover:text-rose-400">
@@ -1843,7 +1847,15 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
         >
           –
         </button>
-        <ProgressBarWithLabel ratio={Math.min(1, ratio)} colorClass={col.solid} label={`${value} / ${target} ${task.unit}`} />
+        <ProgressBoxWithIcon ratio={Math.min(1, ratio)} colorClass={col.solid} label={`${value} / ${target} ${task.unit}`}>
+          {isWater ? (
+            <GrowingPlant ratio={ratio} flowerEmoji={flowerEmoji} bump={value} compact />
+          ) : (
+            <span key={visual ? visual.emoji : task.emoji} className="text-3xl" style={{ animation: ratio > 0 ? "heroPop 0.4s ease-out" : "none" }}>
+              {visual ? visual.emoji : task.emoji}
+            </span>
+          )}
+        </ProgressBoxWithIcon>
         <button
           onClick={() => onChange((c) => ({ ...c, value: (c.value ?? 0) + task.step }))}
           className={`w-9 h-9 rounded-full ${col.solid} text-white font-bold flex items-center justify-center shrink-0`}
@@ -1918,11 +1930,11 @@ function AssignSection({ data, setData, activeProfile }) {
     <div className="space-y-5">
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
         <div className="text-sm font-extrabold text-gray-700 mb-1">✍️ Thử thách dành cho {nameOf(data, other)}</div>
-        <p className="text-[11px] text-gray-400 mb-3">Đặt số lượng cụ thể (VD: mang 5 bao gạo) — hoàn thành sẽ tự tính theo tiến độ thật, không cần tự chấm điểm nữa.</p>
+        <p className="text-[11px] text-gray-400 mb-3">Đặt số lượng cụ thể, đưa ra mức điểm thưởng và phần quà bí mật dành tặng {nameOf(data, other)} yêu nha.</p>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Tên nhiệm vụ, VD: Mang gạo lên nhà"
+          placeholder="Tên thử thách"
           className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
         />
         <input
@@ -1943,7 +1955,7 @@ function AssignSection({ data, setData, activeProfile }) {
           <input
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
-            placeholder="Đơn vị, VD: bao gạo"
+            placeholder="Đơn vị"
             className="flex-1 rounded-xl border border-gray-200 px-2.5 py-2 text-sm"
           />
         </div>
