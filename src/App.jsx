@@ -40,8 +40,8 @@ import {
 /* ---------------------------------------------------------------------- */
 
 const APP_NAME = "Our Days";
-const FONT_IMPORT = "@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap');";
-const DISPLAY_FONT = "'Quicksand', system-ui, sans-serif";
+const FONT_IMPORT = "@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700;800&display=swap');";
+const DISPLAY_FONT = "'Baloo 2', system-ui, sans-serif";
 const BODY_FONT = "'Quicksand', system-ui, sans-serif";
 const SCRIPT_FONT = "'Quicksand', system-ui, sans-serif";
 
@@ -61,10 +61,34 @@ const WILTED_EMOJI = "🥀";
 const PROFILE_EMOJI_CHOICES = ["🐻", "🐰", "🐱", "🦊", "🐼", "🐶", "🦁", "🐨", "🐸", "🦄", "🐧", "🐯"];
 const HABIT_EMOJI_CHOICES = ["🧘", "💪", "🎨", "🧹", "🛏️", "📓", "🎯", "🚿", "🍎", "🎵", "🐾", "🌱"];
 
+const GENDERS = [
+  { id: "nam", emoji: "🤵", label: "Nam" },
+  { id: "nu", emoji: "👰", label: "Nữ" },
+  { id: "khac", emoji: "🌈", label: "Khác / Không nói" },
+];
+
+const ROLE_TITLES = [
+  "Người giữ trái tim em 🔐",
+  "Một nửa của anh 💑",
+  "Gấu bông biết đi 🧸",
+  "Boss khó tính dễ thương 😎",
+  "Đầu bếp riêng 🍳",
+  "Vệ sĩ 24/7 🛡️",
+  "Người gọi dậy mỗi sáng ☀️",
+  "Bạn đời tương lai 💍",
+  "Trùm cuối của tim em 👑",
+  "Người chữa lành mọi mệt mỏi 🩹",
+  "Đồng phạm ăn vặt 🍟",
+  "Crush không đối thủ 😍",
+  "Wifi của đời em (không có là khó sống) 📶",
+  "Vitamin tinh thần mỗi ngày 💊",
+  "CEO của trái tim anh 💼",
+];
+
 const TASKS = [
-  { id: "water", emoji: "💧", name: "Uống nước", unit: "cốc", step: 1, defaultTarget: 8 },
-  { id: "move", emoji: "🚶‍♀️", name: "Đi bộ / Chạy", unit: "km", step: 0.5, defaultTarget: 3 },
-  { id: "read", emoji: "📖", name: "Đọc sách", unit: "trang", step: 5, defaultTarget: 15 },
+  { id: "water", emoji: "💧", name: "Uống nước", unit: "cốc", step: 1, defaultTarget: 8, theme: "water" },
+  { id: "move", emoji: "🚶‍♀️", name: "Đi bộ / Chạy", unit: "km", step: 0.5, defaultTarget: 3, theme: "move" },
+  { id: "read", emoji: "📖", name: "Đọc sách", unit: "trang", step: 5, defaultTarget: 15, theme: "read" },
   {
     id: "vocab",
     emoji: "🔤",
@@ -74,8 +98,9 @@ const TASKS = [
     defaultTarget: 5,
     hasNote: true,
     notePlaceholder: "Ghi các từ đã học, cách nhau bằng dấu phẩy...",
+    theme: "vocab",
   },
-  { id: "meals", emoji: "🍱", name: "Ăn đủ bữa", unit: "bữa", step: 1, defaultTarget: 3, isMeals: true },
+  { id: "meals", emoji: "🍱", name: "Ăn đủ bữa", unit: "bữa", step: 1, defaultTarget: 3, isMeals: true, theme: "meals" },
   {
     id: "screentime",
     emoji: "📱",
@@ -85,9 +110,22 @@ const TASKS = [
     defaultTarget: 90,
     inverse: true,
     hint: "Mục tiêu này nên để người ấy đặt cho bạn nhé",
+    theme: "screentime",
   },
 ];
 const MEAL_LABELS = ["Sáng", "Trưa", "Tối"];
+
+// Paraphrased, in my own words, from general hydration-timing guidance (not copied verbatim from any single source).
+const WATER_REMINDER_TIMES = [
+  { time: "06:30", tip: "Một cốc nước ngay khi vừa ngủ dậy giúp cơ thể tỉnh táo lại sau một đêm dài." },
+  { time: "08:30", tip: "Sau bữa sáng, uống thêm nước giúp hệ tiêu hoá làm việc trơn tru hơn." },
+  { time: "11:30", tip: "Giữa buổi sáng là lúc da dễ khô nhất, làm một cốc cho mọng nước nào." },
+  { time: "13:30", tip: "Sau giấc nghỉ trưa, một cốc nước giúp đầu óc tỉnh táo trở lại." },
+  { time: "15:30", tip: "Giữa chiều dễ buồn ngủ — uống nước thay vì cà phê cũng giúp tập trung hơn." },
+  { time: "17:00", tip: "Trước khi rời chỗ làm/học, bổ sung nước để không thấy đuối vào cuối ngày." },
+  { time: "19:30", tip: "Buổi tối là lúc cơ thể cần thanh lọc — đừng quên cốc nước này." },
+  { time: "21:30", tip: "Một cốc nhỏ trước khi ngủ — nhưng đừng uống quá nhiều để khỏi mất ngủ giữa đêm." },
+];
 
 const TIME_SLOTS = [
   { id: "sang", label: "Buổi sáng", emoji: "🌅" },
@@ -103,6 +141,7 @@ const MOODS = [
   { id: "chan", emoji: "😔", label: "Chán nản", value: 25 },
   { id: "stress", emoji: "😣", label: "Căng thẳng", value: 15 },
 ];
+const LOW_MOODS = ["met", "chan", "stress"];
 
 const WEATHERS = [
   { id: "nang", emoji: "☀️", label: "Nắng đẹp" },
@@ -111,12 +150,6 @@ const WEATHERS = [
   { id: "mua", emoji: "🌧️", label: "Mưa" },
   { id: "lanh", emoji: "❄️", label: "Lạnh" },
   { id: "gio", emoji: "🌬️", label: "Gió nhiều" },
-];
-
-const RATING_OPTIONS = [
-  { id: "xuatsac", label: "Xuất sắc", emoji: "🌟", mult: 1 },
-  { id: "tot", label: "Tốt", emoji: "✅", mult: 0.7 },
-  { id: "tam", label: "Tạm tạm", emoji: "🙂", mult: 0.4 },
 ];
 
 const DEFAULT_URGENCY_LEVELS = ["Khẩn cấp 🚨", "Ngay lập tức ⚡", "Chill chill 🌿", "Khi nào tiện 🌙"];
@@ -170,6 +203,76 @@ const COLORS = {
   },
 };
 
+/* Encouragement message pools — personal, lighthearted customization for a couple's own app.
+   Both directions are written warm and not one-sided: she cheers him on with big energy,
+   he reassures her gently; same idea mirrored for low-mood comforting. Neutral pools cover
+   "Khác / Không nói" or when only one partner's gender is set. {name} is replaced with the
+   partner's nickname/role title if they set one, otherwise their first name. */
+const CHEER_FOR_HIM = [
+  "Người yêu của em siêu quáaaaa!!! 😍💪",
+  "Anh yêu đỉnh nhất luôn á 🥹💖",
+  "Sao có người vừa chăm vừa ngầu vậy nhỉ 😎✨",
+  "Em tự hào về anh quá đi mất 🥰🏆",
+  "Đúng là không có đối thủ thật mà 😤💕",
+  "Anh làm em tin vào những điều tốt đẹp ghê 🌟",
+  "Cố lên là thấy ngay, mê anh hơn mỗi ngày 💘",
+  "Người yêu em chăm chỉ thế này thì ai mà không yêu 🫠",
+  "Một tràng pháo tay cho anh nè 👏👏👏 quá đỉnh!!!",
+  "Em xin một chữ ký của thần tượng được không ạ 😆💗",
+  "Lại thêm một lý do để em yêu anh nhiều hơn rồi đó 💞",
+];
+const CHEER_FOR_HER = [
+  "{name} của anh giỏi quá, anh tự hào lắm 🥹💪",
+  "Cố lên {name}, anh luôn đứng sau cổ vũ em nè 📣💕",
+  "{name} làm được rồi đó, đúng là không có gì cản được em 🌟",
+  "Anh thấy em xinh nhất lúc đang cố gắng như này 🥰",
+  "{name} ơi, hôm nay em ngầu cực kỳ luôn á 🔥",
+  "Chậm một chút cũng không sao, anh vẫn ở đây cổ vũ em 🫶",
+  "Em là động lực để anh cũng phải cố gắng hơn mỗi ngày 💖",
+  "{name} của anh hôm nay toả sáng quá trời 🌈",
+  "Anh tin em làm được, vì em chưa từng làm anh thất vọng 🥹",
+  "Cứ từng bước nhỏ thôi, anh sẽ đi cùng em 👣💞",
+];
+const COMFORT_FOR_HER = [
+  "Em bé của anh cố lên nha, anh yêu em 🥺💕",
+  "{name} ơi đừng buồn, có anh ở đây rồi 🫂💗",
+  "Hôm nay mệt thì nghỉ chút cũng được, anh không trách đâu 🤗",
+  "Em không cần phải mạnh mẽ suốt đâu, dựa vào anh đi 🥹",
+  "Anh gửi một cái ôm thật chặt cho {name} nè 🫶",
+  "Buồn xíu rồi sẽ qua thôi, anh ở ngay đây mà 💌",
+  "{name} là ưu tiên số một của anh, nghỉ ngơi đi rồi mình nói chuyện 💗",
+  "Anh không sửa được hết mọi thứ, nhưng anh có thể ôm em lâu hơn 🩹",
+  "Cố lên xíu nữa thôi {name}, có anh đồng hành rồi 🌙",
+];
+const COMFORT_FOR_HIM = [
+  "Anh ơi đừng cố gắng một mình, có em ở đây rồi 🥺💕",
+  "{name} mệt thì nghỉ chút nha, em vẫn thương anh như vậy 🫂",
+  "Em biết hôm nay khó khăn, nhưng anh không cô đơn đâu 💗",
+  "Cho phép mình yếu lòng một chút cũng được mà {name} 🤍",
+  "Em gửi một cái ôm thật chặt cho {name} đây 🫶",
+  "Mai sẽ ổn hơn thôi, hôm nay cứ dựa vào em một chút 🌙",
+  "{name} luôn mạnh mẽ vì hai đứa rồi, hôm nay để em mạnh mẽ thay anh 💪💕",
+  "Có chuyện gì thì kể em nghe, em luôn ở đây 💌",
+];
+const NEUTRAL_CHEER = [
+  "Giỏi quá đi, {name} ơi! 🎉",
+  "{name} làm được rồi, tự hào về bạn lắm 🥳",
+  "Cố gắng này xứng đáng được khen thật to 👏",
+  "{name} đang toả sáng theo cách riêng của mình ✨",
+  "Một bước tiến nhỏ hôm nay, một phiên bản tốt hơn của {name} 🌱",
+];
+const NEUTRAL_COMFORT = [
+  "{name} ơi, hôm nay mệt thì nghỉ ngơi một chút nhé 🤍",
+  "Không sao đâu {name}, ngày mai sẽ nhẹ nhàng hơn 🌙",
+  "{name} không cần ổn mọi lúc, mình luôn ở đây 🫂",
+  "Cho phép bản thân chậm lại một chút cũng được {name} 💗",
+];
+
+function pickEncouragement(pool, name) {
+  const msg = pool[Math.floor(Math.random() * pool.length)];
+  return msg.replace("{name}", name || "bạn");
+}
+
 /* ---------------------------------------------------------------------- */
 /* Helpers                                                                 */
 /* ---------------------------------------------------------------------- */
@@ -215,7 +318,7 @@ function makeInitialCoupleData(p1Profile) {
   return {
     profiles: {
       p1: p1Profile,
-      p2: { name: "", emoji: "", flower: "", login: "" },
+      p2: { name: "", emoji: "", flower: "", login: "", gender: "", roleTitle: "" },
     },
     targets: {
       p1: { water: 8, move: 3, read: 15, vocab: 5, meals: 3, screentime: 90 },
@@ -268,6 +371,18 @@ function getLevel(ratio) {
   return { label: "Chưa làm", emoji: "⚪", tickets: 0, text: "text-gray-400", bg: "bg-gray-50", border: "border-gray-200" };
 }
 
+// Assigned ("thử thách") tasks now use the same verified, counter-based completion as habits
+// instead of a self-declared rating — ratio/tickets are always computed live from value/target.
+function assignedRatio(task) {
+  if (!task.target || task.target <= 0) return task.value > 0 ? 1 : 0;
+  return (task.value || 0) / task.target;
+}
+function assignedTickets(task) {
+  const ratio = assignedRatio(task);
+  const tierTickets = getLevel(ratio).tickets; // 0-3
+  return Math.round((task.ticketValue || 5) * (tierTickets / 3));
+}
+
 function calcDayTickets(data, dateKey, pid) {
   let total = 0;
   const day = data.dailyData[dateKey]?.[pid];
@@ -277,8 +392,8 @@ function calcDayTickets(data, dateKey, pid) {
     total += getLevel(calcRatio(t, entry, target)).tickets;
   });
   data.assignedTasks
-    .filter((a) => a.dateKey === dateKey && a.assignedTo === pid && a.status === "done")
-    .forEach((a) => (total += a.awardedTickets || 0));
+    .filter((a) => a.dateKey === dateKey && a.assignedTo === pid)
+    .forEach((a) => (total += assignedTickets(a)));
   data.sharedTasks
     .filter((s) => s.completedDate === dateKey && s.doneBy?.p1 && s.doneBy?.p2)
     .forEach((s) => (total += s.ticketValue || 0));
@@ -343,6 +458,9 @@ function freshnessStage(score, flowerEmoji) {
 function computeAlerts(data) {
   const alerts = [];
   ["p1", "p2"].forEach((pid) => {
+    const profile = data.profiles[pid];
+    if (!profile?.name) return;
+    if (!profile.createdAt || profile.createdAt > offsetDateKey(3)) return;
     const tasks = getTasksForProfile(data, pid);
     tasks.forEach((t) => {
       if (t.createdAt && t.createdAt > offsetDateKey(3)) return;
@@ -361,6 +479,47 @@ function computeAlerts(data) {
   });
   return alerts;
 }
+
+// Per-task-type "hero" visual — keeps each habit from feeling like the same generic counter.
+function getTaskVisual(task, ratio, flowerEmoji) {
+  const theme = task.theme;
+  if (theme === "water") {
+    if (ratio <= 0) return { emoji: "🪴", label: "Chưa tưới nước hôm nay" };
+    if (ratio < 0.5) return { emoji: "🌱", label: "Mầm non đang lớn" };
+    if (ratio < 1) return { emoji: "🌿", label: "Xanh tốt rồi đó" };
+    if (ratio < 1.2) return { emoji: flowerEmoji || "🌸", label: "Nở hoa rồi, tuyệt vời!" };
+    return { emoji: (flowerEmoji || "🌸") + "✨", label: "Hoa nở rộ, toả hương!" };
+  }
+  if (theme === "move") {
+    if (ratio <= 0) return { emoji: "🧍", label: "Chưa bắt đầu" };
+    if (ratio < 0.4) return { emoji: "🚶", label: "Đang dạo bước" };
+    if (ratio < 0.8) return { emoji: "🏃", label: "Tăng tốc nào" };
+    if (ratio < 1.2) return { emoji: "💪", label: "Cơ bắp cuồn cuộn" };
+    return { emoji: "🏆", label: "Vận động viên thực thụ" };
+  }
+  if (theme === "read") {
+    if (ratio <= 0) return { emoji: "📖", label: "Chưa mở sách" };
+    if (ratio < 0.5) return { emoji: "📖", label: "Đang lật từng trang" };
+    if (ratio < 1) return { emoji: "📚", label: "Sắp xong rồi" };
+    if (ratio < 1.2) return { emoji: "🤓", label: "Mọt sách chính hiệu" };
+    return { emoji: "🎓", label: "Kiến thức đầy ắp" };
+  }
+  if (theme === "vocab") {
+    if (ratio <= 0) return { emoji: "🔤", label: "Chưa học từ nào" };
+    if (ratio < 0.5) return { emoji: "🧠", label: "Não đang nạp dữ liệu" };
+    if (ratio < 1) return { emoji: "🧠", label: "Từ vựng đang đầy lên" };
+    if (ratio < 1.2) return { emoji: "🎓", label: "Giỏi quá đi!" };
+    return { emoji: "🌟", label: "Sắp thành chuyên gia rồi" };
+  }
+  if (theme === "screentime") {
+    if (ratio >= 1.2) return { emoji: "🧘", label: "Bình yên tuyệt đối" };
+    if (ratio >= 1) return { emoji: "😌", label: "Kiểm soát tốt" };
+    if (ratio >= 0.5) return { emoji: "📱", label: "Cẩn thận kẻo nghiện" };
+    return { emoji: "🥴", label: "Dùng nhiều quá rồi!" };
+  }
+  return null;
+}
+
 
 /* ---------------------------------------------------------------------- */
 /* UI atoms                                                                */
@@ -387,19 +546,63 @@ function LevelBadge({ ratio }) {
 
 function TicketBadge({ count, flowerEmoji }) {
   return (
-    <div className="flex items-center gap-1 bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-sm font-bold border border-amber-100">
+    <div className="flex items-center gap-1 bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-base font-extrabold border border-amber-100" style={{ fontFamily: DISPLAY_FONT }}>
       <span>{flowerEmoji || "🌸"}</span> {count} phiếu
     </div>
   );
 }
 
 /* ---------------------------------------------------------------------- */
-/* Celebration overlay                                                    */
+/* Encouragement toast — gender-flavoured cheer / comfort lines             */
+/* ---------------------------------------------------------------------- */
+
+function EncouragementToast({ toast, onDone }) {
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(onDone, 4200);
+    return () => clearTimeout(t);
+  }, [toast]);
+
+  if (!toast) return null;
+  const isComfort = toast.kind === "comfort";
+  return (
+    <div className="fixed top-3 inset-x-3 z-[55] flex justify-center pointer-events-none">
+      <div
+        className={`pointer-events-auto max-w-sm w-full rounded-2xl shadow-lg border px-4 py-3 flex items-start gap-2.5 ${
+          isComfort ? "bg-rose-50 border-rose-200" : "bg-amber-50 border-amber-200"
+        }`}
+        style={{ animation: "toastPop 0.4s ease-out" }}
+      >
+        <span className="text-2xl shrink-0">{isComfort ? "🥺" : "🎉"}</span>
+        <div className="text-sm font-bold text-gray-700 leading-snug" style={{ fontFamily: BODY_FONT }}>
+          {toast.text}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------- */
+/* Celebration overlay — 12 effects, one picked at random each time        */
 /* ---------------------------------------------------------------------- */
 
 const CELEBRATION_PALETTE = ["bg-rose-300", "bg-amber-300", "bg-sky-300", "bg-violet-300", "bg-emerald-300", "bg-pink-300"];
 const HEART_EMOJIS = ["💕", "💖", "💗", "❤️", "💞"];
-const CELEBRATION_TYPES = ["confetti", "bloom", "kiss", "firework", "hearts", "sparkle", "rainbow", "balloon", "butterfly", "medal"];
+const SHOWER_EMOJIS = ["🎉", "🎊", "✨", "🌟", "💫"];
+const CELEBRATION_TYPES = [
+  "confetti",
+  "bloom",
+  "kiss",
+  "firework",
+  "hearts",
+  "sparkle",
+  "rainbow",
+  "balloon",
+  "butterfly",
+  "medal",
+  "loveletter",
+  "shower",
+];
 
 function randomColor() {
   return CELEBRATION_PALETTE[Math.floor(Math.random() * CELEBRATION_PALETTE.length)];
@@ -425,9 +628,9 @@ function buildEffectData(type, flower) {
   switch (type) {
     case "confetti":
       return {
-        pieces: Array.from({ length: 24 }, () => ({
+        pieces: Array.from({ length: 26 }, () => ({
           left: Math.random() * 100,
-          size: `${6 + Math.random() * 8}px`,
+          size: `${6 + Math.random() * 9}px`,
           delay: Math.random() * 0.4,
           color: randomColor(),
         })),
@@ -437,16 +640,16 @@ function buildEffectData(type, flower) {
     case "kiss":
       return { items: floatItems(7, "💋") };
     case "firework":
-      return { bursts: burstItems(18, 120) };
+      return { bursts: burstItems(20, 130) };
     case "hearts":
-      return { items: floatItems(9, null, HEART_EMOJIS) };
+      return { items: floatItems(10, null, HEART_EMOJIS) };
     case "sparkle":
       return {
-        stars: Array.from({ length: 16 }, () => ({
+        stars: Array.from({ length: 18 }, () => ({
           left: Math.random() * 100,
           top: 8 + Math.random() * 78,
           delay: Math.random() * 1.2,
-          size: 14 + Math.random() * 16,
+          size: 14 + Math.random() * 18,
         })),
       };
     case "rainbow":
@@ -457,6 +660,16 @@ function buildEffectData(type, flower) {
       return { items: Array.from({ length: 6 }, () => ({ top: 10 + Math.random() * 70, delay: Math.random() * 0.9 })) };
     case "medal":
       return { centerEmoji: "🏆", ring: burstItems(10, 100) };
+    case "loveletter":
+      return { centerEmoji: "💌", ring: burstItems(8, 95) };
+    case "shower":
+      return {
+        pieces: Array.from({ length: 22 }, () => ({
+          left: Math.random() * 100,
+          delay: Math.random() * 0.5,
+          emoji: SHOWER_EMOJIS[Math.floor(Math.random() * SHOWER_EMOJIS.length)],
+        })),
+      };
     default:
       return {};
   }
@@ -482,20 +695,31 @@ function CelebrationOverlay({ celebration }) {
           />
         ))}
 
-      {(type === "bloom" || type === "rainbow" || type === "medal") && (
+      {type === "shower" &&
+        data.pieces.map((p, i) => (
+          <span
+            key={i}
+            className="absolute text-2xl"
+            style={{ left: `${p.left}%`, top: "-8%", animation: `confettiFall 2.8s ease-in ${p.delay}s forwards` }}
+          >
+            {p.emoji}
+          </span>
+        ))}
+
+      {(type === "bloom" || type === "rainbow" || type === "medal" || type === "loveletter") && (
         <div className="absolute left-1/2 top-1/2 text-7xl" style={{ transform: "translate(-50%,-50%)", animation: "bloomPop 1.1s ease-out forwards" }}>
           {data.centerEmoji}
         </div>
       )}
 
-      {type === "medal" &&
+      {(type === "medal" || type === "loveletter") &&
         data.ring.map((r, i) => (
           <span
             key={i}
             className="absolute text-xl left-1/2 top-1/2"
             style={{ "--dx": `${r.dx}px`, "--dy": `${r.dy}px`, animation: `burstOut 1.3s ease-out ${r.delay}s forwards` }}
           >
-            ✨
+            {type === "loveletter" ? "💗" : "✨"}
           </span>
         ))}
 
@@ -538,6 +762,11 @@ function CelebrationOverlay({ celebration }) {
     </div>
   );
 }
+
+/* ---------------------------------------------------------------------- */
+/* Ambient critters — slow, wandering, mid-screen cute moments             */
+/* ---------------------------------------------------------------------- */
+
 const AMBIENT_TYPES = ["cat", "kiss", "bunny", "paw"];
 
 function AmbientCritters() {
@@ -550,8 +779,9 @@ function AmbientCritters() {
       timer = setTimeout(() => {
         const type = AMBIENT_TYPES[Math.floor(Math.random() * AMBIENT_TYPES.length)];
         const key = uid();
-        setCritter({ key, type });
-        setTimeout(() => setCritter(null), 6000);
+        const top = 18 + Math.random() * 45; // wander somewhere in the middle of the screen, not glued to one edge
+        setCritter({ key, type, top });
+        setTimeout(() => setCritter(null), 13000);
         schedule();
       }, delay);
     };
@@ -564,27 +794,35 @@ function AmbientCritters() {
   return (
     <div className="fixed inset-0 z-10 pointer-events-none overflow-hidden">
       {critter.type === "cat" && (
-        <span key={critter.key} className="absolute bottom-16 text-3xl" style={{ animation: "catRun 6s ease-in-out forwards" }}>
+        <span
+          key={critter.key}
+          className="absolute text-5xl"
+          style={{ top: `${critter.top}vh`, animation: "catRun 12s ease-in-out forwards" }}
+        >
           🐱
         </span>
       )}
       {critter.type === "bunny" && (
-        <span key={critter.key} className="absolute bottom-16 text-3xl" style={{ animation: "bunnyHop 5s ease-in-out forwards" }}>
+        <span
+          key={critter.key}
+          className="absolute text-5xl"
+          style={{ top: `${critter.top}vh`, animation: "bunnyHop 10s ease-in-out forwards" }}
+        >
           🐰
         </span>
       )}
       {critter.type === "kiss" && (
-        <span key={critter.key} className="absolute top-20 right-6 text-3xl" style={{ animation: "kissWave 3.2s ease-in-out forwards" }}>
+        <span key={critter.key} className="absolute text-4xl" style={{ top: `${critter.top}vh`, right: "8%", animation: "kissWave 3.6s ease-in-out forwards" }}>
           😘
         </span>
       )}
       {critter.type === "paw" && (
-        <div key={critter.key}>
+        <div key={critter.key} style={{ position: "absolute", top: `${critter.top}vh`, left: 0, right: 0 }}>
           {Array.from({ length: 5 }).map((_, i) => (
             <span
               key={i}
-              className="absolute bottom-20 text-base opacity-0"
-              style={{ left: `${10 + i * 15}%`, animation: `pawPrint 0.5s ease-out ${i * 0.35}s forwards` }}
+              className="absolute text-xl opacity-0"
+              style={{ left: `${10 + i * 15}%`, animation: `pawPrint 0.6s ease-out ${i * 0.4}s forwards` }}
             >
               🐾
             </span>
@@ -613,6 +851,8 @@ function ProfileSetupForm({ initial, accentText, accentBorder, onSubmit, submitL
   const [name, setName] = useState(initial?.name || "");
   const [emoji, setEmoji] = useState(initial?.emoji || PROFILE_EMOJI_CHOICES[0]);
   const [flower, setFlower] = useState(initial?.flower || FLOWERS[0].id);
+  const [gender, setGender] = useState(initial?.gender || "");
+  const [roleTitle, setRoleTitle] = useState(initial?.roleTitle || "");
 
   return (
     <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-gray-100 p-5">
@@ -622,7 +862,25 @@ function ProfileSetupForm({ initial, accentText, accentBorder, onSubmit, submitL
         onChange={(e) => setName(e.target.value)}
         placeholder="VD: Bống"
         className="w-full mt-1 mb-3 rounded-xl border border-gray-200 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-200"
+        style={{ fontFamily: BODY_FONT }}
       />
+
+      <div className="text-xs font-bold text-gray-400 uppercase mb-1.5">Giới tính</div>
+      <div className="flex flex-wrap gap-2 mb-3">
+        {GENDERS.map((g) => (
+          <button
+            key={g.id}
+            onClick={() => setGender(g.id)}
+            className={`flex items-center gap-1 text-sm px-2.5 py-1.5 rounded-full border-2 ${
+              gender === g.id ? `${accentBorder} bg-gray-50` : "border-gray-200"
+            }`}
+          >
+            <span>{g.emoji}</span>
+            {g.label}
+          </button>
+        ))}
+      </div>
+
       <div className="text-xs font-bold text-gray-400 uppercase mb-1.5">Avatar</div>
       <div className="flex flex-wrap gap-2 mb-3">
         {PROFILE_EMOJI_CHOICES.map((e) => (
@@ -637,6 +895,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, onSubmit, submitL
           </button>
         ))}
       </div>
+
       <div className="text-xs font-bold text-gray-400 uppercase mb-1.5">Hoa yêu thích (dùng cho phiếu bé ngoan & cảm xúc)</div>
       <div className="flex flex-wrap gap-2 mb-4">
         {FLOWERS.map((f) => (
@@ -652,10 +911,26 @@ function ProfileSetupForm({ initial, accentText, accentBorder, onSubmit, submitL
           </button>
         ))}
       </div>
+
+      <div className="text-xs font-bold text-gray-400 uppercase mb-1.5">Bạn là gì của người kia? 😜</div>
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {ROLE_TITLES.map((r) => (
+          <button
+            key={r}
+            onClick={() => setRoleTitle(r)}
+            className={`text-xs font-bold px-2.5 py-1.5 rounded-full border-2 ${
+              roleTitle === r ? `${accentBorder} bg-gray-50` : "border-gray-200 text-gray-500"
+            }`}
+          >
+            {r}
+          </button>
+        ))}
+      </div>
+
       <button
-        onClick={() => onSubmit({ name: name.trim(), emoji, flower })}
+        onClick={() => onSubmit({ name: name.trim(), emoji, flower, gender, roleTitle })}
         disabled={!name.trim()}
-        className="w-full bg-rose-400 hover:bg-rose-500 disabled:opacity-40 text-white font-bold py-3 rounded-2xl shadow-sm transition-colors"
+        className="w-full bg-rose-400 hover:bg-rose-500 disabled:opacity-40 text-white font-bold py-3 rounded-2xl shadow-sm transition-colors text-lg"
         style={{ fontFamily: DISPLAY_FONT }}
       >
         {submitLabel}
@@ -711,14 +986,14 @@ function WelcomeScreen({ onPickCreate, onPickJoin }) {
         </p>
         <button
           onClick={onPickCreate}
-          className="w-full max-w-sm bg-rose-400 hover:bg-rose-500 text-white font-bold py-3.5 rounded-2xl shadow-sm mb-3 flex items-center justify-center gap-2"
+          className="w-full max-w-sm bg-rose-400 hover:bg-rose-500 text-white font-bold py-3.5 rounded-2xl shadow-sm mb-3 flex items-center justify-center gap-2 text-lg"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           <Link2 size={18} /> Tạo phòng mới
         </button>
         <button
           onClick={onPickJoin}
-          className="w-full max-w-sm bg-white border border-rose-200 text-rose-500 font-bold py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2"
+          className="w-full max-w-sm bg-white border border-rose-200 text-rose-500 font-bold py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2 text-lg"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           <KeyRound size={18} /> Tham gia bằng mã
@@ -754,12 +1029,12 @@ function CreateRoomScreen({ onBack, onCreated }) {
           accentText="text-rose-500"
           accentBorder="border-rose-400"
           submitLabel={creating ? "Đang tạo phòng..." : "Tạo phòng & tiếp tục 💞"}
-          onSubmit={async ({ name, emoji, flower }) => {
+          onSubmit={async ({ name, emoji, flower, gender, roleTitle }) => {
             if (creating) return;
             setCreating(true);
             setError("");
             try {
-              const profile = { name, emoji, flower, login: contact.trim().toLowerCase() };
+              const profile = { name, emoji, flower, gender, roleTitle, login: contact.trim().toLowerCase(), createdAt: todayKey() };
               let code = generateCoupleCode();
               for (let i = 0; i < 6 && (await coupleExists(code)); i++) code = generateCoupleCode();
               await createCouple(code, makeInitialCoupleData(profile));
@@ -807,7 +1082,7 @@ function RoomCodeReveal({ code, onContinue }) {
 
         <button
           onClick={onContinue}
-          className="w-full max-w-sm bg-rose-400 hover:bg-rose-500 text-white font-bold py-3.5 rounded-2xl shadow-sm"
+          className="w-full max-w-sm bg-rose-400 hover:bg-rose-500 text-white font-bold py-3.5 rounded-2xl shadow-sm text-lg"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           Vào app ngay 🚀
@@ -864,11 +1139,11 @@ function JoinRoomScreen({ onBack, onJoined }) {
             accentText="text-violet-500"
             accentBorder="border-violet-400"
             submitLabel={joining ? "Đang tham gia..." : "Hoàn tất, vào app 🚀"}
-            onSubmit={async ({ name, emoji, flower }) => {
+            onSubmit={async ({ name, emoji, flower, gender, roleTitle }) => {
               if (joining) return;
               setJoining(true);
               try {
-                const profile = { name, emoji, flower, login: contact.trim().toLowerCase() };
+                const profile = { name, emoji, flower, gender, roleTitle, login: contact.trim().toLowerCase(), createdAt: todayKey() };
                 await setCouplePath(validRoom, "profiles/p2", profile);
                 onJoined(validRoom);
               } catch {
@@ -910,7 +1185,7 @@ function JoinRoomScreen({ onBack, onJoined }) {
           <button
             onClick={checkCode}
             disabled={checking}
-            className="w-full bg-violet-400 hover:bg-violet-500 disabled:opacity-50 text-white font-bold py-3 rounded-2xl shadow-sm"
+            className="w-full bg-violet-400 hover:bg-violet-500 disabled:opacity-50 text-white font-bold py-3 rounded-2xl shadow-sm text-lg"
             style={{ fontFamily: DISPLAY_FONT }}
           >
             {checking ? "Đang kiểm tra..." : "Tiếp tục"}
@@ -927,17 +1202,18 @@ function JoinRoomScreen({ onBack, onJoined }) {
 
 function Header({ data, activeProfile, onOpenSettings, onOpenAlerts, alertCount }) {
   const active = activeProfile;
-  const other = otherOf(active);
   const tickets = calcTotalTickets(data, active);
   const streak = calcStreak(data, active);
   const col = COLORS[active];
   const flowerEmoji = FLOWERS.find((f) => f.id === data.profiles[active].flower)?.emoji;
+  const gender = data.profiles[active].gender;
+  const genderEmoji = GENDERS.find((g) => g.id === gender)?.emoji;
 
   return (
     <div className="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-gray-100 px-4 pt-4 pb-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <span className="text-lg font-extrabold text-rose-500" style={{ fontFamily: DISPLAY_FONT }}>
+          <span className="text-xl font-extrabold text-rose-500" style={{ fontFamily: DISPLAY_FONT }}>
             {APP_NAME}
           </span>
         </div>
@@ -958,16 +1234,19 @@ function Header({ data, activeProfile, onOpenSettings, onOpenAlerts, alertCount 
 
       <div className="flex items-center justify-between mt-2.5">
         <div className={`flex items-center gap-1.5 pl-1.5 pr-3 py-1.5 rounded-full border ${col.border} ${col.light}`}>
-          <span className="text-xl">{data.profiles[active].emoji}</span>
-          <span className={`text-sm font-bold ${col.text}`}>{data.profiles[active].name}</span>
+          <span className="text-2xl">{data.profiles[active].emoji}</span>
+          <span className={`text-base font-bold ${col.text}`} style={{ fontFamily: DISPLAY_FONT }}>
+            {data.profiles[active].name}
+          </span>
+          {genderEmoji && <span className="text-sm">{genderEmoji}</span>}
         </div>
-        <div className="text-xs text-gray-400 font-semibold">{getRankTitle(tickets)}</div>
+        <div className="text-xs text-gray-400 font-semibold text-right">{getRankTitle(tickets)}</div>
       </div>
 
       <div className="flex items-center gap-2 mt-2.5">
         <TicketBadge count={tickets} flowerEmoji={flowerEmoji} />
-        <div className="flex items-center gap-1 bg-rose-50 text-rose-500 px-2.5 py-1 rounded-full text-sm font-bold">
-          <Flame size={14} /> {streak} ngày
+        <div className="flex items-center gap-1 bg-rose-50 text-rose-500 px-3 py-1 rounded-full text-base font-extrabold" style={{ fontFamily: DISPLAY_FONT }}>
+          <Flame size={16} /> {streak} ngày
         </div>
       </div>
     </div>
@@ -1033,6 +1312,9 @@ function AlertsPanel({ data, setData, activeProfile, onClose }) {
           assignedTo: alert.profileId,
           title: `Cùng cố gắng hơn với: ${alert.taskName} ${alert.taskEmoji}`,
           note: "Được gợi ý từ phân tích 3 ngày gần đây",
+          target: 1,
+          unit: "lần",
+          value: 0,
           ticketValue: Number(ticketValue) || 5,
           urgency,
           status: "pending",
@@ -1199,13 +1481,47 @@ function AddHabitForm({ onAdd, onCancel }) {
   );
 }
 
-function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate }) {
+function WaterTimesPopover({ onClose }) {
+  const now = new Date();
+  const nowStr = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+  return (
+    <div className="fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center" onClick={onClose}>
+      <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-sm max-h-[80vh] overflow-y-auto p-5" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-3">
+          <div className="font-extrabold text-gray-700 text-lg" style={{ fontFamily: DISPLAY_FONT }}>
+            💧 Giờ uống nước gợi ý
+          </div>
+          <button onClick={onClose} className="text-gray-400 p-1">
+            <X size={20} />
+          </button>
+        </div>
+        <div className="space-y-2">
+          {WATER_REMINDER_TIMES.map((w) => (
+            <div key={w.time} className={`flex gap-3 p-2.5 rounded-xl ${w.time === nowStr ? "bg-sky-50 border border-sky-200" : "bg-gray-50"}`}>
+              <span className="text-sm font-extrabold text-sky-500 w-12 shrink-0" style={{ fontFamily: DISPLAY_FONT }}>
+                {w.time}
+              </span>
+              <span className="text-xs text-gray-500">{w.tip}</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-[11px] text-gray-400 mt-3 text-center">Tổng hợp ý tưởng chung, không thay thế lời khuyên y tế nhé 🌿</p>
+      </div>
+    </div>
+  );
+}
+
+function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate, onEncourage }) {
   const active = activeProfile;
   const dk = todayKey();
   const col = COLORS[active];
   const day = data.dailyData[dk]?.[active] || {};
   const tasks = getTasksForProfile(data, active);
   const [showAddHabit, setShowAddHabit] = useState(false);
+  const [showWaterTimes, setShowWaterTimes] = useState(false);
+  const flowerEmoji = FLOWERS.find((f) => f.id === data.profiles[active].flower)?.emoji;
+  const myGender = data.profiles[active].gender;
+  const myDisplayName = data.profiles[active].name;
 
   const updateEntry = (taskId, updater) => {
     setData((prev) => {
@@ -1218,12 +1534,18 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate }) {
     });
   };
 
+  const maybeCheer = () => {
+    if (Math.random() > 0.5) return; // keep it occasional, not every single tap
+    const pool = myGender === "nam" ? CHEER_FOR_HIM : myGender === "nu" ? CHEER_FOR_HER : NEUTRAL_CHEER;
+    onEncourage({ kind: "cheer", text: pickEncouragement(pool, myDisplayName) });
+  };
+
   const checkCelebrate = (task, oldEntry, newEntry, target) => {
     const oldRatio = calcRatio(task, oldEntry, target);
     const newRatio = calcRatio(task, newEntry, target);
     if (oldRatio < 1 && newRatio >= 1) {
-      const flowerEmoji = FLOWERS.find((f) => f.id === data.profiles[active].flower)?.emoji;
       onCelebrate(flowerEmoji);
+      maybeCheer();
     }
   };
 
@@ -1246,22 +1568,28 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate }) {
     }));
   };
 
-  const pendingForMe = data.assignedTasks.filter((a) => a.dateKey === dk && a.assignedTo === active && a.status === "pending");
+  const pendingForMe = data.assignedTasks.filter((a) => a.dateKey === dk && a.assignedTo === active);
 
-  const rateAndComplete = (task, ratingId) => {
-    const rating = RATING_OPTIONS.find((r) => r.id === ratingId);
+  const updateAssigned = (taskId, updater) => {
     setData((prev) => {
       const next = structuredClone(prev);
-      const t = next.assignedTasks.find((a) => a.id === task.id);
-      if (t) {
+      const t = next.assignedTasks.find((a) => a.id === taskId);
+      if (!t) return prev;
+      const oldRatio = assignedRatio(t);
+      const updated = updater(t);
+      Object.assign(t, updated);
+      const newRatio = assignedRatio(t);
+      if (oldRatio < 1 && newRatio >= 1) {
         t.status = "done";
-        t.level = rating.label;
-        t.awardedTickets = Math.round(t.ticketValue * rating.mult);
+        setTimeout(() => {
+          onCelebrate(flowerEmoji);
+          maybeCheer();
+        }, 0);
+      } else if (newRatio < 1) {
+        t.status = "pending";
       }
       return next;
     });
-    const flowerEmoji = FLOWERS.find((f) => f.id === data.profiles[active].flower)?.emoji;
-    onCelebrate(flowerEmoji);
   };
 
   return (
@@ -1281,7 +1609,7 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate }) {
           </div>
           <div className="space-y-2">
             {pendingForMe.map((task) => (
-              <PendingTaskCard key={task.id} task={task} urgencyColors={URGENCY_COLORS} onRate={(r) => rateAndComplete(task, r)} />
+              <PendingTaskCard key={task.id} task={task} col={col} onChange={(updater) => updateAssigned(task.id, updater)} />
             ))}
           </div>
         </div>
@@ -1309,6 +1637,8 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate }) {
               target={target}
               ratio={ratio}
               col={col}
+              flowerEmoji={flowerEmoji}
+              onShowWaterTimes={task.id === "water" ? () => setShowWaterTimes(true) : null}
               onRemoveCustom={task.custom ? () => removeHabit(task.id) : null}
               onChange={(updater) => {
                 const newEntry = updater(entry || {});
@@ -1319,44 +1649,58 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate }) {
           );
         })}
       </div>
+
+      {showWaterTimes && <WaterTimesPopover onClose={() => setShowWaterTimes(false)} />}
     </div>
   );
 }
 
-function PendingTaskCard({ task, onRate, urgencyColors }) {
-  const [rating, setRating] = useState(null);
-  const urgencyClass = urgencyColors[task.urgency] || DEFAULT_URGENCY_COLOR;
+function PendingTaskCard({ task, col, onChange }) {
+  const ratio = assignedRatio(task);
+  const tickets = assignedTickets(task);
+  const urgencyClass = URGENCY_COLORS[task.urgency] || DEFAULT_URGENCY_COLOR;
+  const value = task.value || 0;
+  const target = task.target || 1;
+  const step = task.step || 1;
+  const unit = task.unit || "lần";
+
   return (
     <div className="bg-white rounded-xl p-3 border border-rose-100">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-1">
         <div className="font-bold text-gray-700 text-sm">{task.title}</div>
         {task.urgency && <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${urgencyClass}`}>{task.urgency}</span>}
       </div>
-      {task.note && <div className="text-xs text-gray-400 mt-0.5">{task.note}</div>}
-      <div className="text-xs text-amber-500 font-bold mt-1">🎯 {task.ticketValue} phiếu</div>
-      {!rating ? (
-        <div className="flex gap-1.5 mt-2">
-          {RATING_OPTIONS.map((r) => (
-            <button
-              key={r.id}
-              onClick={() => {
-                setRating(r.id);
-                onRate(r.id);
-              }}
-              className="flex-1 text-xs font-bold py-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200"
-            >
-              {r.emoji} {r.label}
-            </button>
-          ))}
+      {task.note && <div className="text-xs text-gray-400 mb-1">{task.note}</div>}
+      <div className="flex items-center justify-between mb-1.5">
+        <LevelBadge ratio={ratio} />
+        <span className="text-xs text-amber-500 font-bold">🎯 {tickets}/{task.ticketValue} phiếu</span>
+      </div>
+
+      <div className="flex items-center gap-3 mb-2">
+        <button
+          onClick={() => onChange((t) => ({ value: Math.max(0, (t.value || 0) - step) }))}
+          className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center"
+        >
+          –
+        </button>
+        <div className="flex-1 text-center">
+          <span className="text-lg font-extrabold text-gray-700">{value}</span>
+          <span className="text-xs text-gray-400 font-bold"> / {target} {unit}</span>
         </div>
-      ) : (
-        <div className="text-xs font-bold text-emerald-500 mt-2">✅ Đã hoàn thành</div>
-      )}
+        <button
+          onClick={() => onChange((t) => ({ value: (t.value || 0) + step }))}
+          className={`w-8 h-8 rounded-full ${col.solid} text-white font-bold flex items-center justify-center`}
+        >
+          +
+        </button>
+      </div>
+      <ProgressBar ratio={Math.min(1, ratio)} colorClass={col.solid} />
+      {ratio >= 1 && <div className="text-xs font-bold text-emerald-500 mt-2">✅ Đã hoàn thành — minh bạch, không cần tự chấm điểm nữa!</div>}
     </div>
   );
 }
 
-function TaskCard({ task, entry, target, ratio, col, onChange, onRemoveCustom }) {
+function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRemoveCustom, onShowWaterTimes }) {
   if (task.isMeals) {
     const flags = entry?.flags || [false, false, false];
     return (
@@ -1391,14 +1735,29 @@ function TaskCard({ task, entry, target, ratio, col, onChange, onRemoveCustom })
   }
 
   const value = entry?.value ?? 0;
+  const visual = getTaskVisual(task, ratio, flowerEmoji);
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-3.5 shadow-sm">
-      <div className="flex items-center justify-between mb-1.5">
-        <div className="flex items-center gap-2">
-          <span className="text-xl">{task.emoji}</span>
-          <span className="font-bold text-gray-700 text-sm">{task.name}</span>
-          {task.custom && <span className="text-[10px] bg-rose-50 text-rose-400 font-bold px-1.5 py-0.5 rounded-full">riêng</span>}
+      <div className="flex items-center gap-3 mb-2">
+        <div
+          key={visual ? visual.emoji : task.emoji}
+          className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 ${col.light}`}
+          style={{ animation: ratio > 0 ? "heroPop 0.4s ease-out" : "none" }}
+        >
+          {visual ? visual.emoji : task.emoji}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="font-bold text-gray-700 text-sm">{task.name}</span>
+            {task.custom && <span className="text-[10px] bg-rose-50 text-rose-400 font-bold px-1.5 py-0.5 rounded-full">riêng</span>}
+            {onShowWaterTimes && (
+              <button onClick={onShowWaterTimes} className="text-[10px] text-sky-500 font-bold underline">
+                giờ uống nước
+              </button>
+            )}
+          </div>
+          {visual && <div className="text-[11px] text-gray-400 truncate">{visual.label}</div>}
         </div>
         <div className="flex items-center gap-1.5">
           <LevelBadge ratio={ratio} />
@@ -1455,6 +1814,8 @@ function AssignSection({ data, setData, activeProfile }) {
   const dk = todayKey();
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
+  const [targetQty, setTargetQty] = useState(1);
+  const [unit, setUnit] = useState("lần");
   const [ticketValue, setTicketValue] = useState(5);
   const [urgency, setUrgency] = useState(data.urgencyLevels[0]);
 
@@ -1471,6 +1832,9 @@ function AssignSection({ data, setData, activeProfile }) {
           assignedTo: other,
           title: title.trim(),
           note: note.trim(),
+          target: Number(targetQty) || 1,
+          unit: unit.trim() || "lần",
+          value: 0,
           ticketValue: Number(ticketValue) || 5,
           urgency,
           status: "pending",
@@ -1479,6 +1843,8 @@ function AssignSection({ data, setData, activeProfile }) {
     }));
     setTitle("");
     setNote("");
+    setTargetQty(1);
+    setUnit("lần");
     setTicketValue(5);
   };
 
@@ -1490,11 +1856,12 @@ function AssignSection({ data, setData, activeProfile }) {
   return (
     <div className="space-y-5">
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-        <div className="text-sm font-extrabold text-gray-700 mb-3">✍️ Thử thách dành cho {nameOf(data, other)}</div>
+        <div className="text-sm font-extrabold text-gray-700 mb-1">✍️ Thử thách dành cho {nameOf(data, other)}</div>
+        <p className="text-[11px] text-gray-400 mb-3">Đặt số lượng cụ thể (VD: mang 5 bao gạo) — hoàn thành sẽ tự tính theo tiến độ thật, không cần tự chấm điểm nữa.</p>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Tên nhiệm vụ, VD: Dọn phòng trước 9h tối"
+          placeholder="Tên nhiệm vụ, VD: Mang gạo lên nhà"
           className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
         />
         <input
@@ -1503,6 +1870,22 @@ function AssignSection({ data, setData, activeProfile }) {
           placeholder="Ghi chú thêm (không bắt buộc)"
           className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
         />
+        <div className="flex gap-2 mb-2">
+          <input
+            type="number"
+            value={targetQty}
+            onChange={(e) => setTargetQty(e.target.value)}
+            placeholder="Số lượng"
+            className="w-24 rounded-xl border border-gray-200 px-2.5 py-2 text-sm text-center"
+            min={1}
+          />
+          <input
+            value={unit}
+            onChange={(e) => setUnit(e.target.value)}
+            placeholder="Đơn vị, VD: bao gạo"
+            className="flex-1 rounded-xl border border-gray-200 px-2.5 py-2 text-sm"
+          />
+        </div>
         <div className="flex items-center gap-2 mb-3">
           <select value={urgency} onChange={(e) => setUrgency(e.target.value)} className="flex-1 text-xs font-bold rounded-xl border border-gray-200 px-2 py-2">
             {data.urgencyLevels.map((u) => (
@@ -1530,22 +1913,21 @@ function AssignSection({ data, setData, activeProfile }) {
         <div className="text-xs font-bold text-gray-400 uppercase px-1 mb-2">{nameOf(data, other)} giao cho bạn</div>
         {givenToMe.length === 0 && <div className="text-sm text-gray-400 px-1">Chưa có thử thách nào hôm nay 🌤️</div>}
         <div className="space-y-2">
-          {givenToMe.map((t) => (
-            <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3 flex items-center justify-between">
-              <div>
-                <div className="font-bold text-gray-700 text-sm">{t.title}</div>
+          {givenToMe.map((t) => {
+            const ratio = assignedRatio(t);
+            return (
+              <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3">
+                <div className="flex items-center justify-between">
+                  <div className="font-bold text-gray-700 text-sm">{t.title}</div>
+                  <LevelBadge ratio={ratio} />
+                </div>
                 {t.note && <div className="text-xs text-gray-400">{t.note}</div>}
-                <div className="text-xs text-amber-500 font-bold">🎯 {t.ticketValue} phiếu</div>
+                <div className="text-xs text-amber-500 font-bold mt-1">
+                  {t.value || 0} / {t.target} {t.unit} · 🎯 {assignedTickets(t)} phiếu
+                </div>
               </div>
-              {t.status === "done" ? (
-                <span className="text-xs font-bold text-emerald-500 flex items-center gap-1">
-                  <Check size={14} /> {t.level}
-                </span>
-              ) : (
-                <span className="text-xs font-bold text-gray-400">Chờ làm</span>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -1553,26 +1935,27 @@ function AssignSection({ data, setData, activeProfile }) {
         <div className="text-xs font-bold text-gray-400 uppercase px-1 mb-2">Bạn đã tạo</div>
         {givenByMe.length === 0 && <div className="text-sm text-gray-400 px-1">Chưa tạo gì hôm nay 📝</div>}
         <div className="space-y-2">
-          {givenByMe.map((t) => (
-            <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3 flex items-center justify-between">
-              <div>
-                <div className="font-bold text-gray-700 text-sm">{t.title}</div>
-                <div className="text-xs text-amber-500 font-bold">🎯 {t.ticketValue} phiếu</div>
+          {givenByMe.map((t) => {
+            const ratio = assignedRatio(t);
+            return (
+              <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3 flex items-center justify-between">
+                <div>
+                  <div className="font-bold text-gray-700 text-sm">{t.title}</div>
+                  <div className="text-xs text-amber-500 font-bold">
+                    {t.value || 0} / {t.target} {t.unit} · 🎯 {assignedTickets(t)} phiếu
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <LevelBadge ratio={ratio} />
+                  {ratio < 1 && (
+                    <button onClick={() => removeTask(t.id)} className="text-gray-300 hover:text-rose-400">
+                      <Trash2 size={15} />
+                    </button>
+                  )}
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                {t.status === "done" ? (
-                  <span className="text-xs font-bold text-emerald-500">✅ {t.level}</span>
-                ) : (
-                  <span className="text-xs font-bold text-gray-400">Chờ làm</span>
-                )}
-                {t.status !== "done" && (
-                  <button onClick={() => removeTask(t.id)} className="text-gray-300 hover:text-rose-400">
-                    <Trash2 size={15} />
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -1742,10 +2125,12 @@ function TasksTab({ data, setData, activeProfile, onCelebrate }) {
 /* Mood tab                                                                */
 /* ---------------------------------------------------------------------- */
 
-function MoodTab({ data, setData, activeProfile }) {
+function MoodTab({ data, setData, activeProfile, onEncourage }) {
   const active = activeProfile;
   const dk = todayKey();
   const flowerEmoji = FLOWERS.find((f) => f.id === data.profiles[active].flower)?.emoji;
+  const myGender = data.profiles[active].gender;
+  const myDisplayName = data.profiles[active].name;
   const [slot, setSlot] = useState(() => {
     const hour = new Date().getHours();
     if (hour < 11) return "sang";
@@ -1762,6 +2147,14 @@ function MoodTab({ data, setData, activeProfile }) {
       next.moods[dk][active][slot] = { ...(next.moods[dk][active][slot] || {}), ...patch };
       return next;
     });
+  };
+
+  const selectMood = (moodId) => {
+    update({ mood: moodId });
+    if (LOW_MOODS.includes(moodId)) {
+      const pool = myGender === "nu" ? COMFORT_FOR_HER : myGender === "nam" ? COMFORT_FOR_HIM : NEUTRAL_COMFORT;
+      onEncourage({ kind: "comfort", text: pickEncouragement(pool, myDisplayName) });
+    }
   };
 
   const score = moodFreshnessScore(data, dk, active);
@@ -1797,7 +2190,7 @@ function MoodTab({ data, setData, activeProfile }) {
           {MOODS.map((m) => (
             <button
               key={m.id}
-              onClick={() => update({ mood: m.id })}
+              onClick={() => selectMood(m.id)}
               className={`flex flex-col items-center gap-1 py-2.5 rounded-xl border ${
                 entry.mood === m.id ? "border-rose-300 bg-rose-50" : "border-gray-100"
               }`}
@@ -2203,6 +2596,10 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
   const [p2Name, setP2Name] = useState(data.profiles.p2.name);
   const [p1Flower, setP1Flower] = useState(data.profiles.p1.flower);
   const [p2Flower, setP2Flower] = useState(data.profiles.p2.flower);
+  const [p1Gender, setP1Gender] = useState(data.profiles.p1.gender || "");
+  const [p2Gender, setP2Gender] = useState(data.profiles.p2.gender || "");
+  const [p1Role, setP1Role] = useState(data.profiles.p1.roleTitle || "");
+  const [p2Role, setP2Role] = useState(data.profiles.p2.roleTitle || "");
   const [targets, setTargets] = useState(structuredClone(data.targets));
   const [urgencyLevels, setUrgencyLevels] = useState([...data.urgencyLevels]);
   const [newUrgency, setNewUrgency] = useState("");
@@ -2211,8 +2608,8 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
     setData((prev) => ({
       ...prev,
       profiles: {
-        p1: { ...prev.profiles.p1, name: p1Name.trim() || prev.profiles.p1.name, flower: p1Flower },
-        p2: { ...prev.profiles.p2, name: p2Name.trim() || prev.profiles.p2.name, flower: p2Flower },
+        p1: { ...prev.profiles.p1, name: p1Name.trim() || prev.profiles.p1.name, flower: p1Flower, gender: p1Gender, roleTitle: p1Role },
+        p2: { ...prev.profiles.p2, name: p2Name.trim() || prev.profiles.p2.name, flower: p2Flower, gender: p2Gender, roleTitle: p2Role },
       },
       targets,
       urgencyLevels,
@@ -2242,8 +2639,22 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
               onChange={(e) => (pid === "p1" ? setP1Name(e.target.value) : setP2Name(e.target.value))}
               className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mt-1 mb-2"
             />
+            <div className="text-[11px] font-bold text-gray-400 uppercase mb-1">Giới tính</div>
+            <div className="flex flex-wrap gap-1.5 mb-2">
+              {GENDERS.map((g) => (
+                <button
+                  key={g.id}
+                  onClick={() => (pid === "p1" ? setP1Gender(g.id) : setP2Gender(g.id))}
+                  className={`text-xs font-bold px-2 py-1 rounded-full border ${
+                    (pid === "p1" ? p1Gender : p2Gender) === g.id ? "border-rose-400 bg-rose-50" : "border-gray-200 text-gray-400"
+                  }`}
+                >
+                  {g.emoji} {g.label}
+                </button>
+              ))}
+            </div>
             <div className="text-[11px] font-bold text-gray-400 uppercase mb-1">Hoa yêu thích</div>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1.5 mb-2">
               {FLOWERS.map((f) => (
                 <button
                   key={f.id}
@@ -2253,6 +2664,20 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
                   }`}
                 >
                   {f.emoji}
+                </button>
+              ))}
+            </div>
+            <div className="text-[11px] font-bold text-gray-400 uppercase mb-1">Là gì của người kia</div>
+            <div className="flex flex-wrap gap-1.5">
+              {ROLE_TITLES.map((r) => (
+                <button
+                  key={r}
+                  onClick={() => (pid === "p1" ? setP1Role(r) : setP2Role(r))}
+                  className={`text-[11px] font-bold px-2 py-1 rounded-full border ${
+                    (pid === "p1" ? p1Role : p2Role) === r ? "border-rose-400 bg-rose-50" : "border-gray-200 text-gray-400"
+                  }`}
+                >
+                  {r}
                 </button>
               ))}
             </div>
@@ -2347,7 +2772,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
           >
             {notifPermission === "granted" ? "Đã bật thông báo trình duyệt ✓" : "Thử bật thông báo trình duyệt"}
           </button>
-          <p className="text-[11px] text-gray-400 mt-1.5">* Cần cho phép quyền thông báo của trình duyệt; có thể không khả dụng trên mọi thiết bị.</p>
+          <p className="text-[11px] text-gray-400 mt-1.5">* Cần cho phép quyền thông báo của trình duyệt; có thể không khả dụng trên mọi thiết bị. Khi bật, app sẽ thử nhắc bạn vào các giờ uống nước gợi ý.</p>
         </div>
 
         <button onClick={save} className="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 rounded-2xl mb-2">
@@ -2378,10 +2803,12 @@ export default function App() {
   const [showAlerts, setShowAlerts] = useState(false);
   const [reveal, setReveal] = useState(null);
   const [celebration, setCelebration] = useState(null);
+  const [toast, setToast] = useState(null);
   const [notifPermission, setNotifPermission] = useState(
     typeof Notification !== "undefined" ? Notification.permission : "unsupported"
   );
   const writeTimer = useRef(null);
+  const lastWaterPing = useRef("");
 
   // Subscribe to the couple's data in Firebase Realtime Database whenever we have a coupleId.
   // Every update from either device (including our own writes) flows back through here,
@@ -2421,6 +2848,29 @@ export default function App() {
   }, [celebration]);
 
   const celebrate = (flowerEmoji) => setCelebration(makeCelebration(flowerEmoji));
+  const encourage = (toastObj) => setToast(toastObj);
+
+  // Best-effort water-time reminder — only fires if the browser granted notification
+  // permission; checks the clock every 30s against the suggested times. This cannot
+  // guarantee delivery the way a real native push notification would.
+  useEffect(() => {
+    const check = () => {
+      if (typeof Notification === "undefined" || Notification.permission !== "granted") return;
+      const now = new Date();
+      const hhmm = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+      const match = WATER_REMINDER_TIMES.find((w) => w.time === hhmm);
+      if (match && lastWaterPing.current !== hhmm) {
+        lastWaterPing.current = hhmm;
+        try {
+          new Notification("💧 Giờ uống nước rồi!", { body: match.tip });
+        } catch {
+          // ignore
+        }
+      }
+    };
+    const interval = setInterval(check, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   const requestNotif = async () => {
     try {
@@ -2490,7 +2940,7 @@ export default function App() {
   }
 
   const dk = todayKey();
-  const pendingCount = data.assignedTasks.filter((a) => a.dateKey === dk && a.assignedTo === activeProfile && a.status === "pending").length;
+  const pendingCount = data.assignedTasks.filter((a) => a.dateKey === dk && a.assignedTo === activeProfile && assignedRatio(a) < 1).length;
   const alertCount = computeAlerts(data).filter((a) => a.profileId !== activeProfile).length;
 
   return (
@@ -2507,74 +2957,90 @@ export default function App() {
           0% { transform: translateY(0) rotate(0deg); opacity: 1; }
           100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
-       @keyframes floatUp {
-  0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translateY(-65vh) scale(1.1); opacity: 0; }
-}
-@keyframes bloomPop {
-  0% { transform: translate(-50%,-50%) scale(0); opacity: 0; }
-  50% { transform: translate(-50%,-50%) scale(1.3); opacity: 1; }
-  100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
-}
-@keyframes burstOut {
-  0% { transform: translate(-50%,-50%) translate(0,0) scale(1); opacity: 1; }
-  100% { transform: translate(-50%,-50%) translate(var(--dx), var(--dy)) scale(0.4); opacity: 0; }
-}
-@keyframes twinkle {
-  0% { transform: scale(0.4); opacity: 0; }
-  30% { transform: scale(1.2); opacity: 1; }
-  60% { transform: scale(0.9); opacity: 1; }
-  100% { transform: scale(0.3); opacity: 0; }
-}
-@keyframes flutter {
-
-  0% { transform: translate(-8vw, 0) rotate(-8deg); opacity: 0; }
-  10% { opacity: 1; }
-  25% { transform: translate(28vw, -6vh) rotate(8deg); }
-  50% { transform: translate(56vw, 4vh) rotate(-8deg); }
-  75% { transform: translate(84vw, -8vh) rotate(8deg); }
-  100% { transform: translate(108vw, 0) rotate(0deg); opacity: 0; }
-}
-  @keyframes catRun {
-  0% { left: -10%; transform: scaleX(1); opacity: 0; }
-  8% { opacity: 1; }
-  40% { left: 38%; transform: scaleX(1); }
-  50% { left: 38%; transform: scaleX(-1); }
-  92% { opacity: 1; }
-  100% { left: -10%; transform: scaleX(-1); opacity: 0; }
-}
-@keyframes bunnyHop {
-  0% { left: -10%; transform: translateY(0); opacity: 0; }
-  6% { opacity: 1; }
-  20% { transform: translateY(-14px); }
-  30% { transform: translateY(0); }
-  45% { transform: translateY(-14px); }
-  55% { transform: translateY(0); }
-  94% { opacity: 1; }
-  100% { left: 105%; opacity: 0; }
-}
-@keyframes kissWave {
-  0% { transform: scale(0.5) rotate(0deg); opacity: 0; }
-  20% { transform: scale(1.1) rotate(-8deg); opacity: 1; }
-  35% { transform: scale(1) rotate(8deg); }
-  50% { transform: scale(1.1) rotate(-8deg); }
-  65% { transform: scale(1) rotate(8deg); }
-  100% { transform: scale(0.7) rotate(0deg); opacity: 0; }
-}
-@keyframes pawPrint {
-  0% { opacity: 0; transform: scale(0.6); }
-  40% { opacity: 0.55; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1); }
-}
+        @keyframes floatUp {
+          0% { transform: translateY(0) scale(0.8); opacity: 0; }
+          20% { opacity: 1; }
+          100% { transform: translateY(-65vh) scale(1.1); opacity: 0; }
+        }
+        @keyframes bloomPop {
+          0% { transform: translate(-50%,-50%) scale(0); opacity: 0; }
+          50% { transform: translate(-50%,-50%) scale(1.3); opacity: 1; }
+          100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
+        }
+        @keyframes burstOut {
+          0% { transform: translate(-50%,-50%) translate(0,0) scale(1); opacity: 1; }
+          100% { transform: translate(-50%,-50%) translate(var(--dx), var(--dy)) scale(0.4); opacity: 0; }
+        }
+        @keyframes twinkle {
+          0% { transform: scale(0.4); opacity: 0; }
+          30% { transform: scale(1.2); opacity: 1; }
+          60% { transform: scale(0.9); opacity: 1; }
+          100% { transform: scale(0.3); opacity: 0; }
+        }
+        @keyframes flutter {
+          0% { transform: translate(-8vw, 0) rotate(-8deg); opacity: 0; }
+          10% { opacity: 1; }
+          25% { transform: translate(28vw, -6vh) rotate(8deg); }
+          50% { transform: translate(56vw, 4vh) rotate(-8deg); }
+          75% { transform: translate(84vw, -8vh) rotate(8deg); }
+          100% { transform: translate(108vw, 0) rotate(0deg); opacity: 0; }
+        }
+        @keyframes catRun {
+          0% { left: -10%; transform: translateY(0) scaleX(1); opacity: 0; }
+          10% { opacity: 1; }
+          30% { left: 35%; transform: translateY(-8px) scaleX(1); }
+          45% { left: 45%; transform: translateY(4px) scaleX(1); }
+          50% { left: 45%; transform: translateY(4px) scaleX(-1); }
+          70% { left: 20%; transform: translateY(-6px) scaleX(-1); }
+          90% { opacity: 1; }
+          100% { left: -10%; transform: translateY(0) scaleX(-1); opacity: 0; }
+        }
+        @keyframes bunnyHop {
+          0% { left: -10%; transform: translateY(0); opacity: 0; }
+          6% { opacity: 1; }
+          15% { transform: translateY(-16px); }
+          25% { transform: translateY(0); }
+          35% { transform: translateY(-16px); }
+          45% { transform: translateY(0); }
+          55% { transform: translateY(-16px); }
+          65% { transform: translateY(0); }
+          75% { transform: translateY(-16px); }
+          94% { opacity: 1; }
+          100% { left: 105%; transform: translateY(0); opacity: 0; }
+        }
+        @keyframes kissWave {
+          0% { transform: scale(0.5) rotate(0deg); opacity: 0; }
+          15% { transform: scale(1.1) rotate(-8deg); opacity: 1; }
+          30% { transform: scale(1) rotate(8deg); }
+          45% { transform: scale(1.1) rotate(-8deg); }
+          60% { transform: scale(1) rotate(8deg); }
+          75% { transform: scale(1.05) rotate(-6deg); opacity: 1; }
+          100% { transform: scale(0.7) rotate(0deg); opacity: 0; }
+        }
+        @keyframes pawPrint {
+          0% { opacity: 0; transform: scale(0.6); }
+          40% { opacity: 0.55; transform: scale(1); }
+          100% { opacity: 0; transform: scale(1); }
+        }
+        @keyframes heroPop {
+          0% { transform: scale(0.7) rotate(-8deg); }
+          60% { transform: scale(1.15) rotate(4deg); }
+          100% { transform: scale(1) rotate(0deg); }
+        }
+        @keyframes toastPop {
+          0% { transform: translateY(-20px) scale(0.9); opacity: 0; }
+          100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
       `}</style>
 
       <Header data={data} activeProfile={activeProfile} onOpenSettings={() => setShowSettings(true)} onOpenAlerts={() => setShowAlerts(true)} alertCount={alertCount} />
 
       <div className="flex-1 overflow-y-auto">
-        {tab === "today" && <TodayTab data={data} setData={setData} activeProfile={activeProfile} coupleId={coupleId} onCelebrate={celebrate} />}
+        {tab === "today" && (
+          <TodayTab data={data} setData={setData} activeProfile={activeProfile} coupleId={coupleId} onCelebrate={celebrate} onEncourage={encourage} />
+        )}
         {tab === "tasks" && <TasksTab data={data} setData={setData} activeProfile={activeProfile} onCelebrate={celebrate} />}
-        {tab === "mood" && <MoodTab data={data} setData={setData} activeProfile={activeProfile} />}
+        {tab === "mood" && <MoodTab data={data} setData={setData} activeProfile={activeProfile} onEncourage={encourage} />}
         {tab === "gift" && <GiftTab data={data} setData={setData} activeProfile={activeProfile} onReveal={setReveal} />}
         {tab === "finance" && <FinanceTab data={data} setData={setData} activeProfile={activeProfile} />}
       </div>
@@ -2595,6 +3061,7 @@ export default function App() {
       {showAlerts && <AlertsPanel data={data} setData={setData} activeProfile={activeProfile} onClose={() => setShowAlerts(false)} />}
       {reveal && <GiftRevealModal reveal={reveal} onClose={() => setReveal(null)} />}
       <CelebrationOverlay celebration={celebration} />
+      <EncouragementToast toast={toast} onDone={() => setToast(null)} />
       <AmbientCritters />
     </div>
   );
