@@ -1,18 +1,12 @@
 // src/firebase.js
 // Firebase Realtime Database setup + small helper functions used by App.jsx.
-// Data layout in the database:
 //
-//   /couples/{coupleId}/profiles        -> { p1: {...}, p2: {...} }
-//   /couples/{coupleId}/dailyData       -> { [dateKey]: { [profileId]: { ...habitEntries } } }
-//   /couples/{coupleId}/assignedTasks   -> [ {...} ]
-//   /couples/{coupleId}/sharedTasks     -> [ {...} ]
-//   /couples/{coupleId}/moods           -> { [dateKey]: { [profileId]: { sang/chieu/toi: {...} } } }
-//   /couples/{coupleId}/gifts           -> [ {...} ]
-//   /couples/{coupleId}/targets, customHabits, bonusTickets, expenses,
-//                        urgencyLevels, dismissedAlerts -> rest of the app's data
-//
-// "coupleId" doubles as the 6-character room code shown to the user — there is
-// no separate mapping table, which keeps this small and easy to reason about.
+// IMPORTANT GOTCHA: Firebase Realtime Database does NOT store empty
+// objects/arrays — a node only exists if it has at least one child. So
+// fields like `assignedTasks: []` or `moods: {}` written when a couple is
+// first created come back as `undefined` (not `[]`/`{}`) once read back.
+// withDefaults() below patches that, so the rest of the app can safely do
+// things like `data.assignedTasks.filter(...)` without crashing.
 
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, update, onValue, off } from "firebase/database";
@@ -29,6 +23,35 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
+
+/* ---------------------------------------------------------------------- */
+/* Data normalization                                                      */
+/* ---------------------------------------------------------------------- */
+
+// Fills in any container fields that Firebase silently dropped because they
+// were empty. Safe to call on every read; does nothing if the data is
+// already complete.
+function withDefaults(raw) {
+  if (!raw) return raw;
+  return {
+    ...raw,
+    profiles: raw.profiles || { p1: {}, p2: {} },
+    targets: raw.targets || { p1: {}, p2: {} },
+    customHabits: {
+      p1: raw.customHabits?.p1 || [],
+      p2: raw.customHabits?.p2 || [],
+    },
+    dailyData: raw.dailyData || {},
+    assignedTasks: raw.assignedTasks || [],
+    sharedTasks: raw.sharedTasks || [],
+    moods: raw.moods || {},
+    gifts: raw.gifts || [],
+    bonusTickets: raw.bonusTickets || { p1: 0, p2: 0 },
+    expenses: raw.expenses || [],
+    urgencyLevels: raw.urgencyLevels || [],
+    dismissedAlerts: raw.dismissedAlerts || [],
+  };
+}
 
 /* ---------------------------------------------------------------------- */
 /* Room codes                                                             */
@@ -67,7 +90,7 @@ export async function createCouple(coupleId, initialData) {
 // One-off read (used to validate a join code before showing the join form).
 export async function getCoupleData(coupleId) {
   const snap = await get(coupleRef(coupleId));
-  return snap.exists() ? snap.val() : null;
+  return snap.exists() ? withDefaults(snap.val()) : null;
 }
 
 // Overwrites the whole couple document. Simple and good enough for a 2-person
@@ -89,7 +112,7 @@ export async function setCouplePath(coupleId, path, value) {
 // writes a change. Returns an unsubscribe function.
 export function subscribeCouple(coupleId, callback) {
   const r = coupleRef(coupleId);
-  const handler = (snapshot) => callback(snapshot.exists() ? snapshot.val() : null);
+  const handler = (snapshot) => callback(snapshot.exists() ? withDefaults(snapshot.val()) : null);
   onValue(r, handler);
   return () => off(r, "value", handler);
 }
