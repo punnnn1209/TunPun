@@ -534,6 +534,70 @@ function ProgressBar({ ratio, colorClass }) {
   );
 }
 
+// Progress bar with the "x / y unit" label embedded right in the middle of the bar itself,
+// used for every counter-based task (habits + assigned challenges) per request.
+function ProgressBarWithLabel({ ratio, colorClass, label }) {
+  const pct = Math.max(0, Math.min(100, ratio * 100));
+  return (
+    <div className="relative w-full h-8 rounded-full bg-gray-100 overflow-hidden">
+      <div className={`absolute inset-y-0 left-0 rounded-full ${colorClass} transition-all duration-500 ease-out`} style={{ width: `${pct}%` }} />
+      <div className="absolute inset-0 flex items-center justify-center px-2">
+        <span className="text-xs font-extrabold text-gray-700 truncate">{label}</span>
+      </div>
+    </div>
+  );
+}
+
+// A plant that grows continuously with every cup of water — sprout in a pot that gets
+// taller and grows leaves bit by bit, instead of jumping between a few fixed emoji.
+const PLANT_MAX_STEM = 52; // px, height at 100% progress
+const PLANT_MIN_STEM = 6; // px, always-visible little sprout even at 0%
+const PLANT_LEAF_CHECKPOINTS = [14, 27, 40]; // px of stem height at which each leaf pair appears
+
+function GrowingPlant({ ratio, flowerEmoji, bump }) {
+  const cappedRatio = Math.min(1, Math.max(0, ratio));
+  const stemHeight = PLANT_MIN_STEM + cappedRatio * (PLANT_MAX_STEM - PLANT_MIN_STEM);
+  const bloomed = ratio >= 1;
+  const flower = flowerEmoji || "🌸";
+
+  return (
+    <div key={bump} className="relative w-14 h-24 shrink-0" style={{ animation: "plantWater 0.4s ease-out" }}>
+      {/* pot */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-9 h-5 bg-orange-400 rounded-b-xl rounded-t-sm" />
+      <div className="absolute bottom-[18px] left-1/2 -translate-x-1/2 w-10 h-1.5 bg-orange-500 rounded-full" />
+      {/* stem */}
+      <div
+        className="absolute left-1/2 -translate-x-1/2 w-1 bg-emerald-500 rounded-full transition-all duration-500 ease-out"
+        style={{ bottom: "20px", height: `${stemHeight}px` }}
+      />
+      {/* leaves, revealed one by one as the stem grows past each checkpoint */}
+      {PLANT_LEAF_CHECKPOINTS.map((checkpoint, i) => (
+        <span
+          key={checkpoint}
+          className="absolute text-sm transition-all duration-500 ease-out"
+          style={{
+            bottom: `${20 + checkpoint}px`,
+            left: i % 2 === 0 ? "22%" : "60%",
+            opacity: stemHeight >= checkpoint ? 1 : 0,
+            transform: stemHeight >= checkpoint ? "scale(1)" : "scale(0)",
+          }}
+        >
+          🍃
+        </span>
+      ))}
+      {/* flower blooms once the day's target is fully met */}
+      {bloomed && (
+        <span
+          className="absolute text-xl left-1/2"
+          style={{ bottom: `${20 + stemHeight - 4}px`, transform: "translateX(-50%)", animation: "bloomPop 0.6s ease-out" }}
+        >
+          {ratio >= 1.2 ? `${flower}✨` : flower}
+        </span>
+      )}
+    </div>
+  );
+}
+
 function LevelBadge({ ratio }) {
   const lvl = getLevel(ratio);
   return (
@@ -550,6 +614,7 @@ function TicketBadge({ count, flowerEmoji }) {
       <span>{flowerEmoji || "🌸"}</span> {count} phiếu
     </div>
   );
+
 }
 
 /* ---------------------------------------------------------------------- */
@@ -1679,22 +1744,18 @@ function PendingTaskCard({ task, col, onChange }) {
       <div className="flex items-center gap-3 mb-2">
         <button
           onClick={() => onChange((t) => ({ value: Math.max(0, (t.value || 0) - step) }))}
-          className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center"
+          className="w-9 h-9 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center shrink-0"
         >
           –
         </button>
-        <div className="flex-1 text-center">
-          <span className="text-lg font-extrabold text-gray-700">{value}</span>
-          <span className="text-xs text-gray-400 font-bold"> / {target} {unit}</span>
-        </div>
+        <ProgressBarWithLabel ratio={Math.min(1, ratio)} colorClass={col.solid} label={`${value} / ${target} ${unit}`} />
         <button
           onClick={() => onChange((t) => ({ value: (t.value || 0) + step }))}
-          className={`w-8 h-8 rounded-full ${col.solid} text-white font-bold flex items-center justify-center`}
+          className={`w-9 h-9 rounded-full ${col.solid} text-white font-bold flex items-center justify-center shrink-0`}
         >
           +
         </button>
       </div>
-      <ProgressBar ratio={Math.min(1, ratio)} colorClass={col.solid} />
       {ratio >= 1 && <div className="text-xs font-bold text-emerald-500 mt-2">✅ Đã hoàn thành — minh bạch, không cần tự chấm điểm nữa!</div>}
     </div>
   );
@@ -1736,17 +1797,22 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
 
   const value = entry?.value ?? 0;
   const visual = getTaskVisual(task, ratio, flowerEmoji);
+  const isWater = task.theme === "water";
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-3.5 shadow-sm">
-      <div className="flex items-center gap-3 mb-2">
-        <div
-          key={visual ? visual.emoji : task.emoji}
-          className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 ${col.light}`}
-          style={{ animation: ratio > 0 ? "heroPop 0.4s ease-out" : "none" }}
-        >
-          {visual ? visual.emoji : task.emoji}
-        </div>
+      <div className={`flex gap-3 mb-2 ${isWater ? "items-start" : "items-center"}`}>
+        {isWater ? (
+          <GrowingPlant ratio={ratio} flowerEmoji={flowerEmoji} bump={value} />
+        ) : (
+          <div
+            key={visual ? visual.emoji : task.emoji}
+            className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 ${col.light}`}
+            style={{ animation: ratio > 0 ? "heroPop 0.4s ease-out" : "none" }}
+          >
+            {visual ? visual.emoji : task.emoji}
+          </div>
+        )}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="font-bold text-gray-700 text-sm">{task.name}</span>
@@ -1758,6 +1824,7 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
             )}
           </div>
           {visual && <div className="text-[11px] text-gray-400 truncate">{visual.label}</div>}
+          {task.hint && <div className="text-[11px] text-gray-400 mt-1">💡 {task.hint}</div>}
         </div>
         <div className="flex items-center gap-1.5">
           <LevelBadge ratio={ratio} />
@@ -1768,28 +1835,22 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
           )}
         </div>
       </div>
-      {task.hint && <div className="text-[11px] text-gray-400 mb-1.5">💡 {task.hint}</div>}
 
       <div className="flex items-center gap-3 mb-2">
         <button
           onClick={() => onChange((c) => ({ ...c, value: Math.max(0, (c.value ?? 0) - task.step) }))}
-          className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center"
+          className="w-9 h-9 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center shrink-0"
         >
           –
         </button>
-        <div className="flex-1 text-center">
-          <span className="text-lg font-extrabold text-gray-700">{value}</span>
-          <span className="text-xs text-gray-400 font-bold"> / {target} {task.unit}</span>
-        </div>
+        <ProgressBarWithLabel ratio={Math.min(1, ratio)} colorClass={col.solid} label={`${value} / ${target} ${task.unit}`} />
         <button
           onClick={() => onChange((c) => ({ ...c, value: (c.value ?? 0) + task.step }))}
-          className={`w-8 h-8 rounded-full ${col.solid} text-white font-bold flex items-center justify-center`}
+          className={`w-9 h-9 rounded-full ${col.solid} text-white font-bold flex items-center justify-center shrink-0`}
         >
           +
         </button>
       </div>
-
-      <ProgressBar ratio={Math.min(1, ratio)} colorClass={col.solid} />
 
       {task.hasNote && (
         <textarea
@@ -3030,6 +3091,11 @@ export default function App() {
         @keyframes toastPop {
           0% { transform: translateY(-20px) scale(0.9); opacity: 0; }
           100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        @keyframes plantWater {
+          0% { transform: scale(0.96); }
+          40% { transform: scale(1.05); }
+          100% { transform: scale(1); }
         }
       `}</style>
 
