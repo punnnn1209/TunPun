@@ -452,7 +452,7 @@ function freshnessStage(score, flowerEmoji) {
   if (score >= 60) return { emoji: flower, label: "Tươi tắn", scale: "scale-100", opacity: "opacity-100", gray: "" };
   if (score >= 40) return { emoji: flower, label: "Hơi mệt mỏi", scale: "scale-100", opacity: "opacity-80", gray: "" };
   if (score >= 15) return { emoji: flower, label: "Hơi héo, cần quan tâm", scale: "scale-90", opacity: "opacity-70", gray: "grayscale" };
-  return { emoji: WILTED_EMOJI, label: "Nhớ bạn rồi, cần được chăm sóc 💧", scale: "scale-90", opacity: "opacity-90", gray: "" };
+  return { emoji: WILTED_EMOJI, label: "Héo úa rồi, cần được chăm sóc 💧", scale: "scale-90", opacity: "opacity-90", gray: "" };
 }
 
 function computeAlerts(data) {
@@ -1930,11 +1930,11 @@ function AssignSection({ data, setData, activeProfile }) {
     <div className="space-y-5">
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
         <div className="text-sm font-extrabold text-gray-700 mb-1">✍️ Thử thách dành cho {nameOf(data, other)}</div>
-        <p className="text-[11px] text-gray-400 mb-3">Đặt số lượng cụ thể, đưa ra mức điểm thưởng và phần quà bí mật dành tặng {nameOf(data, other)} yêu nha.</p>
+        <p className="text-[11px] text-gray-400 mb-3">Đặt số lượng cụ thể (VD: mang 5 bao gạo) — hoàn thành sẽ tự tính theo tiến độ thật, không cần tự chấm điểm nữa.</p>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Tên thử thách"
+          placeholder="Tên nhiệm vụ, VD: Mang gạo lên nhà"
           className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
         />
         <input
@@ -1955,7 +1955,7 @@ function AssignSection({ data, setData, activeProfile }) {
           <input
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
-            placeholder="Đơn vị"
+            placeholder="Đơn vị, VD: bao gạo"
             className="flex-1 rounded-xl border border-gray-200 px-2.5 py-2 text-sm"
           />
         </div>
@@ -2868,6 +2868,8 @@ export default function App() {
   const [activeProfile, setActiveProfile] = useState(() => loadSession()?.profileId || null);
   const [data, setDataRaw] = useState(null);
   const [connecting, setConnecting] = useState(!!loadSession());
+  const [connectError, setConnectError] = useState(null); // "denied" | "timeout" | "notfound" | null
+  const [retryKey, setRetryKey] = useState(0);
   const [screen, setScreen] = useState("welcome"); // welcome | create | join | reveal
   const [revealCode, setRevealCode] = useState(null);
 
@@ -2886,15 +2888,50 @@ export default function App() {
   // Subscribe to the couple's data in Firebase Realtime Database whenever we have a coupleId.
   // Every update from either device (including our own writes) flows back through here,
   // which is what gives the realtime "no refresh needed" sync.
+  //
+  // This used to be able to hang on the "connecting..." screen forever with zero feedback —
+  // e.g. if the Firebase Realtime Database rules deny read access. Now: a read error surfaces
+  // immediately, a room that genuinely doesn't exist (null after the first real response) is
+  // reported instead of treated as "still loading", and a timeout catches any other silent hang.
   useEffect(() => {
     if (!coupleId) return;
     setConnecting(true);
-    const unsubscribe = subscribeCouple(coupleId, (val) => {
-      setDataRaw(val);
-      setConnecting(false);
-    });
-    return unsubscribe;
-  }, [coupleId]);
+    setConnectError(null);
+    let gotFirstResponse = false;
+
+    const timeout = setTimeout(() => {
+      if (!gotFirstResponse) {
+        setConnecting(false);
+        setConnectError("timeout");
+      }
+    }, 10000);
+
+    const unsubscribe = subscribeCouple(
+      coupleId,
+      (val) => {
+        gotFirstResponse = true;
+        clearTimeout(timeout);
+        setConnecting(false);
+        if (val === null) {
+          setConnectError("notfound");
+        } else {
+          setDataRaw(val);
+          setConnectError(null);
+        }
+      },
+      () => {
+        gotFirstResponse = true;
+        clearTimeout(timeout);
+        setConnecting(false);
+        setConnectError("denied");
+      }
+    );
+
+    return () => {
+      clearTimeout(timeout);
+      unsubscribe();
+    };
+  }, [coupleId, retryKey]);
 
   // Wrapped setter: updates local state immediately (snappy UI), then pushes the
   // full couple document to Firebase after a short debounce so rapid edits
@@ -3003,11 +3040,53 @@ export default function App() {
   }
 
   // Paired, but still waiting on the first snapshot from Firebase.
-  if (connecting || !data) {
+  if (connecting) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-rose-50 gap-2">
         <div className="text-3xl animate-pulse">💞</div>
         <div className="text-xs font-bold text-gray-400">Đang kết nối với phòng của hai bạn...</div>
+      </div>
+    );
+  }
+
+  // Connection finished but something's wrong — show what happened instead of hanging forever.
+  if (connectError || !data) {
+    const messages = {
+      denied: {
+        title: "Không có quyền đọc dữ liệu phòng 🔒",
+        detail: "Firebase Realtime Database đang chặn đọc/ghi. Vào Firebase Console → Realtime Database → Rules, mở quyền .read/.write cho couples/$coupleId rồi thử lại.",
+      },
+      timeout: {
+        title: "Kết nối quá lâu, có gì đó không ổn 🐢",
+        detail: "Có thể do mạng chậm/chặn, hoặc cấu hình Firebase chưa đúng. Kiểm tra kết nối mạng rồi bấm thử lại.",
+      },
+      notfound: {
+        title: "Không tìm thấy phòng này 💔",
+        detail: "Phòng có thể đã bị xoá trên Firebase, hoặc thiết bị này đang nhớ nhầm mã phòng cũ. Rời khỏi thiết bị này rồi tạo/tham gia phòng lại nhé.",
+      },
+    };
+    const m = messages[connectError] || messages.notfound;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-rose-50 gap-3 px-6 text-center">
+        <div className="text-4xl">😵</div>
+        <div className="font-extrabold text-gray-700" style={{ fontFamily: DISPLAY_FONT }}>
+          {m.title}
+        </div>
+        <div className="text-xs text-gray-400 max-w-xs">{m.detail}</div>
+        <div className="flex gap-2 mt-2">
+          <button
+            onClick={() => setRetryKey((k) => k + 1)}
+            className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-5 py-2.5 rounded-full text-sm"
+          >
+            Thử lại
+          </button>
+          <button
+            onClick={handleLogout}
+            className="bg-white border border-gray-200 text-gray-500 font-bold px-5 py-2.5 rounded-full text-sm"
+          >
+            Rời khỏi thiết bị này
+          </button>
+        </div>
       </div>
     );
   }
