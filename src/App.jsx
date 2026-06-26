@@ -724,7 +724,7 @@ function EncouragementToast({ toast, onDone }) {
 /* Celebration overlay — 12 effects, one picked at random each time        */
 /* ---------------------------------------------------------------------- */
 
-const CELEBRATION_PALETTE = ["bg-rose-300", "bg-amber-300", "bg-sky-300", "bg-violet-300", "bg-emerald-300", "bg-pink-300"];
+const CELEBRATION_PALETTE = ["bg-rose-500", "bg-amber-500", "bg-sky-500", "bg-violet-500", "bg-emerald-500", "bg-pink-500"];
 const HEART_EMOJIS = ["💕", "💖", "💗", "❤️", "💞"];
 const SHOWER_EMOJIS = ["🎉", "🎊", "✨", "🌟", "💫"];
 const CELEBRATION_TYPES = [
@@ -776,11 +776,11 @@ function buildEffectData(type, flower) {
     case "bloom":
       return { centerEmoji: flower };
     case "kiss":
-      return { items: floatItems(7, "💋") };
+      return { items: floatItems(70, "💋") };
     case "firework":
-      return { bursts: burstItems(20, 130) };
+      return { bursts: burstItems(200, 130) };
     case "hearts":
-      return { items: floatItems(10, null, HEART_EMOJIS) };
+      return { items: floatItems(100, null, HEART_EMOJIS) };
     case "sparkle":
       return {
         stars: Array.from({ length: 18 }, () => ({
@@ -2379,7 +2379,7 @@ function TasksTab({ data, setData, activeProfile, onCelebrate }) {
           onClick={() => setSub("assign")}
           className={`flex-1 text-base font-bold py-2 rounded-full ${sub === "assign" ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"}`}
         >
-          Giao việc
+          Vượt chướng ngại vật
         </button>
         <button
           onClick={() => setSub("shared")}
