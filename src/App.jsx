@@ -73,10 +73,10 @@ const ROLE_TITLES = [
   "Điểm tựa của em🧸",
   "Nóc nhà dễ thương của anh 😎",
   "Đầu bếp riêng 🍳",
-  "Vệ sĩ 24/7 🛡️",
+  "Vệ sĩ của mình em 🛡️",
   "Người gọi dậy mỗi sáng ☀️",
   "Bạn đời tương lai 💍",
-  "Trùm cuối của tim em 👑",
+  "Trùm đánh cắp tim em 👑",
   "Người chữa lành mọi mệt mỏi 🩹",
   "Đồng phạm ăn vặt 🍟",
   "Crush không đối thủ 😍",
@@ -106,7 +106,7 @@ const TASKS = [
     name: "Giới hạn thời gian sử dụng màn hình",
     unit: "phút",
     step: 10,
-    min: 0, 
+    min: 0,
     max: 450,
     defaultTarget: 90,
     inverse: true,
@@ -163,8 +163,8 @@ const URGENCY_COLORS = {
 const DEFAULT_URGENCY_COLOR = "bg-gray-100 text-gray-600 border-gray-200";
 
 const PRESET_GIFTS = [
-  { text: "+5 phiếu bé ngoan tặng thêm 🌸", bonusTickets: 5 },
-  { text: "+10 phiếu bé ngoan tặng thêm 🌸", bonusTickets: 10 },
+  { text: "+5 phiếu bé ngoan dành cho yêu dấu 🌸", bonusTickets: 5 },
+  { text: "+10 phiếu bé ngoan gửi cho babe 🌸", bonusTickets: 10 },
   { text: "Đặc quyền chọn phim tối nay 🎬" },
   { text: "Một bữa sáng tại giường ☕🥐" },
   { text: "30 phút massage thư giãn 💆" },
@@ -211,7 +211,7 @@ const COLORS = {
    partner's nickname/role title if they set one, otherwise their first name. */
 const CHEER_FOR_HIM = [
   "Người yêu của em siêu quáaaaa!!! 😍💪",
-  "Anh yêu đỉnh nhất luôn á 🥹💖",
+  "Anh yêu đỉnh nhất luôn áaaaa 🥹💖",
   "Sao có người vừa chăm vừa ngầu vậy nhỉ 😎✨",
   "Em tự hào về anh quá đi mất 🥰🏆",
   "Đúng là không có đối thủ thật mà 😤💕",
@@ -219,15 +219,15 @@ const CHEER_FOR_HIM = [
   "Cố lên là thấy ngay, mê anh hơn mỗi ngày 💘",
   "Người yêu em chăm chỉ thế này thì ai mà không yêu 🫠",
   "Một tràng pháo tay cho anh nè 👏👏👏 quá đỉnh!!!",
-  "Em xin một chữ ký của thần tượng được không ạ 😆💗",
+  "Anh lại dặm bùa cho em đấy ạ 😆💗",
   "Lại thêm một lý do để em yêu anh nhiều hơn rồi đó 💞",
 ];
 const CHEER_FOR_HER = [
   "{name} của anh giỏi quá, anh tự hào lắm 🥹💪",
-  "Cố lên {name}, anh luôn đứng sau cổ vũ em nè 📣💕",
+  "Cố lên {name}, anh luôn ở phía sau cổ vũ em nè 📣💕",
   "{name} làm được rồi đó, đúng là không có gì cản được em 🌟",
   "Anh thấy em xinh nhất lúc đang cố gắng như này 🥰",
-  "{name} ơi, hôm nay em ngầu cực kỳ luôn á 🔥",
+  "{name} ơi, hôm nay em siêu cực kỳ luôn á 🔥",
   "Chậm một chút cũng không sao, anh vẫn ở đây cổ vũ em 🫶",
   "Em là động lực để anh cũng phải cố gắng hơn mỗi ngày 💖",
   "{name} của anh hôm nay toả sáng quá trời 🌈",
@@ -237,34 +237,34 @@ const CHEER_FOR_HER = [
 const COMFORT_FOR_HER = [
   "Em bé của anh cố lên nha, anh yêu em 🥺💕",
   "{name} ơi đừng buồn, có anh ở đây rồi 🫂💗",
-  "Hôm nay mệt thì nghỉ chút cũng được, anh không trách đâu 🤗",
-  "Em không cần phải mạnh mẽ suốt đâu, dựa vào anh đi 🥹",
+  "Hôm nay mệt thì nghỉ chút cũng được, anh luôn ở cạnh em 🤗",
+  "Em không cần phải mạnh mẽ suốt đâu, cứ dựa vào anh đi 🥹",
   "Anh gửi một cái ôm thật chặt cho {name} nè 🫶",
   "Buồn xíu rồi sẽ qua thôi, anh ở ngay đây mà 💌",
   "{name} là ưu tiên số một của anh, nghỉ ngơi đi rồi mình nói chuyện 💗",
-  "Anh không sửa được hết mọi thứ, nhưng anh có thể ôm em lâu hơn 🩹",
+  "Anh không giỏi hết mọi thứ, nhưng anh tự tin là anh giỏi yêu em 🩹",
   "Cố lên xíu nữa thôi {name}, có anh đồng hành rồi 🌙",
 ];
 const COMFORT_FOR_HIM = [
   "Anh ơi đừng cố gắng một mình, có em ở đây rồi 🥺💕",
-  "{name} mệt thì nghỉ chút nha, em vẫn thương anh như vậy 🫂",
-  "Em biết hôm nay khó khăn, nhưng anh không cô đơn đâu 💗",
-  "Cho phép mình yếu lòng một chút cũng được mà {name} 🤍",
+  "{name} mệt thì nghỉ chút nha, em thương anh nhiều lắm 🫂",
+  "Em biết hôm nay khó khăn, nhưng anh luôn có em bên cạnh 💗",
+  "Cho phép mình yếu lòng một chút cũng được mà {name} yêu của em 🤍",
   "Em gửi một cái ôm thật chặt cho {name} đây 🫶",
   "Mai sẽ ổn hơn thôi, hôm nay cứ dựa vào em một chút 🌙",
   "{name} luôn mạnh mẽ vì hai đứa rồi, hôm nay để em mạnh mẽ thay anh 💪💕",
   "Có chuyện gì thì kể em nghe, em luôn ở đây 💌",
 ];
 const NEUTRAL_CHEER = [
-  "Giỏi quá đi, {name} ơi! 🎉",
+  "Giỏi quá đi, {name} yêu ơi! 🎉",
   "{name} làm được rồi, tự hào về bạn lắm 🥳",
   "Cố gắng này xứng đáng được khen thật to 👏",
   "{name} đang toả sáng theo cách riêng của mình ✨",
   "Một bước tiến nhỏ hôm nay, một phiên bản tốt hơn của {name} 🌱",
 ];
 const NEUTRAL_COMFORT = [
-  "{name} ơi, hôm nay mệt thì nghỉ ngơi một chút nhé 🤍",
-  "Không sao đâu {name}, ngày mai sẽ nhẹ nhàng hơn 🌙",
+  "{name} yêu ơi, hôm nay mệt thì nghỉ ngơi một chút nhé 🤍",
+  "Không sao đâu {name} dấu yêu, ngày mai sẽ nhẹ nhàng hơn 🌙",
   "{name} không cần ổn mọi lúc, mình luôn ở đây 🫂",
   "Cho phép bản thân chậm lại một chút cũng được {name} 💗",
 ];
@@ -335,6 +335,8 @@ function makeInitialCoupleData(p1Profile) {
     expenses: [],
     urgencyLevels: [...DEFAULT_URGENCY_LEVELS],
     dismissedAlerts: [],
+    notifications: [],
+    routineRewards: {},
   };
 }
 
@@ -369,6 +371,8 @@ function normalizeCoupleData(raw) {
     expenses: safe.expenses || [],
     urgencyLevels: safe.urgencyLevels && Object.keys(safe.urgencyLevels).length ? safe.urgencyLevels : [...DEFAULT_URGENCY_LEVELS],
     dismissedAlerts: safe.dismissedAlerts || [],
+    notifications: safe.notifications || [],
+    routineRewards: safe.routineRewards || {},
   };
 }
 
@@ -515,6 +519,31 @@ function computeAlerts(data) {
   return alerts;
 }
 
+// --- Cross-partner notification helpers -------------------------------
+// "Tiến độ trong ngày" for one profile = trung bình mức hoàn thành (đã chặn ở
+// 100%) của các daily-routine + các thử thách được giao cho họ hôm đó. Dùng để
+// xác định ai đang dẫn đầu (cho bảng so sánh) và để biết khi nào tiến độ đang
+// thấp hơn 50% sau khi đã qua 2/3 thời gian trong ngày.
+function dayProgressRatio(data, dateKey, pid) {
+  const tasks = getTasksForProfile(data, pid);
+  const day = data.dailyData[dateKey]?.[pid] || {};
+  const ratios = tasks.map((t) => {
+    const target = data.targets[pid]?.[t.id] ?? t.defaultTarget;
+    return Math.min(1, calcRatio(t, day[t.id], target));
+  });
+  (data.assignedTasks || [])
+    .filter((a) => a.dateKey === dateKey && a.assignedTo === pid)
+    .forEach((a) => ratios.push(Math.min(1, assignedRatio(a))));
+  if (ratios.length === 0) return 1;
+  return ratios.reduce((a, b) => a + b, 0) / ratios.length;
+}
+
+// 0 = nửa đêm, 1 = nửa đêm hôm sau. >= 2/3 nghĩa là đã qua 16:00.
+function dayFractionElapsed() {
+  const now = new Date();
+  return (now.getHours() * 60 + now.getMinutes()) / (24 * 60);
+}
+
 // Per-task-type "hero" visual — keeps each habit from feeling like the same generic counter.
 function getTaskVisual(task, ratio, flowerEmoji) {
   const theme = task.theme;
@@ -579,7 +608,7 @@ function ProgressBoxWithIcon({ ratio, colorClass, label, children }) {
       <div className={`absolute inset-y-0 left-0 rounded-2xl ${colorClass} transition-all duration-500 ease-out`} style={{ width: `${pct}%` }} />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
         {children}
-        <span className="text-sm font-extrabold text-gray-700 drop-shadow-sm">{label}</span>
+        <span className="text-base font-extrabold text-gray-700 drop-shadow-sm">{label}</span>
       </div>
     </div>
   );
@@ -646,7 +675,7 @@ function GrowingPlant({ ratio, flowerEmoji, bump, compact }) {
 function LevelBadge({ ratio }) {
   const lvl = getLevel(ratio);
   return (
-    <span className={`inline-flex items-center gap-1 text-sm font-bold px-2 py-1 rounded-full border ${lvl.bg} ${lvl.text} ${lvl.border}`}>
+    <span className={`inline-flex items-center gap-1 text-base font-bold px-2 py-1 rounded-full border ${lvl.bg} ${lvl.text} ${lvl.border}`}>
       <span>{lvl.emoji}</span>
       {lvl.label}
     </span>
@@ -655,7 +684,7 @@ function LevelBadge({ ratio }) {
 
 function TicketBadge({ count, flowerEmoji }) {
   return (
-    <div className="flex items-center gap-1 bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-base font-extrabold border border-amber-100" style={{ fontFamily: DISPLAY_FONT }}>
+    <div className="flex items-center gap-1 bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-lg font-extrabold border border-amber-100" style={{ fontFamily: DISPLAY_FONT }}>
       <span>{flowerEmoji || "🌸"}</span> {count} phiếu
     </div>
   );
@@ -678,13 +707,12 @@ function EncouragementToast({ toast, onDone }) {
   return (
     <div className="fixed top-3 inset-x-3 z-[55] flex justify-center pointer-events-none">
       <div
-        className={`pointer-events-auto max-w-sm w-full rounded-2xl shadow-lg border px-4 py-3 flex items-start gap-2.5 ${
-          isComfort ? "bg-rose-50 border-rose-200" : "bg-amber-50 border-amber-200"
-        }`}
+        className={`pointer-events-auto max-w-sm w-full rounded-2xl shadow-lg border px-4 py-3 flex items-start gap-2.5 ${isComfort ? "bg-rose-50 border-rose-200" : "bg-amber-50 border-amber-200"
+          }`}
         style={{ animation: "toastPop 0.4s ease-out" }}
       >
         <span className="text-2xl shrink-0">{isComfort ? "🥺" : "🎉"}</span>
-        <div className="text-sm font-bold text-gray-700 leading-snug" style={{ fontFamily: BODY_FONT }}>
+        <div className="text-base font-bold text-gray-700 leading-snug" style={{ fontFamily: BODY_FONT }}>
           {toast.text}
         </div>
       </div>
@@ -968,7 +996,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
 
   return (
     <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-gray-100 p-5">
-      <label className={`text-sm font-bold uppercase ${accentText}`}>Tên của bạn</label>
+      <label className={`text-base font-bold uppercase ${accentText}`}>Tên của bạn</label>
       <input
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -977,15 +1005,14 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
         style={{ fontFamily: BODY_FONT }}
       />
 
-      <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Giới tính</div>
+      <div className="text-lg font-bold text-gray-600 uppercase mb-1.5">Giới tính</div>
       <div className="flex flex-wrap gap-2 mb-3">
         {GENDERS.map((g) => (
           <button
             key={g.id}
             onClick={() => setGender(g.id)}
-            className={`flex items-center gap-1 text-sm px-2.5 py-1.5 rounded-full border-2 ${
-              gender === g.id ? `${accentBorder} bg-gray-50` : "border-gray-200"
-            }`}
+            className={`flex items-center gap-1 text-base px-2.5 py-1.5 rounded-full border-2 ${gender === g.id ? `${accentBorder} bg-gray-50` : "border-gray-200"
+              }`}
           >
             <span>{g.emoji}</span>
             {g.label}
@@ -993,30 +1020,28 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
         ))}
       </div>
 
-      <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Avatar</div>
+      <div className="text-lg font-bold text-gray-600 uppercase mb-1.5">Avatar</div>
       <div className="flex flex-wrap gap-2 mb-3">
         {PROFILE_EMOJI_CHOICES.map((e) => (
           <button
             key={e}
             onClick={() => setEmoji(e)}
-            className={`text-xl w-9 h-9 rounded-full flex items-center justify-center border-2 ${
-              emoji === e ? `${accentBorder} bg-gray-50` : "border-transparent"
-            }`}
+            className={`text-xl w-9 h-9 rounded-full flex items-center justify-center border-2 ${emoji === e ? `${accentBorder} bg-gray-50` : "border-transparent"
+              }`}
           >
             {e}
           </button>
         ))}
       </div>
 
-      <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Hoa yêu thích (dùng cho phiếu bé ngoan & cảm xúc)</div>
+      <div className="text-lg font-bold text-gray-600 uppercase mb-1.5">Hoa yêu thích (dùng cho phiếu bé ngoan & cảm xúc)</div>
       <div className="flex flex-wrap gap-2 mb-4">
         {FLOWERS.map((f) => (
           <button
             key={f.id}
             onClick={() => setFlower(f.id)}
-            className={`flex items-center gap-1 text-sm px-2.5 py-1.5 rounded-full border-2 ${
-              flower === f.id ? `${accentBorder} bg-gray-50` : "border-gray-200"
-            }`}
+            className={`flex items-center gap-1 text-base px-2.5 py-1.5 rounded-full border-2 ${flower === f.id ? `${accentBorder} bg-gray-50` : "border-gray-200"
+              }`}
           >
             <span>{f.emoji}</span>
             {f.name}
@@ -1024,15 +1049,14 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
         ))}
       </div>
 
-      <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Bạn là gì của người kia? 😜</div>
+      <div className="text-lg font-bold text-gray-600 uppercase mb-1.5">Bạn là gì của người kia? 😜</div>
       <div className="flex flex-wrap gap-1.5 mb-4">
         {ROLE_TITLES.map((r) => (
           <button
             key={r}
             onClick={() => setRoleTitle(r)}
-            className={`text-sm font-bold px-2.5 py-1.5 rounded-full border-2 ${
-              roleTitle === r ? `${accentBorder} bg-gray-50` : "border-gray-200 text-gray-600"
-            }`}
+            className={`text-base font-bold px-2.5 py-1.5 rounded-full border-2 ${roleTitle === r ? `${accentBorder} bg-gray-50` : "border-gray-200 text-gray-600"
+              }`}
           >
             {r}
           </button>
@@ -1042,7 +1066,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
       <button
         onClick={() => onSubmit({ name: name.trim(), emoji, flower, gender, roleTitle })}
         disabled={!name.trim()}
-        className={`w-full ${accentSolid || "bg-sky-400 hover:bg-sky-500"} disabled:opacity-40 text-white font-bold py-3 rounded-2xl shadow-sm transition-colors text-lg`}
+        className={`w-full ${accentSolid || "bg-sky-400 hover:bg-sky-500"} disabled:opacity-40 text-white font-bold py-3 rounded-2xl shadow-sm transition-colors text-xl`}
         style={{ fontFamily: DISPLAY_FONT }}
       >
         {submitLabel}
@@ -1054,32 +1078,30 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
 function ContactField({ method, setMethod, contact, setContact }) {
   return (
     <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-gray-100 p-5 mb-4">
-      <div className="text-base font-bold text-gray-600 uppercase mb-2">Thông tin liên hệ của bạn</div>
+      <div className="text-lg font-bold text-gray-600 uppercase mb-2">Thông tin liên hệ của bạn</div>
       <div className="flex gap-2 mb-3">
         <button
-          onClick={() => setMethod("gmail")}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-bold border ${
-            method === "gmail" ? "bg-sky-50 border-sky-300 text-sky-500" : "border-gray-200 text-gray-600"
-          }`}
+          onClick={() => setMethod("Username")}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-base font-bold border ${method === "xxxx" ? "bg-sky-50 border-sky-300 text-sky-500" : "border-gray-200 text-gray-600"
+            }`}
         >
-          <Mail size={15} /> Gmail
+          <Mail size={15} /> xxxx
         </button>
         <button
-          onClick={() => setMethod("phone")}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-bold border ${
-            method === "phone" ? "bg-sky-50 border-sky-300 text-sky-500" : "border-gray-200 text-gray-600"
-          }`}
+          onClick={() => setMethod("Your favorite number")}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-base font-bold border ${method === "number" ? "bg-sky-50 border-sky-300 text-sky-500" : "border-gray-200 text-gray-600"
+            }`}
         >
-          <Phone size={15} /> Số điện thoại
+          <Number size={15} />Your favorite Number
         </button>
       </div>
       <input
         value={contact}
         onChange={(e) => setContact(e.target.value)}
-        placeholder={method === "gmail" ? "ten@gmail.com" : "09xxxxxxxx"}
+        placeholder={method === "Username" ? "xxxxx" : "xxxxxxx"}
         className="w-full rounded-xl border border-gray-200 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-200"
       />
-      <p className="text-sm text-gray-600 mt-1.5">* Chỉ để hiển thị trong hồ sơ, không dùng để đăng nhập — phòng của bạn được bảo vệ bằng mã kết nối riêng.</p>
+      <p className="text-base text-gray-600 mt-1.5">* Chỉ để hiển thị trong hồ sơ, không dùng để đăng nhập — bí mật của hai bạn được bảo vệ bằng mã kết nối riêng.</p>
     </div>
   );
 }
@@ -1093,19 +1115,19 @@ function WelcomeScreen({ onPickCreate, onPickJoin }) {
         <h1 className="text-3xl font-extrabold text-white mb-1 text-center mt-4 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
           {APP_NAME}
         </h1>
-        <p className="text-sm text-blue-50 mb-8 text-center max-w-xs">
-          Mọi sự thay đổi đều khó khăn lúc ban đầu, lộn xộn ở giữa và tuyệt đẹp ở cuối 🎁
+        <p className="text-base text-blue-50 mb-8 text-center max-w-xs">
+          Mọi sự thay đổi đều khó khăn lúc ban đầu, lộn xộn ở giữa và tuyệt đẹp ở cuối 🎁 HEART_EMOJIS
         </p>
         <button
           onClick={onPickCreate}
-          className="w-full max-w-sm bg-white hover:bg-blue-50 text-blue-700 font-bold py-3.5 rounded-2xl shadow-lg mb-3 flex items-center justify-center gap-2 text-lg"
+          className="w-full max-w-sm bg-white hover:bg-blue-50 text-blue-700 font-bold py-3.5 rounded-2xl shadow-lg mb-3 flex items-center justify-center gap-2 text-xl"
           style={{ fontFamily: DISPLAY_FONT }}
         >
-          <Link2 size={18} /> Tạo phòng mới
+          <Link2 size={18} /> Tạo thế giới mới
         </button>
         <button
           onClick={onPickJoin}
-          className="w-full max-w-sm bg-blue-800/30 border-2 border-white/70 text-white font-bold py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2 text-lg backdrop-blur-sm"
+          className="w-full max-w-sm bg-blue-800/30 border-2 border-white/70 text-white font-bold py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2 text-xl backdrop-blur-sm"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           <KeyRound size={18} /> Tham gia bằng mã
@@ -1125,24 +1147,24 @@ function CreateRoomScreen({ onBack, onCreated }) {
     <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-blue-700 via-sky-500 to-sky-100 overflow-hidden">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
-        <button onClick={onBack} className="self-start mb-3 text-sm font-bold text-white/90">
+        <button onClick={onBack} className="self-start mb-3 text-base font-bold text-white/90">
           ← Quay lại
         </button>
         <div className="text-4xl mb-2 bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">🏡</div>
         <h1 className="text-2xl font-extrabold text-white mb-1 text-center mt-3 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
-          Tạo phòng của hai bạn
+          Tạo thế giới của hai bạn
         </h1>
-        <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Điền thông tin của bạn, app sẽ tạo một link riêng để người ấy bấm vào tham gia.</p>
+        <p className="text-base text-blue-50 mb-6 text-center max-w-xs">Điền thông tin của bạn, app sẽ tạo một link riêng để người ấy bấm vào tham gia.</p>
 
         <ContactField method={method} setMethod={setMethod} contact={contact} setContact={setContact} />
-        {error && <div className="text-sm text-white font-bold mb-2 text-center bg-rose-500 rounded-full px-3 py-1">{error}</div>}
+        {error && <div className="text-base text-white font-bold mb-2 text-center bg-rose-500 rounded-full px-3 py-1">{error}</div>}
 
         <ProfileSetupForm
           accentText="text-sky-600"
           accentBorder="border-sky-400"
           accentRing="focus:ring-sky-200"
           accentSolid="bg-sky-500 hover:bg-sky-600"
-          submitLabel={creating ? "Đang tạo phòng..." : "Tạo phòng & tiếp tục 💞"}
+          submitLabel={creating ? "Đang tạo mới..." : "Tạo mới & tiếp tục 💞"}
           onSubmit={async ({ name, emoji, flower, gender, roleTitle }) => {
             if (creating) return;
             setCreating(true);
@@ -1154,7 +1176,7 @@ function CreateRoomScreen({ onBack, onCreated }) {
               await createCouple(code, makeInitialCoupleData(profile));
               onCreated(code);
             } catch (e) {
-              setError("Không tạo được phòng, kiểm tra kết nối mạng và thử lại nhé.");
+              setError("Không tạo được, kiểm tra kết nối mạng và thử lại nhé.");
               setCreating(false);
             }
           }}
@@ -1200,30 +1222,30 @@ function RoomCodeReveal({ code, onContinue }) {
         <h1 className="text-2xl font-extrabold text-white mb-1 text-center drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
           Phòng của bạn đã sẵn sàng!
         </h1>
-        <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Gửi link này cho người ấy — bấm vào là vào thẳng phòng luôn, không cần nhập gì thêm 💌</p>
+        <p className="text-base text-blue-50 mb-6 text-center max-w-xs">Gửi link này cho người ấy — bấm vào là vào thẳng phòng luôn, không cần nhập gì thêm 💌</p>
 
         <div className="w-full max-w-sm bg-white rounded-3xl shadow-lg border border-sky-100 p-5 text-center mb-4">
-          <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Link mời (cách nhanh nhất)</div>
-          <div className="text-sm text-sky-700 font-bold bg-sky-50 rounded-xl p-3 mb-3 break-all">{shareLink}</div>
-          <button onClick={copyLink} className="inline-flex items-center gap-1.5 text-sm font-bold text-white bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-full">
+          <div className="text-lg font-bold text-gray-600 uppercase mb-1.5">Link mời (cách nhanh nhất)</div>
+          <div className="text-base text-sky-700 font-bold bg-sky-50 rounded-xl p-3 mb-3 break-all">{shareLink}</div>
+          <button onClick={copyLink} className="inline-flex items-center gap-1.5 text-base font-bold text-white bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-full">
             <Copy size={13} /> {copiedLink ? "Đã sao chép link!" : "Sao chép link mời"}
           </button>
 
-          <div className="text-sm text-gray-600 mt-4 mb-1">Hoặc đọc mã cho người ấy tự nhập:</div>
+          <div className="text-base text-gray-600 mt-4 mb-1">Hoặc đọc mã cho người ấy tự nhập:</div>
           <div className="flex items-center justify-center gap-2">
-            <span className="text-lg font-extrabold tracking-[0.25em] text-gray-600" style={{ fontFamily: DISPLAY_FONT }}>
+            <span className="text-xl font-extrabold tracking-[0.25em] text-gray-600" style={{ fontFamily: DISPLAY_FONT }}>
               {code}
             </span>
             <button onClick={copyCode} className="text-gray-600">
               <Copy size={14} />
             </button>
           </div>
-          {copiedCode && <div className="text-sm text-emerald-500 font-bold mt-1">Đã sao chép mã!</div>}
+          {copiedCode && <div className="text-base text-emerald-500 font-bold mt-1">Đã sao chép mã!</div>}
         </div>
 
         <button
           onClick={onContinue}
-          className="w-full max-w-sm bg-white hover:bg-blue-50 text-blue-700 font-bold py-3.5 rounded-2xl shadow-lg text-lg"
+          className="w-full max-w-sm bg-white hover:bg-blue-50 text-blue-700 font-bold py-3.5 rounded-2xl shadow-lg text-xl"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           Vào app ngay 🚀
@@ -1239,7 +1261,7 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
   const [validRoom, setValidRoom] = useState(null);
   const [fullRoom, setFullRoom] = useState(null); // { code, profiles } — room already has both people, let the rightful owner pick who they are
   const [error, setError] = useState("");
-  const [method, setMethod] = useState("gmail");
+  const [method, setMethod] = useState("Username");
   const [contact, setContact] = useState("");
   const [joining, setJoining] = useState(false);
 
@@ -1252,7 +1274,7 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
     try {
       const roomData = await getCoupleData(val);
       if (!roomData) {
-        setError("Không tìm thấy phòng với mã này, kiểm tra lại nhé 💌");
+        setError("Không tìm thấy thế giới nào với mã này, kiểm tra lại nhé 💌");
       } else if (roomData.profiles?.p1?.name && roomData.profiles?.p2?.name) {
         setFullRoom({ code: val, profiles: roomData.profiles });
       } else {
@@ -1278,8 +1300,8 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
           <h1 className="text-2xl font-extrabold text-white mb-1 text-center mt-3 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
             Phòng này đã có đủ hai người
           </h1>
-          <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">
-            Nếu đây là phòng của bạn (đổi máy, đổi trình duyệt, hoặc vừa cài app...), chọn đúng vai trò của mình để vào lại nhé.
+          <p className="text-base text-blue-50 mb-6 text-center max-w-xs">
+            Nếu đây là thế giới của bạn (đổi máy, đổi trình duyệt, hoặc vừa cài app...), hãy chọn đúng vị trí của mình để vào lại nhé.
           </p>
 
           <div className="w-full max-w-sm space-y-3 mb-4">
@@ -1304,11 +1326,11 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
               setFullRoom(null);
               setCode("");
             }}
-            className="text-sm font-bold text-white/90 underline"
+            className="text-base font-bold text-white/90 underline"
           >
-            Không phải phòng của tôi, thử mã khác
+            Không phải thế giới của tôi, thử mã khác
           </button>
-          <button onClick={onBack} className="mt-3 text-sm font-bold text-white/70">
+          <button onClick={onBack} className="mt-3 text-base font-bold text-white/70">
             ← Quay lại
           </button>
         </div>
@@ -1325,7 +1347,7 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
           <h1 className="text-2xl font-extrabold text-white mb-1 text-center mt-3 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
             Chào người ấy!
           </h1>
-          <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Hoàn tất hồ sơ của bạn để bắt đầu cùng nhau trên {APP_NAME} 💞</p>
+          <p className="text-base text-blue-50 mb-6 text-center max-w-xs">Hoàn tất hồ sơ của bạn để bắt đầu cùng chia sẻ trên {APP_NAME} 💞</p>
 
           <ContactField method={method} setMethod={setMethod} contact={contact} setContact={setContact} />
 
@@ -1356,14 +1378,14 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
     <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-700 via-indigo-500 to-blue-200 overflow-hidden">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
-        <button onClick={onBack} className="self-start mb-3 text-sm font-bold text-white/90">
+        <button onClick={onBack} className="self-start mb-3 text-base font-bold text-white/90">
           ← Quay lại
         </button>
         <div className="text-4xl mb-2 bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">🔑</div>
         <h1 className="text-2xl font-extrabold text-white mb-1 text-center mt-3 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
           Tham gia phòng
         </h1>
-        <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Nhập mã 6 ký tự mà người ấy đã gửi cho bạn (hoặc bấm thẳng vào link mời sẽ tự điền sẵn).</p>
+        <p className="text-base text-blue-50 mb-6 text-center max-w-xs">Vui lòng nhập mã 6 ký tự mà người ấy đã gửi cho bạn (hoặc bấm thẳng vào link mời sẽ tự điền sẵn).</p>
 
         <div className="w-full max-w-sm bg-white rounded-3xl shadow-lg border border-gray-100 p-5">
           <input
@@ -1377,11 +1399,11 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
             className="w-full text-center text-2xl font-extrabold tracking-[0.2em] rounded-xl border border-gray-200 px-3 py-3 text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 mb-2"
             style={{ fontFamily: DISPLAY_FONT }}
           />
-          {error && <div className="text-sm text-rose-500 font-bold mb-2 text-center">{error}</div>}
+          {error && <div className="text-base text-rose-500 font-bold mb-2 text-center">{error}</div>}
           <button
             onClick={() => checkCode()}
             disabled={checking}
-            className="w-full bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 text-white font-bold py-3 rounded-2xl shadow-sm text-lg"
+            className="w-full bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 text-white font-bold py-3 rounded-2xl shadow-sm text-xl"
             style={{ fontFamily: DISPLAY_FONT }}
           >
             {checking ? "Đang kiểm tra..." : "Tiếp tục"}
@@ -1409,7 +1431,7 @@ function Header({ data, activeProfile, onOpenSettings, onOpenAlerts, alertCount 
     <div className="sticky top-0 z-20 bg-sky-50/90 backdrop-blur border-b border-sky-100 px-4 pt-4 pb-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <span className="text-xl font-extrabold text-rose-500" style={{ fontFamily: DISPLAY_FONT }}>
+          <span className="text-2xl font-extrabold text-rose-500" style={{ fontFamily: DISPLAY_FONT }}>
             {APP_NAME}
           </span>
         </div>
@@ -1431,17 +1453,17 @@ function Header({ data, activeProfile, onOpenSettings, onOpenAlerts, alertCount 
       <div className="flex items-center justify-between mt-2.5">
         <div className={`flex items-center gap-1.5 pl-1.5 pr-3 py-1.5 rounded-full border ${col.border} ${col.light}`}>
           <span className="text-2xl">{data.profiles[active].emoji}</span>
-          <span className={`text-base font-bold ${col.text}`} style={{ fontFamily: DISPLAY_FONT }}>
+          <span className={`text-lg font-bold ${col.text}`} style={{ fontFamily: DISPLAY_FONT }}>
             {data.profiles[active].name}
           </span>
-          {genderEmoji && <span className="text-sm">{genderEmoji}</span>}
+          {genderEmoji && <span className="text-base">{genderEmoji}</span>}
         </div>
-        <div className="text-sm text-gray-600 font-semibold text-right">{getRankTitle(tickets)}</div>
+        <div className="text-base text-gray-600 font-semibold text-right">{getRankTitle(tickets)}</div>
       </div>
 
       <div className="flex items-center gap-2 mt-2.5">
         <TicketBadge count={tickets} flowerEmoji={flowerEmoji} />
-        <div className="flex items-center gap-1 bg-rose-50 text-rose-500 px-3 py-1 rounded-full text-base font-extrabold" style={{ fontFamily: DISPLAY_FONT }}>
+        <div className="flex items-center gap-1 bg-rose-50 text-rose-500 px-3 py-1 rounded-full text-lg font-extrabold" style={{ fontFamily: DISPLAY_FONT }}>
           <Flame size={16} /> {streak} ngày
         </div>
       </div>
@@ -1466,12 +1488,11 @@ function BottomNav({ tab, setTab, pendingCount }) {
           <button
             key={it.id}
             onClick={() => setTab(it.id)}
-            className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1 rounded-xl active:scale-95 transition-transform ${
-              isActive ? "text-rose-500" : "text-gray-600"
-            }`}
+            className={`relative flex flex-col items-center gap-0.5 px-2.5 py-1 rounded-xl active:scale-95 transition-transform ${isActive ? "text-rose-500" : "text-gray-600"
+              }`}
           >
-            <Icon size={21} strokeWidth={isActive ? 2.5 : 2} />
-            <span className="text-[10px] font-bold">{it.label}</span>
+            <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+            <span className="text-[12px] font-bold">{it.label}</span>
             {!!it.badge && (
               <span className="absolute -top-0.5 right-1 bg-rose-500 text-white text-sm font-bold rounded-full w-4 h-4 flex items-center justify-center">
                 {it.badge}
@@ -1488,6 +1509,12 @@ function AlertsPanel({ data, setData, activeProfile, onClose }) {
   const active = activeProfile;
   const alerts = computeAlerts(data).filter((a) => a.profileId !== active);
   const [drafts, setDrafts] = useState({});
+
+  const myNotifications = (data.notifications || [])
+    .filter((n) => n.toProfile === active)
+    .slice()
+    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+    .slice(0, 12);
 
   const dismiss = (alertId) => {
     setData((prev) => ({ ...prev, dismissedAlerts: [...prev.dismissedAlerts, alertId] }));
@@ -1506,7 +1533,7 @@ function AlertsPanel({ data, setData, activeProfile, onClose }) {
           dateKey: todayKey(),
           assignedBy: active,
           assignedTo: alert.profileId,
-          title: `Cùng cố gắng hơn với: ${alert.taskName} ${alert.taskEmoji}`,
+          title: `Dấu yêu cùng cố gắng hơn với: ${alert.taskName} ${alert.taskEmoji}`,
           note: "Được gợi ý từ phân tích 3 ngày gần đây",
           target: 1,
           unit: "lần",
@@ -1524,7 +1551,7 @@ function AlertsPanel({ data, setData, activeProfile, onClose }) {
     <div className="fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center">
       <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-md max-h-[85vh] overflow-y-auto p-5">
         <div className="flex items-center justify-between mb-4">
-          <div className="font-extrabold text-gray-700 text-lg flex items-center gap-1.5" style={{ fontFamily: DISPLAY_FONT }}>
+          <div className="font-extrabold text-gray-700 text-xl flex items-center gap-1.5" style={{ fontFamily: DISPLAY_FONT }}>
             <Bell size={18} className="text-rose-400" /> Thông báo
           </div>
           <button onClick={onClose} className="text-gray-600 p-1">
@@ -1532,9 +1559,28 @@ function AlertsPanel({ data, setData, activeProfile, onClose }) {
           </button>
         </div>
 
+        {myNotifications.length > 0 && (
+          <div className="mb-5">
+            <div className="text-lg font-bold text-gray-600 uppercase mb-2">Tiến độ của {nameOf(data, otherOf(active))}</div>
+            <div className="space-y-2">
+              {myNotifications.map((n) => (
+                <div
+                  key={n.id}
+                  className={`flex items-start gap-2 rounded-2xl p-3 border ${n.kind === "excellent" ? "bg-amber-50 border-amber-100" : "bg-rose-50 border-rose-100"
+                    }`}
+                >
+                  <span className="text-xl shrink-0">{n.kind === "excellent" ? "🌟" : "⏰"}</span>
+                  <div className="text-base text-gray-700 font-semibold">{n.message}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="text-lg font-bold text-gray-600 uppercase mb-2">Gợi ý nhắc nhở</div>
         {alerts.length === 0 && (
-          <div className="text-sm text-gray-600 text-center py-6">
-            Chưa có cảnh báo nào — mọi thứ vẫn đang ổn 🌿
+          <div className="text-base text-gray-600 text-center py-6">
+            Chưa có cảnh báo nào xuất hiện, mọi thứ vẫn đang rất tốt 🌿
           </div>
         )}
 
@@ -1543,16 +1589,16 @@ function AlertsPanel({ data, setData, activeProfile, onClose }) {
             <div key={a.id} className="bg-rose-50 border border-rose-100 rounded-2xl p-3.5">
               <div className="flex items-start gap-2 mb-2">
                 <AlertTriangle size={16} className="text-rose-400 mt-0.5" />
-                <div className="text-sm text-gray-600">
-                  <span className="font-bold">{data.profiles[a.profileId].name}</span> đã làm "{a.taskName}" {a.taskEmoji} ở
-                  mức thấp 3 ngày liên tiếp. Gợi ý tạo nhiệm vụ nhắc nhở nhé?
+                <div className="text-base text-gray-600">
+                  <span className="font-bold">{data.profiles[a.profileId].name}</span> đã làm "{a.taskName}" {a.taskEmoji} với
+                  hiệu suất thấp trong 3 ngày liên tiếp. Bạn có muốn tạo nhiệm vụ nhắc nhở đối phương không?
                 </div>
               </div>
               <div className="flex gap-2 mb-2">
                 <select
                   value={drafts[a.id]?.urgency || data.urgencyLevels[0]}
                   onChange={(e) => setDrafts((p) => ({ ...p, [a.id]: { ...p[a.id], urgency: e.target.value } }))}
-                  className="flex-1 text-sm font-bold rounded-lg border border-gray-200 px-2 py-1.5"
+                  className="flex-1 text-base font-bold rounded-lg border border-gray-200 px-2 py-1.5"
                 >
                   {data.urgencyLevels.map((u) => (
                     <option key={u} value={u}>
@@ -1564,7 +1610,7 @@ function AlertsPanel({ data, setData, activeProfile, onClose }) {
                   type="number"
                   value={drafts[a.id]?.ticketValue ?? 5}
                   onChange={(e) => setDrafts((p) => ({ ...p, [a.id]: { ...p[a.id], ticketValue: e.target.value } }))}
-                  className="w-16 text-sm font-bold rounded-lg border border-gray-200 px-2 py-1.5 text-center"
+                  className="w-16 text-base font-bold rounded-lg border border-gray-200 px-2 py-1.5 text-center"
                   min={1}
                   max={20}
                 />
@@ -1572,13 +1618,13 @@ function AlertsPanel({ data, setData, activeProfile, onClose }) {
               <div className="flex gap-2">
                 <button
                   onClick={() => createFromAlert(a)}
-                  className="flex-1 bg-rose-400 hover:bg-rose-500 text-white text-sm font-bold py-2 rounded-lg"
+                  className="flex-1 bg-rose-400 hover:bg-rose-500 text-white text-base font-bold py-2 rounded-lg"
                 >
                   Tạo nhiệm vụ nhắc nhở
                 </button>
                 <button
                   onClick={() => dismiss(a.id)}
-                  className="px-3 text-sm font-bold py-2 rounded-lg bg-white border border-gray-200 text-gray-600"
+                  className="px-3 text-base font-bold py-2 rounded-lg bg-white border border-gray-200 text-gray-600"
                 >
                   Bỏ qua
                 </button>
@@ -1609,16 +1655,15 @@ function AddHabitForm({ onAdd, onCancel }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Tên thói quen, VD: Tập yoga"
-        className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm"
+        className="w-full rounded-xl border border-gray-200 px-3 py-2 text-base"
       />
       <div className="flex flex-wrap gap-1.5">
         {HABIT_EMOJI_CHOICES.map((e) => (
           <button
             key={e}
             onClick={() => setEmoji(e)}
-            className={`text-lg w-8 h-8 rounded-full flex items-center justify-center border-2 ${
-              emoji === e ? "border-rose-400 bg-rose-50" : "border-transparent"
-            }`}
+            className={`text-lg w-8 h-8 rounded-full flex items-center justify-center border-2 ${emoji === e ? "border-rose-400 bg-rose-50" : "border-transparent"
+              }`}
           >
             {e}
           </button>
@@ -1629,24 +1674,24 @@ function AddHabitForm({ onAdd, onCancel }) {
           value={unit}
           onChange={(e) => setUnit(e.target.value)}
           placeholder="Đơn vị (phút, lần...)"
-          className="flex-1 rounded-xl border border-gray-200 px-2.5 py-1.5 text-sm"
+          className="flex-1 rounded-xl border border-gray-200 px-2.5 py-1.5 text-base"
         />
         <input
           type="number"
           value={target}
           onChange={(e) => setTarget(Number(e.target.value))}
           placeholder="Mục tiêu"
-          className="w-20 rounded-xl border border-gray-200 px-2.5 py-1.5 text-sm"
+          className="w-20 rounded-xl border border-gray-200 px-2.5 py-1.5 text-base"
         />
         <input
           type="number"
           value={step}
           onChange={(e) => setStep(Number(e.target.value))}
           placeholder="Bước nhảy"
-          className="w-20 rounded-xl border border-gray-200 px-2.5 py-1.5 text-sm"
+          className="w-20 rounded-xl border border-gray-200 px-2.5 py-1.5 text-base"
         />
       </div>
-      <label className="flex items-center gap-1.5 text-sm text-gray-600 font-semibold">
+      <label className="flex items-center gap-1.5 text-base text-gray-600 font-semibold">
         <input type="checkbox" checked={inverse} onChange={(e) => setInverse(e.target.checked)} />
         Thói quen "càng ít càng tốt" (VD: hút thuốc, ăn vặt)
       </label>
@@ -1665,11 +1710,11 @@ function AddHabitForm({ onAdd, onCancel }) {
               createdAt: todayKey(),
             });
           }}
-          className="flex-1 bg-rose-400 hover:bg-rose-500 text-white text-sm font-bold py-2 rounded-lg"
+          className="flex-1 bg-rose-400 hover:bg-rose-500 text-white text-base font-bold py-2 rounded-lg"
         >
           Thêm thói quen
         </button>
-        <button onClick={onCancel} className="px-3 text-sm font-bold py-2 rounded-lg bg-gray-50 text-gray-600">
+        <button onClick={onCancel} className="px-3 text-base font-bold py-2 rounded-lg bg-gray-50 text-gray-600">
           Huỷ
         </button>
       </div>
@@ -1684,7 +1729,7 @@ function WaterTimesPopover({ onClose }) {
     <div className="fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center" onClick={onClose}>
       <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-sm max-h-[80vh] overflow-y-auto p-5" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-3">
-          <div className="font-extrabold text-gray-700 text-lg" style={{ fontFamily: DISPLAY_FONT }}>
+          <div className="font-extrabold text-gray-700 text-xl" style={{ fontFamily: DISPLAY_FONT }}>
             💧 Giờ uống nước gợi ý
           </div>
           <button onClick={onClose} className="text-gray-600 p-1">
@@ -1694,14 +1739,14 @@ function WaterTimesPopover({ onClose }) {
         <div className="space-y-2">
           {WATER_REMINDER_TIMES.map((w) => (
             <div key={w.time} className={`flex gap-3 p-2.5 rounded-xl ${w.time === nowStr ? "bg-sky-50 border border-sky-200" : "bg-gray-50"}`}>
-              <span className="text-sm font-extrabold text-sky-500 w-12 shrink-0" style={{ fontFamily: DISPLAY_FONT }}>
+              <span className="text-base font-extrabold text-sky-500 w-12 shrink-0" style={{ fontFamily: DISPLAY_FONT }}>
                 {w.time}
               </span>
-              <span className="text-sm text-gray-600">{w.tip}</span>
+              <span className="text-base text-gray-600">{w.tip}</span>
             </div>
           ))}
         </div>
-        <p className="text-sm text-gray-600 mt-3 text-center">Tổng hợp ý tưởng chung, không thay thế lời khuyên y tế nhé 🌿</p>
+        <p className="text-base text-gray-600 mt-3 text-center">Tổng hợp ý tưởng chung, không thay thế lời khuyên y tế nhé 🌿</p>
       </div>
     </div>
   );
@@ -1719,30 +1764,53 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate, onEncou
   const myGender = data.profiles[active].gender;
   const myDisplayName = data.profiles[active].name;
 
-  const updateEntry = (taskId, updater) => {
-    setData((prev) => {
-      const next = structuredClone(prev);
-      if (!next.dailyData[dk]) next.dailyData[dk] = {};
-      if (!next.dailyData[dk][active]) next.dailyData[dk][active] = {};
-      const current = next.dailyData[dk][active][taskId] || {};
-      next.dailyData[dk][active][taskId] = updater(current);
-      return next;
-    });
-  };
-
   const maybeCheer = () => {
     if (Math.random() > 0.5) return; // keep it occasional, not every single tap
     const pool = myGender === "nam" ? CHEER_FOR_HIM : myGender === "nu" ? CHEER_FOR_HER : NEUTRAL_CHEER;
     onEncourage({ kind: "cheer", text: pickEncouragement(pool, myDisplayName) });
   };
 
-  const checkCelebrate = (task, oldEntry, newEntry, target) => {
-    const oldRatio = calcRatio(task, oldEntry, target);
-    const newRatio = calcRatio(task, newEntry, target);
-    if (oldRatio < 1 && newRatio >= 1) {
-      onCelebrate(flowerEmoji);
-      maybeCheer();
-    }
+  // Cập nhật 1 task hôm nay + (nếu cần) gửi thông báo "làm xuất sắc" cho người ấy,
+  // trong cùng một lượt cập nhật dữ liệu để tránh ghi đè lẫn nhau.
+  const updateEntry = (task, target, updater) => {
+    setData((prev) => {
+      const next = structuredClone(prev);
+      if (!next.dailyData[dk]) next.dailyData[dk] = {};
+      if (!next.dailyData[dk][active]) next.dailyData[dk][active] = {};
+      const oldEntry = next.dailyData[dk][active][task.id] || {};
+      const newEntry = updater(oldEntry);
+      const oldRatio = calcRatio(task, oldEntry, target);
+      const newRatio = calcRatio(task, newEntry, target);
+
+      if (oldRatio < 1 && newRatio >= 1) {
+        setTimeout(() => {
+          onCelebrate(flowerEmoji);
+          maybeCheer();
+        }, 0);
+      }
+      if (newRatio >= 1.2 && !newEntry.notifiedExcellent) {
+        newEntry.notifiedExcellent = true;
+        const list = [
+          ...(next.notifications || []),
+          {
+            id: uid(),
+            createdAt: Date.now(),
+            read: false,
+            toProfile: otherOf(active),
+            fromProfile: active,
+            kind: "excellent",
+            taskName: task.name,
+            taskEmoji: task.emoji,
+            dateKey: dk,
+            message: `Tình yêu của bạn - ${myDisplayName} vừa chốt hoạt động "${task.name}" ${task.emoji} ở mức Xuất sắc 🌟 hôm nay!`,
+          },
+        ];
+        next.notifications = list.length > 40 ? list.slice(list.length - 40) : list;
+      }
+
+      next.dailyData[dk][active][task.id] = newEntry;
+      return next;
+    });
   };
 
   const addHabit = (habit) => {
@@ -1784,6 +1852,25 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate, onEncou
       } else if (newRatio < 1) {
         t.status = "pending";
       }
+      if (newRatio >= 1.2 && !t.notifiedExcellent) {
+        t.notifiedExcellent = true;
+        const list = [
+          ...(next.notifications || []),
+          {
+            id: uid(),
+            createdAt: Date.now(),
+            read: false,
+            toProfile: t.assignedBy,
+            fromProfile: active,
+            kind: "excellent",
+            taskName: t.title,
+            taskEmoji: "🎯",
+            dateKey: dk,
+            message: `${myDisplayName} dấu yêu vừa hoàn thành thử thách "${t.title}" ở mức Xuất sắc 🌟!`,
+          },
+        ];
+        next.notifications = list.length > 40 ? list.slice(list.length - 40) : list;
+      }
       return next;
     });
   };
@@ -1792,16 +1879,16 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate, onEncou
     <div className="px-4 py-4 space-y-4 pb-6">
       {!data.profiles[otherOf(active)].name && (
         <div className="bg-amber-50 border border-amber-200 rounded-2xl p-3 text-center">
-          <div className="text-sm font-extrabold text-amber-600 mb-1">Người ấy chưa tham gia phòng 💌</div>
-          <div className="text-sm text-amber-500">
-            Gửi mã <span className="font-extrabold tracking-widest">{coupleId}</span> để cùng bắt đầu nhé
+          <div className="text-base font-extrabold text-amber-600 mb-1">Người ấy chưa xuất hiện trong thế giới này 💌</div>
+          <div className="text-base text-amber-500">
+            Gửi mã <span className="font-extrabold tracking-widest">{coupleId}</span> cho tình yêu của bạn để cùng bắt đầu nhé
           </div>
         </div>
       )}
       {pendingForMe.length > 0 && (
         <div className="bg-rose-50 border border-rose-200 rounded-2xl p-3">
-          <div className="text-sm font-extrabold text-rose-500 mb-2 flex items-center gap-1">
-            💌 {nameOf(data, otherOf(active))} giao cho bạn hôm nay
+          <div className="text-base font-extrabold text-rose-500 mb-2 flex items-center gap-1">
+            💌 {nameOf(data, otherOf(active))} đã tạo thử thách cho bạn hôm nay
           </div>
           <div className="space-y-2">
             {pendingForMe.map((task) => (
@@ -1812,8 +1899,8 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate, onEncou
       )}
 
       <div className="flex items-center justify-between px-1">
-        <div className="text-base font-bold text-gray-600 uppercase">Daily routine</div>
-        <button onClick={() => setShowAddHabit((s) => !s)} className="text-sm font-bold text-rose-400 flex items-center gap-0.5">
+        <div className="text-lg font-bold text-gray-600 uppercase">Daily routine</div>
+        <button onClick={() => setShowAddHabit((s) => !s)} className="text-base font-bold text-rose-400 flex items-center gap-0.5">
           <Plus size={13} /> Thói quen riêng
         </button>
       </div>
@@ -1836,11 +1923,7 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate, onEncou
               flowerEmoji={flowerEmoji}
               onShowWaterTimes={task.id === "water" ? () => setShowWaterTimes(true) : null}
               onRemoveCustom={task.custom ? () => removeHabit(task.id) : null}
-              onChange={(updater) => {
-                const newEntry = updater(entry || {});
-                checkCelebrate(task, entry, newEntry, target);
-                updateEntry(task.id, () => newEntry);
-              }}
+              onChange={(updater) => updateEntry(task, target, updater)}
             />
           );
         })}
@@ -1864,13 +1947,13 @@ function PendingTaskCard({ task, col, onChange }) {
   return (
     <div className="bg-white rounded-xl p-3 border border-rose-100">
       <div className="flex items-center justify-between mb-1">
-        <div className="font-bold text-gray-700 text-base">{task.title}</div>
-        {task.urgency && <span className={`text-sm font-bold px-2 py-0.5 rounded-full border ${urgencyClass}`}>{task.urgency}</span>}
+        <div className="font-bold text-gray-700 text-lg">{task.title}</div>
+        {task.urgency && <span className={`text-base font-bold px-2 py-0.5 rounded-full border ${urgencyClass}`}>{task.urgency}</span>}
       </div>
-      {task.note && <div className="text-sm text-gray-600 mb-1">{task.note}</div>}
+      {task.note && <div className="text-base text-gray-600 mb-1">{task.note}</div>}
       <div className="flex items-center justify-between mb-1.5">
         <LevelBadge ratio={ratio} />
-        <span className="text-sm text-amber-500 font-bold">🎯 {tickets}/{task.ticketValue} phiếu</span>
+        <span className="text-base text-amber-500 font-bold">🎯 {tickets}/{task.ticketValue} phiếu</span>
       </div>
 
       <div className="flex items-center gap-3 mb-2">
@@ -1892,7 +1975,7 @@ function PendingTaskCard({ task, col, onChange }) {
           +
         </button>
       </div>
-      {ratio >= 1 && <div className="text-sm font-bold text-emerald-500 mt-2">✅ Đã hoàn thành — minh bạch, không cần tự chấm điểm nữa!</div>}
+      {ratio >= 1 && <div className="text-base font-bold text-emerald-500 mt-2">✅ Đã hoàn thành — minh bạch, không cần tự chấm điểm nữa!</div>}
     </div>
   );
 }
@@ -1905,7 +1988,7 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <span className="text-xl">{task.emoji}</span>
-            <span className="font-bold text-gray-700 text-base">{task.name}</span>
+            <span className="font-bold text-gray-700 text-lg">{task.name}</span>
           </div>
           <LevelBadge ratio={ratio} />
         </div>
@@ -1916,11 +1999,10 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
               onClick={() => {
                 const newFlags = [...flags];
                 newFlags[i] = !newFlags[i];
-                onChange(() => ({ flags: newFlags }));
+                onChange(() => ({ ...(entry || {}), flags: newFlags }));
               }}
-              className={`flex-1 text-sm font-bold py-2 rounded-xl border ${
-                flags[i] ? `${col.solid} text-white border-transparent` : "bg-gray-50 text-gray-600 border-gray-200"
-              }`}
+              className={`flex-1 text-base font-bold py-2 rounded-xl border ${flags[i] ? `${col.solid} text-white border-transparent` : "bg-gray-50 text-gray-600 border-gray-200"
+                }`}
             >
               {flags[i] ? "✓ " : ""}
               {label}
@@ -1940,16 +2022,16 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
       <div className="flex items-center gap-2 mb-2">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="font-bold text-gray-700 text-base">{task.name}</span>
+            <span className="font-bold text-gray-700 text-lg">{task.name}</span>
             {task.custom && <span className="text-sm bg-rose-50 text-rose-400 font-bold px-1.5 py-0.5 rounded-full">riêng</span>}
             {onShowWaterTimes && (
-              <button onClick={onShowWaterTimes} className="text-sm text-sky-500 font-bold underline">
+              <button onClick={onShowWaterTimes} className="text-base text-sky-500 font-bold underline">
                 giờ uống nước
               </button>
             )}
           </div>
-          {visual && <div className="text-sm text-gray-600 truncate">{visual.label}</div>}
-          {task.hint && <div className="text-sm text-gray-600 mt-1">💡 {task.hint}</div>}
+          {visual && <div className="text-base text-gray-600 truncate">{visual.label}</div>}
+          {task.hint && <div className="text-base text-gray-600 mt-1">💡 {task.hint}</div>}
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
           <LevelBadge ratio={ratio} />
@@ -1991,7 +2073,7 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
           onChange={(e) => onChange((c) => ({ ...c, note: e.target.value }))}
           placeholder={task.notePlaceholder}
           rows={2}
-          className="w-full mt-2 text-sm rounded-xl border border-gray-200 px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-orange-200 resize-none"
+          className="w-full mt-2 text-base rounded-xl border border-gray-200 px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-orange-200 resize-none"
         />
       )}
     </div>
@@ -1999,7 +2081,7 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
 }
 
 /* ---------------------------------------------------------------------- */
-/* Tasks tab (Giao việc + Nhiệm vụ chung)                                  */
+/* Tasks tab (Vượt chướng ngại vật + Nhiệm vụ chung)                                  */
 /* ---------------------------------------------------------------------- */
 
 function AssignSection({ data, setData, activeProfile }) {
@@ -2050,19 +2132,19 @@ function AssignSection({ data, setData, activeProfile }) {
   return (
     <div className="space-y-5">
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-        <div className="text-sm font-extrabold text-gray-700 mb-1">✍️ Thử thách dành cho {nameOf(data, other)}</div>
-        <p className="text-sm text-gray-600 mb-3">Đặt số lượng tương ứng với số phiếu thưởng hợp lý, có thể tạo thêm các phần quà bí mật để tạo bất ngờ cho {nameOf(data, other)} yêu nha.</p>
+        <div className="text-base font-extrabold text-gray-700 mb-1">✍️ Thử thách mới dành cho {nameOf(data, other)} yêu</div>
+        <p className="text-base text-gray-600 mb-3">Hãy đặt số lượng tương ứng với số phiếu thưởng hợp lý, có thể tạo thêm các phần quà bí mật để tạo bất ngờ cho {nameOf(data, other)} yêu nha.</p>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Tên thử thách"
-          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
+          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-base mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
         />
         <input
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          placeholder="Ghi chú thêm (không bắt buộc)"
-          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
+          placeholder="Ghi chú thêm (nếu có)"
+          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-base mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
         />
         <div className="flex gap-2 mb-2">
           <input
@@ -2070,18 +2152,18 @@ function AssignSection({ data, setData, activeProfile }) {
             value={targetQty}
             onChange={(e) => setTargetQty(e.target.value)}
             placeholder="Số lượng"
-            className="w-24 rounded-xl border border-gray-200 px-2.5 py-2 text-sm text-center"
+            className="w-24 rounded-xl border border-gray-200 px-2.5 py-2 text-base text-center"
             min={1}
           />
           <input
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
-            placeholder="Đơn vị"
-            className="flex-1 rounded-xl border border-gray-200 px-2.5 py-2 text-sm"
+            placeholder="Đơn vị tính"
+            className="flex-1 rounded-xl border border-gray-200 px-2.5 py-2 text-base"
           />
         </div>
         <div className="flex items-center gap-2 mb-3">
-          <select value={urgency} onChange={(e) => setUrgency(e.target.value)} className="flex-1 text-sm font-bold rounded-xl border border-gray-200 px-2 py-2">
+          <select value={urgency} onChange={(e) => setUrgency(e.target.value)} className="flex-1 text-base font-bold rounded-xl border border-gray-200 px-2 py-2">
             {data.urgencyLevels.map((u) => (
               <option key={u} value={u}>
                 {u}
@@ -2092,31 +2174,31 @@ function AssignSection({ data, setData, activeProfile }) {
             type="number"
             value={ticketValue}
             onChange={(e) => setTicketValue(e.target.value)}
-            className="w-16 rounded-xl border border-gray-200 px-2 py-2 text-sm text-center"
+            className="w-16 rounded-xl border border-gray-200 px-2 py-2 text-base text-center"
             min={1}
             max={20}
           />
-          <span className="text-sm text-gray-600 font-bold">phiếu</span>
+          <span className="text-base text-gray-600 font-bold">phiếu</span>
         </div>
-        <button onClick={createTask} className="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 text-sm">
+        <button onClick={createTask} className="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 text-base">
           <Plus size={16} /> Tạo thử thách
         </button>
       </div>
 
       <div>
-        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">{nameOf(data, other)} giao cho bạn</div>
-        {givenToMe.length === 0 && <div className="text-sm text-gray-600 px-1">Chưa có thử thách nào hôm nay 🌤️</div>}
+        <div className="text-lg font-bold text-gray-600 uppercase px-1 mb-2">{nameOf(data, other)} yêu đã tạo thử thách cho bạn</div>
+        {givenToMe.length === 0 && <div className="text-base text-gray-600 px-1">Bạn chưa nhận được thử thách nào trong hôm nay 🌤️</div>}
         <div className="space-y-2">
           {givenToMe.map((t) => {
             const ratio = assignedRatio(t);
             return (
               <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3">
                 <div className="flex items-center justify-between">
-                  <div className="font-bold text-gray-700 text-base">{t.title}</div>
+                  <div className="font-bold text-gray-700 text-lg">{t.title}</div>
                   <LevelBadge ratio={ratio} />
                 </div>
-                {t.note && <div className="text-sm text-gray-600">{t.note}</div>}
-                <div className="text-sm text-amber-500 font-bold mt-1">
+                {t.note && <div className="text-base text-gray-600">{t.note}</div>}
+                <div className="text-base text-amber-500 font-bold mt-1">
                   {t.value || 0} / {t.target} {t.unit} · 🎯 {assignedTickets(t)} phiếu
                 </div>
               </div>
@@ -2126,16 +2208,16 @@ function AssignSection({ data, setData, activeProfile }) {
       </div>
 
       <div>
-        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Bạn đã tạo</div>
-        {givenByMe.length === 0 && <div className="text-sm text-gray-600 px-1">Bạn chưa tạo gì hôm nay 📝</div>}
+        <div className="text-lg font-bold text-gray-600 uppercase px-1 mb-2">Bạn đã tạo</div>
+        {givenByMe.length === 0 && <div className="text-base text-gray-600 px-1">Bạn chưa tạo gì hôm nay 📝</div>}
         <div className="space-y-2">
           {givenByMe.map((t) => {
             const ratio = assignedRatio(t);
             return (
               <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3 flex items-center justify-between">
                 <div>
-                  <div className="font-bold text-gray-700 text-base">{t.title}</div>
-                  <div className="text-sm text-amber-500 font-bold">
+                  <div className="font-bold text-gray-700 text-lg">{t.title}</div>
+                  <div className="text-base text-amber-500 font-bold">
                     {t.value || 0} / {t.target} {t.unit} · 🎯 {assignedTickets(t)} phiếu
                   </div>
                 </div>
@@ -2201,7 +2283,7 @@ function SharedSection({ data, setData, activeProfile, onCelebrate }) {
   return (
     <div className="space-y-5">
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-        <div className="text-sm font-extrabold text-gray-700 mb-2 flex items-center gap-1.5">
+        <div className="text-base font-extrabold text-gray-700 mb-2 flex items-center gap-1.5">
           <Users size={16} className="text-violet-400" /> Gợi ý nhiệm vụ chung sức
         </div>
         <div className="flex flex-wrap gap-1.5 mb-3">
@@ -2209,7 +2291,7 @@ function SharedSection({ data, setData, activeProfile, onCelebrate }) {
             <button
               key={t.title}
               onClick={() => addShared(t)}
-              className="text-sm font-bold px-2.5 py-1.5 rounded-full bg-violet-50 text-violet-600 border border-violet-100"
+              className="text-base font-bold px-2.5 py-1.5 rounded-full bg-violet-50 text-violet-600 border border-violet-100"
             >
               + {t.title}
             </button>
@@ -2219,21 +2301,21 @@ function SharedSection({ data, setData, activeProfile, onCelebrate }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Hoặc tự tạo nhiệm vụ chung..."
-          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2"
+          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-base mb-2"
         />
         <input
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
-          placeholder="Mô tả thêm (không bắt buộc)"
-          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2"
+          placeholder="Mô tả thêm (nếu có)"
+          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-base mb-2"
         />
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-sm font-bold text-gray-600">Phiếu cho mỗi người</span>
+          <span className="text-base font-bold text-gray-600">Phiếu ngoan cho mỗi người</span>
           <input
             type="number"
             value={ticketValue}
             onChange={(e) => setTicketValue(Number(e.target.value))}
-            className="w-16 rounded-xl border border-gray-200 px-2 py-1.5 text-sm text-center"
+            className="w-16 rounded-xl border border-gray-200 px-2 py-1.5 text-base text-center"
           />
         </div>
         <button
@@ -2243,28 +2325,28 @@ function SharedSection({ data, setData, activeProfile, onCelebrate }) {
             setTitle("");
             setDesc("");
           }}
-          className="w-full bg-violet-400 hover:bg-violet-500 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5"
+          className="w-full bg-violet-400 hover:bg-violet-500 text-white font-bold py-2.5 rounded-xl text-base flex items-center justify-center gap-1.5"
         >
           <Plus size={16} /> Tạo nhiệm vụ chung
         </button>
       </div>
 
       <div>
-        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Đang thực hiện</div>
-        {ongoing.length === 0 && <div className="text-sm text-gray-600 px-1">Chưa có nhiệm vụ chung nào 🌷</div>}
+        <div className="text-lg font-bold text-gray-600 uppercase px-1 mb-2">Đang thực hiện</div>
+        {ongoing.length === 0 && <div className="text-base text-gray-600 px-1">Chưa có nhiệm vụ chung nào 🌷</div>}
         <div className="space-y-2">
           {ongoing.map((t) => (
             <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3">
-              <div className="font-bold text-gray-700 text-base">{t.title}</div>
-              {t.desc && <div className="text-sm text-gray-600 mt-0.5">{t.desc}</div>}
+              <div className="font-bold text-gray-700 text-lg">{t.title}</div>
+              {t.desc && <div className="text-base text-gray-600 mt-0.5">{t.desc}</div>}
               <div className="flex items-center justify-between mt-2">
-                <div className="flex items-center gap-1.5 text-sm font-bold">
-                  <span className={t.doneBy.p1 ? "text-orange-500" : "text-gray-300"}>{data.profiles.p1.emoji} {t.doneBy.p1 ? "Đã xong" : "Chưa xong"}</span>
+                <div className="flex items-center gap-1.5 text-base font-bold">
+                  <span className={t.doneBy.p1 ? "text-orange-500" : "text-gray-300"}>{data.profiles.p1.emoji} {t.doneBy.p1 ? "Quá dễ luônnn" : "Chưa xong"}</span>
                   <span className="text-gray-300">·</span>
-                  <span className={t.doneBy.p2 ? "text-violet-500" : "text-gray-300"}>{data.profiles.p2.emoji} {t.doneBy.p2 ? "Đã xong" : "Chưa xong"}</span>
+                  <span className={t.doneBy.p2 ? "text-violet-500" : "text-gray-300"}>{data.profiles.p2.emoji} {t.doneBy.p2 ? "Siêu quá đi àaaa" : "Chưa xong"}</span>
                 </div>
-                <button onClick={() => toggleDone(t.id)} className={`text-sm font-bold px-3 py-1.5 rounded-lg ${COLORS[active].solid} text-white`}>
-                  {t.doneBy[active] ? "Bỏ đánh dấu" : "Mình xong rồi"}
+                <button onClick={() => toggleDone(t.id)} className={`text-base font-bold px-3 py-1.5 rounded-lg ${COLORS[active].solid} text-white`}>
+                  {t.doneBy[active] ? "Bỏ đánh dấu" : "Mình giỏi quáaa"}
                 </button>
               </div>
             </div>
@@ -2274,11 +2356,11 @@ function SharedSection({ data, setData, activeProfile, onCelebrate }) {
 
       {done.length > 0 && (
         <div>
-          <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Đã hoàn thành cùng nhau 🎉</div>
+          <div className="text-lg font-bold text-gray-600 uppercase px-1 mb-2">Đã hoàn thành cùng nhau 🎉</div>
           <div className="space-y-1.5">
             {done.map((t) => (
-              <div key={t.id} className="bg-emerald-50 border border-emerald-100 rounded-xl px-3 py-2 text-sm text-gray-600">
-                ✅ {t.title} <span className="text-emerald-500 font-bold">(+{t.ticketValue} phiếu mỗi người)</span>
+              <div key={t.id} className="bg-emerald-50 border border-emerald-100 rounded-xl px-3 py-2 text-base text-gray-600">
+                ✅ {t.title} <span className="text-emerald-500 font-bold">(+{t.ticketValue} phiếu ngoan mỗi người)</span>
               </div>
             ))}
           </div>
@@ -2295,13 +2377,13 @@ function TasksTab({ data, setData, activeProfile, onCelebrate }) {
       <div className="flex gap-2 mb-4 bg-gray-100 rounded-full p-1">
         <button
           onClick={() => setSub("assign")}
-          className={`flex-1 text-sm font-bold py-2 rounded-full ${sub === "assign" ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"}`}
+          className={`flex-1 text-base font-bold py-2 rounded-full ${sub === "assign" ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"}`}
         >
           Giao việc
         </button>
         <button
           onClick={() => setSub("shared")}
-          className={`flex-1 text-sm font-bold py-2 rounded-full ${sub === "shared" ? "bg-white text-violet-500 shadow-sm" : "text-gray-600"}`}
+          className={`flex-1 text-base font-bold py-2 rounded-full ${sub === "shared" ? "bg-white text-violet-500 shadow-sm" : "text-gray-600"}`}
         >
           Nhiệm vụ chung
         </button>
@@ -2358,11 +2440,11 @@ function MoodTab({ data, setData, activeProfile, onEncourage }) {
   return (
     <div className="px-4 py-4 space-y-5 pb-6">
       <div className="rounded-3xl p-5 text-center bg-gradient-to-b from-rose-50 to-amber-50 border border-rose-100">
-        <div className="text-base font-bold text-gray-600 uppercase mb-1">Hoa cảm xúc hôm nay (tổng hợp từ 3 buổi)</div>
+        <div className="text-lg font-bold text-gray-600 uppercase mb-1">Bông hoa cảm xúc hôm nay</div>
         <div className={`text-6xl mb-1 inline-block transition-all duration-500 ${stage.scale} ${stage.opacity} ${stage.gray}`}>
           {stage.emoji}
         </div>
-        <div className="text-sm font-bold text-gray-600">{stage.label}</div>
+        <div className="text-base font-bold text-gray-600">{stage.label}</div>
       </div>
 
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
@@ -2371,9 +2453,8 @@ function MoodTab({ data, setData, activeProfile, onEncourage }) {
             <button
               key={s.id}
               onClick={() => setSlot(s.id)}
-              className={`flex-1 text-sm font-bold py-2 rounded-full flex items-center justify-center gap-1 ${
-                slot === s.id ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"
-              }`}
+              className={`flex-1 text-base font-bold py-2 rounded-full flex items-center justify-center gap-1 ${slot === s.id ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"
+                }`}
             >
               {s.emoji} {s.label}
             </button>
@@ -2385,25 +2466,23 @@ function MoodTab({ data, setData, activeProfile, onEncourage }) {
             <button
               key={m.id}
               onClick={() => selectMood(m.id)}
-              className={`flex flex-col items-center gap-1 py-2.5 rounded-xl border ${
-                entry.mood === m.id ? "border-rose-300 bg-rose-50" : "border-gray-100"
-              }`}
+              className={`flex flex-col items-center gap-1 py-2.5 rounded-xl border ${entry.mood === m.id ? "border-rose-300 bg-rose-50" : "border-gray-100"
+                }`}
             >
               <span className="text-2xl">{m.emoji}</span>
-              <span className="text-sm font-bold text-gray-600">{m.label}</span>
+              <span className="text-base font-bold text-gray-600">{m.label}</span>
             </button>
           ))}
         </div>
 
-        <div className="text-base font-bold text-gray-600 uppercase mb-2">Thời tiết</div>
+        <div className="text-lg font-bold text-gray-600 uppercase mb-2">Thời tiết</div>
         <div className="flex flex-wrap gap-2 mb-4">
           {WEATHERS.map((w) => (
             <button
               key={w.id}
               onClick={() => update({ weather: w.id })}
-              className={`text-sm font-bold px-3 py-1.5 rounded-full border ${
-                entry.weather === w.id ? "border-sky-300 bg-sky-50 text-sky-600" : "border-gray-200 text-gray-600"
-              }`}
+              className={`text-base font-bold px-3 py-1.5 rounded-full border ${entry.weather === w.id ? "border-sky-300 bg-sky-50 text-sky-600" : "border-gray-200 text-gray-600"
+                }`}
             >
               {w.emoji} {w.label}
             </button>
@@ -2413,29 +2492,29 @@ function MoodTab({ data, setData, activeProfile, onEncourage }) {
         <textarea
           value={entry.note || ""}
           onChange={(e) => update({ note: e.target.value })}
-          placeholder={`Buổi ${TIME_SLOTS.find((s) => s.id === slot)?.label.toLowerCase()} của bạn có gì muốn kể? 📝`}
+          placeholder={`Buổi ${TIME_SLOTS.find((s) => s.id === slot)?.label.toLowerCase()} của bạn có gì muốn chia sẻ với người kia không? 📝`}
           rows={2}
-          className="w-full text-sm rounded-xl border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-rose-200 resize-none"
+          className="w-full text-base rounded-xl border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-rose-200 resize-none"
           style={{ fontFamily: SCRIPT_FONT, fontSize: "16px" }}
         />
       </div>
 
       <div>
-        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">7 ngày gần đây</div>
+        <div className="text-lg font-bold text-gray-600 uppercase px-1 mb-2">7 ngày gần đây</div>
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-50">
           {days.map((day) => {
             const s1 = freshnessStage(moodFreshnessScore(data, day, "p1"), FLOWERS.find((f) => f.id === data.profiles.p1.flower)?.emoji);
             const s2 = freshnessStage(moodFreshnessScore(data, day, "p2"), FLOWERS.find((f) => f.id === data.profiles.p2.flower)?.emoji);
             return (
-              <div key={day} className="flex items-center justify-between px-4 py-2.5 text-sm">
-                <span className="text-gray-600 text-sm font-semibold w-16">{dateLabel(day)}</span>
+              <div key={day} className="flex items-center justify-between px-4 py-2.5 text-base">
+                <span className="text-gray-600 text-base font-semibold w-16">{dateLabel(day)}</span>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-base">{s1.emoji}</span>
-                  <span className="text-sm text-orange-400 font-bold">{data.profiles.p1.name}</span>
+                  <span className="text-lg">{s1.emoji}</span>
+                  <span className="text-base text-orange-400 font-bold">{data.profiles.p1.name}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-base">{s2.emoji}</span>
-                  <span className="text-sm text-violet-400 font-bold">{data.profiles.p2.name}</span>
+                  <span className="text-lg">{s2.emoji}</span>
+                  <span className="text-base text-violet-400 font-bold">{data.profiles.p2.name}</span>
                 </div>
               </div>
             );
@@ -2447,8 +2526,133 @@ function MoodTab({ data, setData, activeProfile, onEncourage }) {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Gift tab                                                                */
+/*                             Gift tab                                   */
 /* ---------------------------------------------------------------------- */
+
+function RoutineComparisonCard({ data, setData, activeProfile }) {
+  const dk = todayKey();
+  const days = lastNDays(7);
+  const p1Today = dayProgressRatio(data, dk, "p1");
+  const p2Today = dayProgressRatio(data, dk, "p2");
+  const bothNamed = !!data.profiles.p1.name && !!data.profiles.p2.name;
+  const leader = !bothNamed || Math.abs(p1Today - p2Today) < 0.001 ? null : p1Today > p2Today ? "p1" : "p2";
+  const rewardGiven = leader ? !!data.routineRewards?.[dk]?.[leader] : false;
+  const canReward = leader && activeProfile !== leader && !rewardGiven;
+
+  const markRewarded = (next) => {
+    if (!next.routineRewards) next.routineRewards = {};
+    if (!next.routineRewards[dk]) next.routineRewards[dk] = {};
+    next.routineRewards[dk][leader] = true;
+  };
+
+  const giveTickets = (n) => {
+    setData((prev) => {
+      const next = structuredClone(prev);
+      next.bonusTickets[leader] = (next.bonusTickets[leader] || 0) + n;
+      markRewarded(next);
+      return next;
+    });
+  };
+
+  const giveRandomGift = () => {
+    const pick = PRESET_GIFTS[Math.floor(Math.random() * PRESET_GIFTS.length)];
+    setData((prev) => {
+      const next = structuredClone(prev);
+      next.gifts.push({
+        id: uid(),
+        addedBy: activeProfile,
+        forProfile: leader,
+        text: pick.text,
+        bonusTickets: pick.bonusTickets || 0,
+        opened: false,
+        dateAdded: dk,
+      });
+      markRewarded(next);
+      return next;
+    });
+  };
+
+  if (!bothNamed) return null;
+
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+      <div className="text-base font-extrabold text-gray-700 mb-3 flex items-center gap-1.5">📊 So sánh daily routine hôm nay</div>
+
+      {["p1", "p2"].map((pid) => {
+        const ratio = pid === "p1" ? p1Today : p2Today;
+        return (
+          <div key={pid} className="flex items-center gap-2 mb-2">
+            <span className="text-xl w-8 shrink-0">{data.profiles[pid].emoji}</span>
+            <span className="text-base font-bold w-20 truncate shrink-0">{data.profiles[pid].name}</span>
+            <div className="flex-1 h-5 rounded-full bg-gray-50 overflow-hidden">
+              <div className={`h-full rounded-full ${COLORS[pid].solid} transition-all duration-500`} style={{ width: `${Math.min(100, ratio * 100)}%` }} />
+            </div>
+            <span className="text-base font-bold text-gray-600 w-12 text-right shrink-0">{Math.round(ratio * 100)}%</span>
+            {leader === pid && <span className="text-lg shrink-0">👑</span>}
+          </div>
+        );
+      })}
+
+      <div className="mt-3 pt-3 border-t border-gray-100 text-center">
+        {!leader && (
+          <div className="text-base text-gray-600">Hai bạn quá ghê gớm vào hôm nay, cùng cố gắng tiếp nhé! 💪</div>
+        )}
+        {leader && canReward && (
+          <>
+            <div className="text-base text-gray-600 mb-2">
+              {nameOf(data, leader)} đang dẫn đầu hôm nay, tặng cho người ấy những nụ hôn say đắm nhé! kissWave 🎉
+            </div>
+            <div className="flex gap-2 justify-center flex-wrap">
+              <button
+                onClick={() => giveTickets(3)}
+                className="text-base font-bold px-3 py-2 rounded-full bg-amber-50 text-amber-600 border border-amber-100"
+              >
+                +3 phiếu bé ngoan
+              </button>
+              <button
+                onClick={giveRandomGift}
+                className="text-base font-bold px-3 py-2 rounded-full bg-violet-50 text-violet-600 border border-violet-100"
+              >
+                🎁 Quà random
+              </button>
+            </div>
+          </>
+        )}
+        {leader && !canReward && rewardGiven && (
+          <div className="text-base font-bold text-emerald-500">Đã tặng quà cho {nameOf(data, leader)} yêu hôm nay ✅</div>
+        )}
+        {leader && !canReward && !rewardGiven && (
+          <div className="text-base text-gray-600">{nameOf(data, leader)} đang dẫn đầu hôm nay 👑</div>
+        )}
+      </div>
+
+      <div className="text-lg font-bold text-gray-600 uppercase mt-4 mb-2">7 ngày gần đây</div>
+      <div className="space-y-1.5">
+        {days.map((day) => {
+          const r1 = dayProgressRatio(data, day, "p1");
+          const r2 = dayProgressRatio(data, day, "p2");
+          return (
+            <div key={day} className="flex items-center gap-2 text-base">
+              <span className="w-16 text-gray-600 font-semibold shrink-0">{dateLabel(day)}</span>
+              <div className="flex-1 flex items-center gap-1">
+                <div className="flex-1 h-3 rounded-full bg-gray-50 overflow-hidden">
+                  <div className={`h-full ${COLORS.p1.solid}`} style={{ width: `${Math.min(100, r1 * 100)}%` }} />
+                </div>
+                <div className="flex-1 h-3 rounded-full bg-gray-50 overflow-hidden">
+                  <div className={`h-full ${COLORS.p2.solid}`} style={{ width: `${Math.min(100, r2 * 100)}%` }} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex items-center justify-end gap-3 mt-1.5 text-sm text-gray-600">
+        <span className="flex items-center gap-1"><span className={`w-2.5 h-2.5 rounded-full ${COLORS.p1.solid}`} />{data.profiles.p1.name}</span>
+        <span className="flex items-center gap-1"><span className={`w-2.5 h-2.5 rounded-full ${COLORS.p2.solid}`} />{data.profiles.p2.name}</span>
+      </div>
+    </div>
+  );
+}
 
 function GiftTab({ data, setData, activeProfile, onReveal }) {
   const active = activeProfile;
@@ -2500,24 +2704,26 @@ function GiftTab({ data, setData, activeProfile, onReveal }) {
         <div className="font-extrabold text-gray-700" style={{ fontFamily: DISPLAY_FONT }}>
           Phần thưởng bí mật
         </div>
-        <div className="text-sm text-gray-600 mt-1 mb-3">
+        <div className="text-base text-gray-600 mt-1 mb-3">
           Đủ {GIFT_THRESHOLD} phiếu bạn lại được mở 1 phần quà bí mật từ {nameOf(data, other)} yêu 💌
         </div>
         <div className="flex items-center justify-center gap-2 mb-4">
-          <span className="text-sm font-bold bg-white px-3 py-1.5 rounded-full text-rose-500 border border-rose-100">🔒 {myUnopened.length} hộp đang chờ</span>
-          <span className="text-sm font-bold bg-white px-3 py-1.5 rounded-full text-amber-500 border border-amber-100">✨ {opens} lượt mở</span>
+          <span className="text-base font-bold bg-white px-3 py-1.5 rounded-full text-rose-500 border border-rose-100">🔒 {myUnopened.length} hộp đang chờ</span>
+          <span className="text-base font-bold bg-white px-3 py-1.5 rounded-full text-amber-500 border border-amber-100">✨ {opens} lượt mở</span>
         </div>
-        <button onClick={openBox} className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-6 py-2.5 rounded-full shadow-sm text-sm">
+        <button onClick={openBox} className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-6 py-2.5 rounded-full shadow-sm text-base">
           Mở hộp bí mật ngay
         </button>
       </div>
 
+      <RoutineComparisonCard data={data} setData={setData} activeProfile={active} />
+
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-        <div className="text-sm font-extrabold text-gray-700 mb-2">🤫 Thêm phần thưởng bí mật cho {nameOf(data, other)}</div>
-        <div className="text-sm font-bold text-gray-600 mb-1.5">Chọn nhanh từ gợi ý</div>
+        <div className="text-base font-extrabold text-gray-700 mb-2">🤫 Hãy tặng thêm phần thưởng bí mật cho {nameOf(data, other)} dấu y của bạn nào</div>
+        <div className="text-base font-bold text-gray-600 mb-1.5">Chọn nhanh từ gợi ý</div>
         <div className="flex flex-wrap gap-1.5 mb-3">
           {PRESET_GIFTS.map((g) => (
-            <button key={g.text} onClick={() => addGift(g)} className="text-sm font-bold px-2.5 py-1.5 rounded-full bg-amber-50 text-amber-600 border border-amber-100">
+            <button key={g.text} onClick={() => addGift(g)} className="text-base font-bold px-2.5 py-1.5 rounded-full bg-amber-50 text-amber-600 border border-amber-100">
               + {g.text}
             </button>
           ))}
@@ -2525,9 +2731,9 @@ function GiftTab({ data, setData, activeProfile, onReveal }) {
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Hoặc viết quà riêng của bạn..."
+          placeholder="Hoặc viết món quà riêng của bạn..."
           rows={2}
-          className="w-full text-sm rounded-xl border border-gray-200 px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200 resize-none"
+          className="w-full text-base rounded-xl border border-gray-200 px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200 resize-none"
         />
         <button
           onClick={() => {
@@ -2535,22 +2741,22 @@ function GiftTab({ data, setData, activeProfile, onReveal }) {
             addGift({ text: text.trim() });
             setText("");
           }}
-          className="w-full bg-violet-400 hover:bg-violet-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 text-sm"
+          className="w-full bg-violet-400 hover:bg-violet-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 text-base"
         >
-          <Plus size={16} /> Bỏ vào hộp quà
+          <Plus size={16} /> Đóng gói lại nào
         </button>
 
         {iAdded.length > 0 && (
           <div className="mt-3 space-y-1.5">
             {iAdded.map((g) => (
-              <div key={g.id} className="flex items-center justify-between text-sm bg-violet-50 rounded-lg px-2.5 py-1.5">
+              <div key={g.id} className="flex items-center justify-between text-base bg-violet-50 rounded-lg px-2.5 py-1.5">
                 <span className={`text-gray-600 ${g.opened ? "line-through opacity-50" : ""}`}>{g.text}</span>
                 {!g.opened ? (
                   <button onClick={() => removeGift(g.id)} className="text-gray-300 hover:text-rose-400 ml-2">
                     <Trash2 size={13} />
                   </button>
                 ) : (
-                  <span className="text-emerald-500 font-bold ml-2">đã mở 🎉</span>
+                  <span className="text-emerald-500 font-bold ml-2">đã mở món quà bí mật từ bạn 🎉</span>
                 )}
               </div>
             ))}
@@ -2560,10 +2766,10 @@ function GiftTab({ data, setData, activeProfile, onReveal }) {
 
       {myOpened.length > 0 && (
         <div>
-          <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Quà bạn đã mở</div>
+          <div className="text-lg font-bold text-gray-600 uppercase px-1 mb-2">Quà bạn đã mở</div>
           <div className="space-y-1.5">
             {myOpened.map((g) => (
-              <div key={g.id} className="bg-amber-50 border border-amber-100 rounded-xl px-3 py-2 text-sm text-gray-600">
+              <div key={g.id} className="bg-amber-50 border border-amber-100 rounded-xl px-3 py-2 text-base text-gray-600">
                 🎉 {g.text}
               </div>
             ))}
@@ -2582,8 +2788,8 @@ function GiftRevealModal({ reveal, onClose }) {
         {reveal.kind === "gift" && (
           <>
             <div className="text-5xl mb-3">🎉</div>
-            <div className="text-sm font-bold text-rose-400 uppercase mb-1">Quà bí mật của bạn</div>
-            <div className="text-lg font-extrabold text-gray-700 mb-4" style={{ fontFamily: DISPLAY_FONT }}>
+            <div className="text-base font-bold text-rose-400 uppercase mb-1">Quà bất ngờ từ người ấy dành cho bạn</div>
+            <div className="text-xl font-extrabold text-gray-700 mb-4" style={{ fontFamily: DISPLAY_FONT }}>
               {reveal.text}
             </div>
           </>
@@ -2592,7 +2798,7 @@ function GiftRevealModal({ reveal, onClose }) {
           <>
             <div className="text-5xl mb-3">💌</div>
             <div className="font-bold text-gray-600 mb-4">
-              Bạn đã có lượt mở, nhưng tình yêu của bạn chưa bỏ quà bí mật vào hộp. Gửi nụ hôn đến người ấy để nhắc họ thêm vào nhé!
+              Bạn đã có lượt mở, nhưng tình yêu của bạn chưa đóng gói món quà bí mật ấy vào hộp. Hãy gửi những nụ hôn đến người ấy để nhắc họ thêm vào nhé!
             </div>
           </>
         )}
@@ -2601,10 +2807,10 @@ function GiftRevealModal({ reveal, onClose }) {
             <div className="mb-3 flex items-center justify-center">
               <Lock size={44} className="text-gray-300" />
             </div>
-            <div className="font-bold text-gray-600 mb-4">Bạn cần thêm điểm để mở hộp tiếp theo. Hoàn thành các mục tiêu và thử thách hôm nay nhé! 💪</div>
+            <div className="font-bold text-gray-600 mb-4">Bạn cần thêm điểm để mở phần quà tiếp theo. Hoàn thành các mục tiêu và thử thách hôm nay nhé! 💪</div>
           </>
         )}
-        <button onClick={onClose} className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-6 py-2 rounded-full text-sm">
+        <button onClick={onClose} className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-6 py-2 rounded-full text-base">
           Đóng
         </button>
       </div>
@@ -2661,12 +2867,12 @@ function FinanceTab({ data, setData, activeProfile }) {
   return (
     <div className="px-4 py-4 space-y-5 pb-6">
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-        <div className="text-sm font-extrabold text-gray-700 mb-3">💰 Thêm khoản thu chi</div>
+        <div className="text-base font-extrabold text-gray-700 mb-3">💰 Thêm khoản thu chi</div>
         <div className="flex gap-2 mb-2 bg-gray-100 rounded-full p-1">
-          <button onClick={() => setType("chi")} className={`flex-1 text-sm font-bold py-1.5 rounded-full ${type === "chi" ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"}`}>
+          <button onClick={() => setType("chi")} className={`flex-1 text-base font-bold py-1.5 rounded-full ${type === "chi" ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"}`}>
             Khoản chi
           </button>
-          <button onClick={() => setType("thu")} className={`flex-1 text-sm font-bold py-1.5 rounded-full ${type === "thu" ? "bg-white text-emerald-500 shadow-sm" : "text-gray-600"}`}>
+          <button onClick={() => setType("thu")} className={`flex-1 text-base font-bold py-1.5 rounded-full ${type === "thu" ? "bg-white text-emerald-500 shadow-sm" : "text-gray-600"}`}>
             Khoản thu
           </button>
         </div>
@@ -2676,9 +2882,9 @@ function FinanceTab({ data, setData, activeProfile }) {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="Số tiền (VND)"
-            className="flex-1 rounded-xl border border-gray-200 px-3 py-2 text-sm"
+            className="flex-1 rounded-xl border border-gray-200 px-3 py-2 text-base"
           />
-          <select value={category} onChange={(e) => setCategory(e.target.value)} className="rounded-xl border border-gray-200 px-2 py-2 text-sm font-bold">
+          <select value={category} onChange={(e) => setCategory(e.target.value)} className="rounded-xl border border-gray-200 px-2 py-2 text-base font-bold">
             {EXPENSE_CATEGORIES.map((c) => (
               <option key={c} value={c}>
                 {c}
@@ -2690,82 +2896,82 @@ function FinanceTab({ data, setData, activeProfile }) {
           value={label}
           onChange={(e) => setLabel(e.target.value)}
           placeholder="Tên / mục đích, VD: Cà phê sáng"
-          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-3"
+          className="w-full rounded-xl border border-gray-200 px-3 py-2 text-base mb-3"
         />
-        <button onClick={addExpense} className="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5">
+        <button onClick={addExpense} className="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-base flex items-center justify-center gap-1.5">
           <Plus size={16} /> Thêm khoản
         </button>
       </div>
 
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
         <div className="flex items-center justify-between mb-3">
-          <div className="text-sm font-extrabold text-gray-700">So sánh chi tiêu</div>
+          <div className="text-base font-extrabold text-gray-700">So sánh chi tiêu</div>
           <div className="flex gap-1 bg-gray-100 rounded-full p-1">
             {[
               ["day", "Ngày"],
               ["week", "Tuần"],
               ["month", "Tháng"],
             ].map(([id, label]) => (
-              <button key={id} onClick={() => setPeriod(id)} className={`text-sm font-bold px-2.5 py-1 rounded-full ${period === id ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"}`}>
+              <button key={id} onClick={() => setPeriod(id)} className={`text-base font-bold px-2.5 py-1 rounded-full ${period === id ? "bg-white text-rose-500 shadow-sm" : "text-gray-600"}`}>
                 {label}
               </button>
             ))}
           </div>
         </div>
 
-        <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Tổng chi</div>
+        <div className="text-lg font-bold text-gray-600 uppercase mb-1.5">Tổng chi</div>
         {["p1", "p2"].map((pid) => (
           <div key={pid} className="flex items-center gap-2 mb-2">
-            <span className="text-sm w-7">{data.profiles[pid].emoji}</span>
+            <span className="text-base w-7">{data.profiles[pid].emoji}</span>
             <div className="flex-1 h-6 rounded-full bg-gray-50 overflow-hidden">
               <div className={`h-full rounded-full ${COLORS[pid].solid}`} style={{ width: `${(sumFor(pid, "chi") / maxChi) * 100}%` }} />
             </div>
-            <span className="text-sm font-bold text-gray-600 w-20 text-right">{formatVND(sumFor(pid, "chi"))}</span>
+            <span className="text-base font-bold text-gray-600 w-20 text-right">{formatVND(sumFor(pid, "chi"))}</span>
           </div>
         ))}
 
-        <div className="text-base font-bold text-gray-600 uppercase mb-1.5 mt-3">Tổng thu</div>
+        <div className="text-lg font-bold text-gray-600 uppercase mb-1.5 mt-3">Tổng thu</div>
         {["p1", "p2"].map((pid) => (
           <div key={pid} className="flex items-center gap-2 mb-2">
-            <span className="text-sm w-7">{data.profiles[pid].emoji}</span>
+            <span className="text-base w-7">{data.profiles[pid].emoji}</span>
             <div className="flex-1 h-6 rounded-full bg-gray-50 overflow-hidden">
               <div className="h-full rounded-full bg-emerald-300" style={{ width: `${(sumFor(pid, "thu") / maxThu) * 100}%` }} />
             </div>
-            <span className="text-sm font-bold text-gray-600 w-20 text-right">{formatVND(sumFor(pid, "thu"))}</span>
+            <span className="text-base font-bold text-gray-600 w-20 text-right">{formatVND(sumFor(pid, "thu"))}</span>
           </div>
         ))}
       </div>
 
       {byCategory.length > 0 && (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-          <div className="text-sm font-extrabold text-gray-700 mb-3">Chi tiêu của bạn theo danh mục</div>
+          <div className="text-base font-extrabold text-gray-700 mb-3">Chi tiêu của bạn theo danh mục</div>
           {byCategory.map((c) => (
             <div key={c.category} className="flex items-center gap-2 mb-2">
-              <span className="text-sm font-bold text-gray-600 w-20">{c.category}</span>
+              <span className="text-base font-bold text-gray-600 w-20">{c.category}</span>
               <div className="flex-1 h-5 rounded-full bg-gray-50 overflow-hidden">
                 <div className={`h-full rounded-full ${COLORS[active].solid}`} style={{ width: `${(c.total / maxCat) * 100}%` }} />
               </div>
-              <span className="text-sm font-bold text-gray-600 w-16 text-right">{formatVND(c.total)}</span>
+              <span className="text-base font-bold text-gray-600 w-16 text-right">{formatVND(c.total)}</span>
             </div>
           ))}
         </div>
       )}
 
       <div>
-        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Hôm nay</div>
-        {todayList.length === 0 && <div className="text-sm text-gray-600 px-1">Chưa có khoản nào hôm nay 🌤️</div>}
+        <div className="text-lg font-bold text-gray-600 uppercase px-1 mb-2">Hôm nay</div>
+        {todayList.length === 0 && <div className="text-base text-gray-600 px-1">Bạn chưa có khoản nào hôm nay 🌤️</div>}
         <div className="space-y-1.5">
           {todayList.map((e) => (
             <div key={e.id} className="bg-white rounded-xl border border-gray-100 p-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className={`text-sm font-bold px-1.5 py-0.5 rounded-full ${COLORS[e.profileId].chip}`}>{data.profiles[e.profileId].emoji}</span>
+                <span className={`text-base font-bold px-1.5 py-0.5 rounded-full ${COLORS[e.profileId].chip}`}>{data.profiles[e.profileId].emoji}</span>
                 <div>
-                  <div className="text-sm font-bold text-gray-700">{e.label}</div>
-                  <div className="text-sm text-gray-600">{e.category}</div>
+                  <div className="text-base font-bold text-gray-700">{e.label}</div>
+                  <div className="text-base text-gray-600">{e.category}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className={`text-sm font-bold ${e.type === "chi" ? "text-rose-500" : "text-emerald-500"}`}>
+                <span className={`text-base font-bold ${e.type === "chi" ? "text-rose-500" : "text-emerald-500"}`}>
                   {e.type === "chi" ? "-" : "+"}
                   {formatVND(e.amount)}
                 </span>
@@ -2815,7 +3021,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
     <div className="fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center">
       <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-md max-h-[85vh] overflow-y-auto p-5">
         <div className="flex items-center justify-between mb-4">
-          <div className="font-extrabold text-gray-700 text-lg" style={{ fontFamily: DISPLAY_FONT }}>
+          <div className="font-extrabold text-gray-700 text-xl" style={{ fontFamily: DISPLAY_FONT }}>
             Cài đặt
           </div>
           <button onClick={onClose} className="text-gray-600 p-1">
@@ -2825,63 +3031,60 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
 
         {["p1", "p2"].map((pid) => (
           <div key={pid} className="mb-4 bg-gray-50 rounded-2xl p-3">
-            <label className={`text-sm font-bold uppercase ${pid === "p1" ? "text-orange-500" : "text-violet-500"}`}>
+            <label className={`text-base font-bold uppercase ${pid === "p1" ? "text-orange-500" : "text-violet-500"}`}>
               Tên của {data.profiles[pid].emoji}
             </label>
             <input
               value={pid === "p1" ? p1Name : p2Name}
               onChange={(e) => (pid === "p1" ? setP1Name(e.target.value) : setP2Name(e.target.value))}
-              className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mt-1 mb-2"
+              className="w-full rounded-xl border border-gray-200 px-3 py-2 text-base mt-1 mb-2"
             />
-            <div className="text-base font-bold text-gray-600 uppercase mb-1">Giới tính</div>
+            <div className="text-lg font-bold text-gray-600 uppercase mb-1">Giới tính</div>
             <div className="flex flex-wrap gap-1.5 mb-2">
               {GENDERS.map((g) => (
                 <button
                   key={g.id}
                   onClick={() => (pid === "p1" ? setP1Gender(g.id) : setP2Gender(g.id))}
-                  className={`text-sm font-bold px-2 py-1 rounded-full border ${
-                    (pid === "p1" ? p1Gender : p2Gender) === g.id ? "border-rose-400 bg-rose-50" : "border-gray-200 text-gray-600"
-                  }`}
+                  className={`text-base font-bold px-2 py-1 rounded-full border ${(pid === "p1" ? p1Gender : p2Gender) === g.id ? "border-rose-400 bg-rose-50" : "border-gray-200 text-gray-600"
+                    }`}
                 >
                   {g.emoji} {g.label}
                 </button>
               ))}
             </div>
-            <div className="text-base font-bold text-gray-600 uppercase mb-1">Hoa yêu thích</div>
+            <div className="text-lg font-bold text-gray-600 uppercase mb-1">Bông hoa bạn yêu thích</div>
             <div className="flex flex-wrap gap-1.5 mb-2">
               {FLOWERS.map((f) => (
                 <button
                   key={f.id}
                   onClick={() => (pid === "p1" ? setP1Flower(f.id) : setP2Flower(f.id))}
-                  className={`text-sm px-2 py-1 rounded-full border ${
-                    (pid === "p1" ? p1Flower : p2Flower) === f.id ? "border-rose-400 bg-rose-50" : "border-gray-200"
-                  }`}
+                  className={`text-base px-2 py-1 rounded-full border ${(pid === "p1" ? p1Flower : p2Flower) === f.id ? "border-rose-400 bg-rose-50" : "border-gray-200"
+                    }`}
                 >
                   {f.emoji}
                 </button>
               ))}
             </div>
-            <div className="text-base font-bold text-gray-600 uppercase mb-1">Là gì của người kia</div>
+            <div className="text-lg font-bold text-gray-600 uppercase mb-1">Bạn là gì của người kia</div>
             <div className="flex flex-wrap gap-1.5">
               {ROLE_TITLES.map((r) => (
                 <button
                   key={r}
                   onClick={() => (pid === "p1" ? setP1Role(r) : setP2Role(r))}
-                  className={`text-sm font-bold px-2 py-1 rounded-full border ${
-                    (pid === "p1" ? p1Role : p2Role) === r ? "border-rose-400 bg-rose-50" : "border-gray-200 text-gray-600"
-                  }`}
+                  className={`text-base font-bold px-2 py-1 rounded-full border ${(pid === "p1" ? p1Role : p2Role) === r ? "border-rose-400 bg-rose-50" : "border-gray-200 text-gray-600"
+                    }`}
                 >
                   {r}
                 </button>
               ))}
             </div>
-            <div className="text-sm text-gray-600 mt-2">Đăng nhập bằng: {data.profiles[pid].login || "(chưa có)"}</div>
+            <div className="text-base text-gray-600 mt-2">Đăng nhập bằng: {data.profiles[pid].login || "(chưa có)"}</div>
           </div>
         ))}
 
         {["p1", "p2"].map((pid) => (
           <div key={pid} className="mb-4">
-            <div className={`text-sm font-bold uppercase mb-2 ${pid === "p1" ? "text-orange-500" : "text-violet-500"}`}>
+            <div className={`text-base font-bold uppercase mb-2 ${pid === "p1" ? "text-orange-500" : "text-violet-500"}`}>
               Mục tiêu của {data.profiles[pid].name}
             </div>
             <div className="grid grid-cols-2 gap-2">
@@ -2896,9 +3099,9 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
                       onChange={(e) =>
                         setTargets((prev) => ({ ...prev, [pid]: { ...prev[pid], [t.id]: Number(e.target.value) || 0 } }))
                       }
-                      className="w-12 bg-transparent text-sm font-bold text-center focus:outline-none"
+                      className="w-12 bg-transparent text-base font-bold text-center focus:outline-none"
                     />
-                    <span className="text-sm text-gray-600">{t.unit}</span>
+                    <span className="text-base text-gray-600">{t.unit}</span>
                   </div>
                 ))}
             </div>
@@ -2906,10 +3109,10 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
         ))}
 
         <div className="mb-4">
-          <div className="text-base font-bold text-gray-600 uppercase mb-2">Thang mức độ ưu tiên nhiệm vụ</div>
+          <div className="text-lg font-bold text-gray-600 uppercase mb-2">Thang mức độ ưu tiên nhiệm vụ</div>
           <div className="flex flex-wrap gap-1.5 mb-2">
             {urgencyLevels.map((u) => (
-              <span key={u} className="text-sm font-bold px-2.5 py-1 rounded-full bg-gray-50 border border-gray-200 flex items-center gap-1">
+              <span key={u} className="text-base font-bold px-2.5 py-1 rounded-full bg-gray-50 border border-gray-200 flex items-center gap-1">
                 {u}
                 <button onClick={() => setUrgencyLevels((prev) => prev.filter((x) => x !== u))} className="text-gray-300 hover:text-rose-400">
                   <X size={12} />
@@ -2922,7 +3125,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
               value={newUrgency}
               onChange={(e) => setNewUrgency(e.target.value)}
               placeholder="Thêm mức độ mới, VD: Cuối tuần này 🗓️"
-              className="flex-1 rounded-xl border border-gray-200 px-3 py-2 text-sm"
+              className="flex-1 rounded-xl border border-gray-200 px-3 py-2 text-base"
             />
             <button
               onClick={() => {
@@ -2930,7 +3133,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
                 setUrgencyLevels((prev) => [...prev, newUrgency.trim()]);
                 setNewUrgency("");
               }}
-              className="px-3 rounded-xl bg-gray-100 text-gray-600 text-sm font-bold"
+              className="px-3 rounded-xl bg-gray-100 text-gray-600 text-base font-bold"
             >
               Thêm
             </button>
@@ -2938,9 +3141,9 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
         </div>
 
         <div className="mb-5">
-          <div className="text-base font-bold text-gray-600 uppercase mb-2">Mã phòng của hai bạn</div>
+          <div className="text-lg font-bold text-gray-600 uppercase mb-2">Mật mã về thế giới riêng của hai bạn</div>
           <div className="flex items-center justify-between bg-rose-50 border border-rose-100 rounded-xl px-4 py-3">
-            <span className="text-lg font-extrabold tracking-[0.25em] text-rose-500" style={{ fontFamily: DISPLAY_FONT }}>
+            <span className="text-xl font-extrabold tracking-[0.25em] text-rose-500" style={{ fontFamily: DISPLAY_FONT }}>
               {coupleId}
             </span>
             <button
@@ -2951,7 +3154,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
                   // clipboard not available; ignore
                 }
               }}
-              className="text-sm font-bold text-rose-400 flex items-center gap-1"
+              className="text-base font-bold text-rose-400 flex items-center gap-1"
             >
               <Copy size={13} /> Sao chép
             </button>
@@ -2959,20 +3162,20 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
         </div>
 
         <div className="mb-5">
-          <div className="text-base font-bold text-gray-600 uppercase mb-2">Thông báo trên thiết bị</div>
+          <div className="text-lg font-bold text-gray-600 uppercase mb-2">Thông báo trên thiết bị</div>
           <button
             onClick={onRequestNotif}
-            className="w-full bg-sky-50 text-sky-600 border border-sky-200 font-bold py-2.5 rounded-xl text-sm"
+            className="w-full bg-sky-50 text-sky-600 border border-sky-200 font-bold py-2.5 rounded-xl text-base"
           >
             {notifPermission === "granted" ? "Đã bật thông báo trình duyệt ✓" : "Thử bật thông báo trình duyệt"}
           </button>
-          <p className="text-sm text-gray-600 mt-1.5">* Cần cho phép quyền thông báo của trình duyệt; có thể không khả dụng trên mọi thiết bị. Khi bật, app sẽ thử nhắc bạn vào các giờ uống nước gợi ý.</p>
+          <p className="text-base text-gray-600 mt-1.5">* Cần cho phép quyền thông báo của trình duyệt; có thể không khả dụng trên mọi thiết bị. Khi bật, app sẽ thử nhắc bạn vào các giờ uống nước gợi ý.</p>
         </div>
 
         <button onClick={save} className="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 rounded-2xl mb-2">
           Lưu thay đổi
         </button>
-        <button onClick={onLogout} className="w-full flex items-center justify-center gap-1.5 text-gray-600 font-bold py-2 text-sm">
+        <button onClick={onLogout} className="w-full flex items-center justify-center gap-1.5 text-gray-600 font-bold py-2 text-base">
           <LogOut size={15} /> Rời khỏi thiết bị này
         </button>
       </div>
@@ -3018,6 +3221,7 @@ export default function App() {
   );
   const writeTimer = useRef(null);
   const lastWaterPing = useRef("");
+  const shownPartnerNotifIds = useRef(new Set());
 
   // Subscribe to the couple's data in Firebase Realtime Database whenever we have a coupleId.
   // Every update from either device (including our own writes) flows back through here,
@@ -3116,6 +3320,70 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // Tự động kiểm tra "tiến độ trong ngày" của cả hai người: nếu đã quá 2/3 thời
+  // gian trong ngày (sau 16:00) mà routine + thử thách hôm nay vẫn dưới 50%,
+  // gửi một thông báo nhẹ nhàng cho người còn lại (để hai người nhắc nhau).
+  // Mỗi người chỉ nhận tối đa 1 thông báo dạng này mỗi ngày (kiểm tra trùng
+  // trong chính mảng notifications trước khi ghi thêm).
+  useEffect(() => {
+    if (!data) return;
+    const checkLowProgress = () => {
+      if (dayFractionElapsed() < 2 / 3) return;
+      const dk = todayKey();
+      ["p1", "p2"].forEach((pid) => {
+        const other = otherOf(pid);
+        if (!data.profiles[pid]?.name || !data.profiles[other]?.name) return;
+        const progress = dayProgressRatio(data, dk, pid);
+        if (progress >= 0.5) return;
+        const already = (data.notifications || []).some((n) => n.kind === "low" && n.fromProfile === pid && n.dateKey === dk);
+        if (already) return;
+        setData((prev) => {
+          const exists = (prev.notifications || []).some((n) => n.kind === "low" && n.fromProfile === pid && n.dateKey === dk);
+          if (exists) return prev;
+          const list = [
+            ...(prev.notifications || []),
+            {
+              id: uid(),
+              createdAt: Date.now(),
+              read: false,
+              toProfile: other,
+              fromProfile: pid,
+              kind: "low",
+              dateKey: dk,
+              message: `Còn ít thời gian của hôm nay mà ${nameOf(prev, pid)} yêu mới hoàn thành dưới 50% routine hôm nay, hãy động viên dấu yêu của bạn cùng cố lên nhé! ⏰`,
+            },
+          ];
+          return { ...prev, notifications: list.length > 40 ? list.slice(list.length - 40) : list };
+        });
+      });
+    };
+    checkLowProgress();
+    const interval = setInterval(checkLowProgress, 5 * 60 * 1000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  // Khi có thông báo mới (xuất sắc / tiến độ thấp) gửi cho hồ sơ đang hoạt động,
+  // hiện một toast ngắn để báo ngay, rồi đánh dấu đã đọc.
+  useEffect(() => {
+    if (!data || !activeProfile) return;
+    const mine = (data.notifications || []).filter(
+      (n) => n.toProfile === activeProfile && !n.read && !shownPartnerNotifIds.current.has(n.id)
+    );
+    if (mine.length === 0) return;
+    mine.forEach((n) => shownPartnerNotifIds.current.add(n.id));
+    const latest = mine[mine.length - 1];
+    const isRecent = Date.now() - (latest.createdAt || 0) < 2 * 60 * 1000;
+    if (isRecent) {
+      setToast({ kind: latest.kind === "excellent" ? "cheer" : "comfort", text: latest.message });
+    }
+    setData((prev) => ({
+      ...prev,
+      notifications: (prev.notifications || []).map((n) => (mine.some((m) => m.id === n.id) ? { ...n, read: true } : n)),
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, activeProfile]);
+
   const requestNotif = async () => {
     try {
       if (typeof Notification === "undefined") return;
@@ -3179,7 +3447,7 @@ export default function App() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-sky-50 gap-2">
         <div className="text-3xl animate-pulse">💞</div>
-        <div className="text-sm font-bold text-gray-600">Đang kết nối với phòng của hai bạn...</div>
+        <div className="text-base font-bold text-gray-600">Đang kết nối với thế giới riêng của hai bạn...</div>
       </div>
     );
   }
@@ -3207,17 +3475,17 @@ export default function App() {
         <div className="font-extrabold text-gray-700" style={{ fontFamily: DISPLAY_FONT }}>
           {m.title}
         </div>
-        <div className="text-sm text-gray-600 max-w-xs">{m.detail}</div>
+        <div className="text-base text-gray-600 max-w-xs">{m.detail}</div>
         <div className="flex gap-2 mt-2">
           <button
             onClick={() => setRetryKey((k) => k + 1)}
-            className="bg-sky-500 hover:bg-sky-600 text-white font-bold px-5 py-2.5 rounded-full text-sm"
+            className="bg-sky-500 hover:bg-sky-600 text-white font-bold px-5 py-2.5 rounded-full text-base"
           >
             Thử lại
           </button>
           <button
             onClick={handleLogout}
-            className="bg-white border border-gray-200 text-gray-600 font-bold px-5 py-2.5 rounded-full text-sm"
+            className="bg-white border border-gray-200 text-gray-600 font-bold px-5 py-2.5 rounded-full text-base"
           >
             Rời khỏi thiết bị này
           </button>
@@ -3228,10 +3496,19 @@ export default function App() {
 
   const dk = todayKey();
   const pendingCount = data.assignedTasks.filter((a) => a.dateKey === dk && a.assignedTo === activeProfile && assignedRatio(a) < 1).length;
-  const alertCount = computeAlerts(data).filter((a) => a.profileId !== activeProfile).length;
+  const unreadNotifs = (data.notifications || []).filter((n) => n.toProfile === activeProfile && !n.read).length;
+  const alertCount = computeAlerts(data).filter((a) => a.profileId !== activeProfile).length + unreadNotifs;
+
+  const openAlerts = () => {
+    setShowAlerts(true);
+    setData((prev) => ({
+      ...prev,
+      notifications: (prev.notifications || []).map((n) => (n.toProfile === activeProfile ? { ...n, read: true } : n)),
+    }));
+  };
 
   return (
-<div className="min-h-screen bg-gradient-to-b from-sky-200 via-blue-100 to-sky-50 flex flex-col" style={{ fontFamily: BODY_FONT }}>      <style>{`
+    <div className="min-h-screen bg-gradient-to-b from-sky-200 via-blue-100 to-sky-50 flex flex-col" style={{ fontFamily: BODY_FONT }}>      <style>{`
         ${FONT_IMPORT}
         @keyframes giftPop {
           0% { transform: scale(0.7) rotate(-3deg); opacity: 0; }
@@ -3324,7 +3601,7 @@ export default function App() {
         }
       `}</style>
 
-      <Header data={data} activeProfile={activeProfile} onOpenSettings={() => setShowSettings(true)} onOpenAlerts={() => setShowAlerts(true)} alertCount={alertCount} />
+      <Header data={data} activeProfile={activeProfile} onOpenSettings={() => setShowSettings(true)} onOpenAlerts={openAlerts} alertCount={alertCount} />
 
       <div className="flex-1 overflow-y-auto">
         {tab === "today" && (
