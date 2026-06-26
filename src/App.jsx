@@ -574,7 +574,7 @@ function ProgressBar({ ratio, colorClass }) {
 function ProgressBoxWithIcon({ ratio, colorClass, label, children }) {
   const pct = Math.max(0, Math.min(100, ratio * 100));
   return (
-    <div className="relative flex-1 h-20 rounded-2xl bg-gray-100 overflow-hidden">
+    <div className="relative flex-1 h-20 rounded-2xl bg-gradient-to-r from-sky-100 to-blue-50 overflow-hidden border border-sky-100">
       <div className={`absolute inset-y-0 left-0 rounded-2xl ${colorClass} transition-all duration-500 ease-out`} style={{ width: `${pct}%` }} />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
         {children}
@@ -949,10 +949,11 @@ function AmbientCritters() {
 function BlobBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute -top-10 -left-10 w-56 h-56 rounded-full bg-indigo-300 opacity-30 blur-3xl" />
-      <div className="absolute top-1/3 -right-12 w-64 h-64 rounded-full bg-blue-300 opacity-30 blur-3xl" />
-      <div className="absolute bottom-0 left-1/4 w-56 h-56 rounded-full bg-sky-200 opacity-40 blur-3xl" />
-      <div className="absolute bottom-10 right-0 w-40 h-40 rounded-full bg-cyan-100 opacity-50 blur-3xl" />
+      <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-indigo-600 opacity-50 blur-3xl" />
+      <div className="absolute top-1/4 -right-16 w-80 h-80 rounded-full bg-blue-500 opacity-50 blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-72 h-72 rounded-full bg-sky-400 opacity-50 blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-56 h-56 rounded-full bg-cyan-300 opacity-50 blur-3xl" />
+      <div className="absolute top-1/2 left-1/3 w-40 h-40 rounded-full bg-white opacity-30 blur-3xl" />
     </div>
   );
 }
@@ -1084,26 +1085,26 @@ function ContactField({ method, setMethod, contact, setContact }) {
 
 function WelcomeScreen({ onPickCreate, onPickJoin }) {
   return (
-    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-blue-100 via-sky-50 to-white">
+    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-700 via-blue-500 to-sky-300 overflow-hidden">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
-        <div className="text-5xl mb-3">💌</div>
-        <h1 className="text-3xl font-extrabold text-blue-600 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
+        <div className="text-5xl mb-3 bg-white w-20 h-20 rounded-full flex items-center justify-center shadow-lg">💌</div>
+        <h1 className="text-3xl font-extrabold text-white mb-1 text-center mt-4 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
           {APP_NAME}
         </h1>
-        <p className="text-sm text-gray-500 mb-8 text-center max-w-xs">
+        <p className="text-sm text-blue-50 mb-8 text-center max-w-xs">
           Mọi sự thay đổi đều khó khăn lúc ban đầu, lộn xộn ở giữa và tuyệt đẹp ở cuối 🎁
         </p>
         <button
           onClick={onPickCreate}
-          className="w-full max-w-sm bg-sky-500 hover:bg-sky-600 text-white font-bold py-3.5 rounded-2xl shadow-sm mb-3 flex items-center justify-center gap-2 text-lg"
+          className="w-full max-w-sm bg-white hover:bg-blue-50 text-blue-700 font-bold py-3.5 rounded-2xl shadow-lg mb-3 flex items-center justify-center gap-2 text-lg"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           <Link2 size={18} /> Tạo phòng mới
         </button>
         <button
           onClick={onPickJoin}
-          className="w-full max-w-sm bg-white border border-sky-200 text-sky-600 font-bold py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2 text-lg"
+          className="w-full max-w-sm bg-blue-800/30 border-2 border-white/70 text-white font-bold py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2 text-lg backdrop-blur-sm"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           <KeyRound size={18} /> Tham gia bằng mã
@@ -1120,20 +1121,20 @@ function CreateRoomScreen({ onBack, onCreated }) {
   const [error, setError] = useState("");
 
   return (
-    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-blue-50 via-sky-50 to-white">
+    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-blue-700 via-sky-500 to-sky-100 overflow-hidden">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
-        <button onClick={onBack} className="self-start mb-3 text-xs font-bold text-gray-400">
+        <button onClick={onBack} className="self-start mb-3 text-xs font-bold text-white/90">
           ← Quay lại
         </button>
-        <div className="text-4xl mb-2">🏡</div>
-        <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
+        <div className="text-4xl mb-2 bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">🏡</div>
+        <h1 className="text-2xl font-extrabold text-white mb-1 text-center mt-3 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
           Tạo phòng của hai bạn
         </h1>
-        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Điền thông tin của bạn, app sẽ tạo một link riêng để người ấy bấm vào tham gia.</p>
+        <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Điền thông tin của bạn, app sẽ tạo một link riêng để người ấy bấm vào tham gia.</p>
 
         <ContactField method={method} setMethod={setMethod} contact={contact} setContact={setContact} />
-        {error && <div className="text-xs text-rose-500 font-bold mb-2 text-center">{error}</div>}
+        {error && <div className="text-xs text-white font-bold mb-2 text-center bg-rose-500 rounded-full px-3 py-1">{error}</div>}
 
         <ProfileSetupForm
           accentText="text-sky-600"
@@ -1191,16 +1192,16 @@ function RoomCodeReveal({ code, onContinue }) {
     }
   };
   return (
-    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-blue-50 via-sky-50 to-white">
+    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-700 via-blue-500 to-sky-200 overflow-hidden">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
         <div className="text-5xl mb-3">🎉</div>
-        <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
+        <h1 className="text-2xl font-extrabold text-white mb-1 text-center drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
           Phòng của bạn đã sẵn sàng!
         </h1>
-        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Gửi link này cho người ấy — bấm vào là vào thẳng phòng luôn, không cần nhập gì thêm 💌</p>
+        <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Gửi link này cho người ấy — bấm vào là vào thẳng phòng luôn, không cần nhập gì thêm 💌</p>
 
-        <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-sky-100 p-5 text-center mb-4">
+        <div className="w-full max-w-sm bg-white rounded-3xl shadow-lg border border-sky-100 p-5 text-center mb-4">
           <div className="text-[11px] font-bold text-gray-400 uppercase mb-1.5">Link mời (cách nhanh nhất)</div>
           <div className="text-xs text-sky-700 font-bold bg-sky-50 rounded-xl p-3 mb-3 break-all">{shareLink}</div>
           <button onClick={copyLink} className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-full">
@@ -1221,7 +1222,7 @@ function RoomCodeReveal({ code, onContinue }) {
 
         <button
           onClick={onContinue}
-          className="w-full max-w-sm bg-sky-500 hover:bg-sky-600 text-white font-bold py-3.5 rounded-2xl shadow-sm text-lg"
+          className="w-full max-w-sm bg-white hover:bg-blue-50 text-blue-700 font-bold py-3.5 rounded-2xl shadow-lg text-lg"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           Vào app ngay 🚀
@@ -1252,10 +1253,6 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
       if (!roomData) {
         setError("Không tìm thấy phòng với mã này, kiểm tra lại nhé 💌");
       } else if (roomData.profiles?.p1?.name && roomData.profiles?.p2?.name) {
-        // Both slots already taken. Instead of blocking, let whoever knows the code
-        // pick which of the two people they are — this is also how re-installing the
-        // app (e.g. "Add to Home Screen" on iOS keeps a separate, empty storage area
-        // from regular Safari) gets back into an existing room on the same device.
         setFullRoom({ code: val, profiles: roomData.profiles });
       } else {
         setValidRoom(val);
@@ -1267,21 +1264,20 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
     }
   };
 
-  // Arrived via a one-tap invite link (?join=CODE) — skip straight to checking it.
   useEffect(() => {
     if (initialCode) checkCode(initialCode);
   }, []);
 
   if (fullRoom) {
     return (
-      <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-50 via-blue-50 to-white">
+      <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-700 via-indigo-500 to-blue-200 overflow-hidden">
         <BlobBackground />
         <div className="relative z-10 flex flex-col items-center w-full">
-          <div className="text-4xl mb-2">🔑</div>
-          <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
+          <div className="text-4xl mb-2 bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">🔑</div>
+          <h1 className="text-2xl font-extrabold text-white mb-1 text-center mt-3 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
             Phòng này đã có đủ hai người
           </h1>
-          <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">
+          <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">
             Nếu đây là phòng của bạn (đổi máy, đổi trình duyệt, hoặc vừa cài app...), chọn đúng vai trò của mình để vào lại nhé.
           </p>
 
@@ -1293,7 +1289,7 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
                 <button
                   key={pid}
                   onClick={() => onJoined(fullRoom.code, pid)}
-                  className="w-full bg-white rounded-2xl border-2 border-blue-200 hover:border-blue-400 p-4 flex items-center gap-3 text-left shadow-sm"
+                  className="w-full bg-white rounded-2xl border-2 border-transparent hover:border-indigo-300 p-4 flex items-center gap-3 text-left shadow-lg"
                 >
                   <span className="text-3xl">{p.emoji}</span>
                   <span className="font-bold text-gray-700">Tôi là {p.name}</span>
@@ -1307,11 +1303,11 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
               setFullRoom(null);
               setCode("");
             }}
-            className="text-xs font-bold text-gray-400 underline"
+            className="text-xs font-bold text-white/90 underline"
           >
             Không phải phòng của tôi, thử mã khác
           </button>
-          <button onClick={onBack} className="mt-3 text-xs font-bold text-gray-400">
+          <button onClick={onBack} className="mt-3 text-xs font-bold text-white/70">
             ← Quay lại
           </button>
         </div>
@@ -1321,14 +1317,14 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
 
   if (validRoom) {
     return (
-      <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-50 via-blue-50 to-white">
+      <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-700 via-indigo-500 to-blue-200 overflow-hidden">
         <BlobBackground />
         <div className="relative z-10 flex flex-col items-center w-full">
-          <div className="text-4xl mb-2">👋</div>
-          <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
+          <div className="text-4xl mb-2 bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">👋</div>
+          <h1 className="text-2xl font-extrabold text-white mb-1 text-center mt-3 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
             Chào người ấy!
           </h1>
-          <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Hoàn tất hồ sơ của bạn để bắt đầu cùng nhau trên {APP_NAME} 💞</p>
+          <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Hoàn tất hồ sơ của bạn để bắt đầu cùng nhau trên {APP_NAME} 💞</p>
 
           <ContactField method={method} setMethod={setMethod} contact={contact} setContact={setContact} />
 
@@ -1356,19 +1352,19 @@ function JoinRoomScreen({ onBack, onJoined, initialCode }) {
   }
 
   return (
-    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-50 via-blue-50 to-white">
+    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-700 via-indigo-500 to-blue-200 overflow-hidden">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
-        <button onClick={onBack} className="self-start mb-3 text-xs font-bold text-gray-400">
+        <button onClick={onBack} className="self-start mb-3 text-xs font-bold text-white/90">
           ← Quay lại
         </button>
-        <div className="text-4xl mb-2">🔑</div>
-        <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
+        <div className="text-4xl mb-2 bg-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">🔑</div>
+        <h1 className="text-2xl font-extrabold text-white mb-1 text-center mt-3 drop-shadow" style={{ fontFamily: DISPLAY_FONT }}>
           Tham gia phòng
         </h1>
-        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Nhập mã 6 ký tự mà người ấy đã gửi cho bạn (hoặc bấm thẳng vào link mời sẽ tự điền sẵn).</p>
+        <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Nhập mã 6 ký tự mà người ấy đã gửi cho bạn (hoặc bấm thẳng vào link mời sẽ tự điền sẵn).</p>
 
-        <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-gray-100 p-5">
+        <div className="w-full max-w-sm bg-white rounded-3xl shadow-lg border border-gray-100 p-5">
           <input
             value={code}
             onChange={(e) => {
@@ -1409,7 +1405,7 @@ function Header({ data, activeProfile, onOpenSettings, onOpenAlerts, alertCount 
   const genderEmoji = GENDERS.find((g) => g.id === gender)?.emoji;
 
   return (
-    <div className="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-gray-100 px-4 pt-4 pb-3">
+    <div className="sticky top-0 z-20 bg-sky-50/90 backdrop-blur border-b border-sky-100 px-4 pt-4 pb-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           <span className="text-xl font-extrabold text-rose-500" style={{ fontFamily: DISPLAY_FONT }}>
@@ -1455,13 +1451,13 @@ function Header({ data, activeProfile, onOpenSettings, onOpenAlerts, alertCount 
 function BottomNav({ tab, setTab, pendingCount }) {
   const items = [
     { id: "today", icon: Home, label: "Hôm nay" },
-    { id: "tasks", icon: ClipboardList, label: "Nhiệm vụ", badge: pendingCount },
+    { id: "tasks", icon: ClipboardList, label: "Thử thách", badge: pendingCount },
     { id: "mood", icon: Heart, label: "Cảm xúc" },
     { id: "gift", icon: GiftIcon, label: "Phần thưởng" },
     { id: "finance", icon: Wallet, label: "Thu chi" },
   ];
   return (
-    <div className="sticky bottom-0 z-20 bg-white border-t border-gray-100 flex justify-around px-1 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+    <div className="sticky bottom-0 z-20 bg-sky-50/95 border-t border-sky-100 flex justify-around px-1 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
       {items.map((it) => {
         const Icon = it.icon;
         const isActive = tab === it.id;
@@ -2054,11 +2050,11 @@ function AssignSection({ data, setData, activeProfile }) {
     <div className="space-y-5">
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
         <div className="text-sm font-extrabold text-gray-700 mb-1">✍️ Thử thách dành cho {nameOf(data, other)}</div>
-        <p className="text-[11px] text-gray-400 mb-3">Đặt số lượng cụ thể (VD: mang 5 bao gạo) — hoàn thành sẽ tự tính theo tiến độ thật, không cần tự chấm điểm nữa.</p>
+        <p className="text-[11px] text-gray-400 mb-3">Đặt số lượng tương ứng với số phiếu thưởng hợp lý, có thể tạo thêm các phần quà bí mật để tạo bất ngờ cho {nameOf(data, other)} yêu nha.</p>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Tên nhiệm vụ, VD: Mang gạo lên nhà"
+          placeholder="Tên thử thách"
           className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-rose-200"
         />
         <input
@@ -2079,7 +2075,7 @@ function AssignSection({ data, setData, activeProfile }) {
           <input
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
-            placeholder="Đơn vị, VD: bao gạo"
+            placeholder="Đơn vị"
             className="flex-1 rounded-xl border border-gray-200 px-2.5 py-2 text-sm"
           />
         </div>
@@ -2130,7 +2126,7 @@ function AssignSection({ data, setData, activeProfile }) {
 
       <div>
         <div className="text-xs font-bold text-gray-400 uppercase px-1 mb-2">Bạn đã tạo</div>
-        {givenByMe.length === 0 && <div className="text-sm text-gray-400 px-1">Chưa tạo gì hôm nay 📝</div>}
+        {givenByMe.length === 0 && <div className="text-sm text-gray-400 px-1">Bạn chưa tạo gì hôm nay 📝</div>}
         <div className="space-y-2">
           {givenByMe.map((t) => {
             const ratio = assignedRatio(t);
@@ -2504,14 +2500,14 @@ function GiftTab({ data, setData, activeProfile, onReveal }) {
           Phần thưởng bí mật
         </div>
         <div className="text-xs text-gray-500 mt-1 mb-3">
-          Cứ {GIFT_THRESHOLD} phiếu bạn lại được mở 1 phần quà bí mật từ {nameOf(data, other)} yêu 💌
+          Đủ {GIFT_THRESHOLD} phiếu bạn lại được mở 1 phần quà bí mật từ {nameOf(data, other)} yêu 💌
         </div>
         <div className="flex items-center justify-center gap-2 mb-4">
           <span className="text-xs font-bold bg-white px-3 py-1.5 rounded-full text-rose-500 border border-rose-100">🔒 {myUnopened.length} hộp đang chờ</span>
           <span className="text-xs font-bold bg-white px-3 py-1.5 rounded-full text-amber-500 border border-amber-100">✨ {opens} lượt mở</span>
         </div>
         <button onClick={openBox} className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-6 py-2.5 rounded-full shadow-sm text-sm">
-          Mở hộp quà ngay
+          Mở hộp bí mật ngay
         </button>
       </div>
 
@@ -3109,7 +3105,7 @@ export default function App() {
       if (match && lastWaterPing.current !== hhmm) {
         lastWaterPing.current = hhmm;
         try {
-          new Notification("💧 Giờ uống nước rồi!", { body: match.tip });
+          new Notification("💧 Tới giờ uống nước rồi bạn yêu ơi!", { body: match.tip });
         } catch {
           // ignore
         }
@@ -3234,8 +3230,7 @@ export default function App() {
   const alertCount = computeAlerts(data).filter((a) => a.profileId !== activeProfile).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-blue-50 to-white flex flex-col" style={{ fontFamily: BODY_FONT }}>
-      <style>{`
+<div className="min-h-screen bg-gradient-to-b from-sky-200 via-blue-100 to-sky-50 flex flex-col" style={{ fontFamily: BODY_FONT }}>      <style>{`
         ${FONT_IMPORT}
         @keyframes giftPop {
           0% { transform: scale(0.7) rotate(-3deg); opacity: 0; }
