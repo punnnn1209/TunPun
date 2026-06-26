@@ -70,8 +70,8 @@ const GENDERS = [
 const ROLE_TITLES = [
   "Người giữ trái tim em 🔐",
   "Một nửa của anh 💑",
-  "Gấu bông biết đi 🧸",
-  "Boss khó tính dễ thương 😎",
+  "Điểm tựa của em🧸",
+  "Nóc nhà dễ thương của anh 😎",
   "Đầu bếp riêng 🍳",
   "Vệ sĩ 24/7 🛡️",
   "Người gọi dậy mỗi sáng ☀️",
@@ -80,7 +80,6 @@ const ROLE_TITLES = [
   "Người chữa lành mọi mệt mỏi 🩹",
   "Đồng phạm ăn vặt 🍟",
   "Crush không đối thủ 😍",
-  "Wifi của đời em (không có là khó sống) 📶",
   "Vitamin tinh thần mỗi ngày 💊",
   "CEO của trái tim anh 💼",
 ];
@@ -107,6 +106,8 @@ const TASKS = [
     name: "Giới hạn thời gian sử dụng màn hình",
     unit: "phút",
     step: 10,
+    min: 0, 
+    max: 450,
     defaultTarget: 90,
     inverse: true,
     hint: "Mục tiêu này nên để người ấy đặt cho bạn nhé",
@@ -462,7 +463,7 @@ function getRankTitle(tickets) {
   if (tickets < 15) return "Tân binh đáng yêu 🐣";
   if (tickets < 40) return "Người yêu chăm chỉ 🌱";
   if (tickets < 90) return "Cao thủ tự giác 🔥";
-  if (tickets < 180) return "Phải chăng là định mệnh 👑";
+  if (tickets < 180) return "Chỉ có thể là định mệnh 👑";
   return "Happy Ending 💞";
 }
 
@@ -976,7 +977,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
         style={{ fontFamily: BODY_FONT }}
       />
 
-      <div className="text-sm font-bold text-gray-600 uppercase mb-1.5">Giới tính</div>
+      <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Giới tính</div>
       <div className="flex flex-wrap gap-2 mb-3">
         {GENDERS.map((g) => (
           <button
@@ -992,7 +993,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
         ))}
       </div>
 
-      <div className="text-sm font-bold text-gray-600 uppercase mb-1.5">Avatar</div>
+      <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Avatar</div>
       <div className="flex flex-wrap gap-2 mb-3">
         {PROFILE_EMOJI_CHOICES.map((e) => (
           <button
@@ -1007,7 +1008,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
         ))}
       </div>
 
-      <div className="text-sm font-bold text-gray-600 uppercase mb-1.5">Hoa yêu thích (dùng cho phiếu bé ngoan & cảm xúc)</div>
+      <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Hoa yêu thích (dùng cho phiếu bé ngoan & cảm xúc)</div>
       <div className="flex flex-wrap gap-2 mb-4">
         {FLOWERS.map((f) => (
           <button
@@ -1023,7 +1024,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
         ))}
       </div>
 
-      <div className="text-sm font-bold text-gray-600 uppercase mb-1.5">Bạn là gì của người kia? 😜</div>
+      <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Bạn là gì của người kia? 😜</div>
       <div className="flex flex-wrap gap-1.5 mb-4">
         {ROLE_TITLES.map((r) => (
           <button
@@ -1053,7 +1054,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accen
 function ContactField({ method, setMethod, contact, setContact }) {
   return (
     <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-gray-100 p-5 mb-4">
-      <div className="text-sm font-bold text-gray-600 uppercase mb-2">Thông tin liên hệ của bạn</div>
+      <div className="text-base font-bold text-gray-600 uppercase mb-2">Thông tin liên hệ của bạn</div>
       <div className="flex gap-2 mb-3">
         <button
           onClick={() => setMethod("gmail")}
@@ -1202,7 +1203,7 @@ function RoomCodeReveal({ code, onContinue }) {
         <p className="text-sm text-blue-50 mb-6 text-center max-w-xs">Gửi link này cho người ấy — bấm vào là vào thẳng phòng luôn, không cần nhập gì thêm 💌</p>
 
         <div className="w-full max-w-sm bg-white rounded-3xl shadow-lg border border-sky-100 p-5 text-center mb-4">
-          <div className="text-sm font-bold text-gray-600 uppercase mb-1.5">Link mời (cách nhanh nhất)</div>
+          <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Link mời (cách nhanh nhất)</div>
           <div className="text-sm text-sky-700 font-bold bg-sky-50 rounded-xl p-3 mb-3 break-all">{shareLink}</div>
           <button onClick={copyLink} className="inline-flex items-center gap-1.5 text-sm font-bold text-white bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-full">
             <Copy size={13} /> {copiedLink ? "Đã sao chép link!" : "Sao chép link mời"}
@@ -1471,11 +1472,11 @@ function BottomNav({ tab, setTab, pendingCount }) {
           >
             <Icon size={21} strokeWidth={isActive ? 2.5 : 2} />
             <span className="text-[10px] font-bold">{it.label}</span>
-            {!!it.badge && 
+            {!!it.badge && (
               <span className="absolute -top-0.5 right-1 bg-rose-500 text-white text-sm font-bold rounded-full w-4 h-4 flex items-center justify-center">
                 {it.badge}
               </span>
-            }
+            )}
           </button>
         );
       })}
@@ -1811,7 +1812,7 @@ function TodayTab({ data, setData, activeProfile, coupleId, onCelebrate, onEncou
       )}
 
       <div className="flex items-center justify-between px-1">
-        <div className="text-sm font-bold text-gray-600 uppercase">Daily routine</div>
+        <div className="text-base font-bold text-gray-600 uppercase">Daily routine</div>
         <button onClick={() => setShowAddHabit((s) => !s)} className="text-sm font-bold text-rose-400 flex items-center gap-0.5">
           <Plus size={13} /> Thói quen riêng
         </button>
@@ -1863,7 +1864,7 @@ function PendingTaskCard({ task, col, onChange }) {
   return (
     <div className="bg-white rounded-xl p-3 border border-rose-100">
       <div className="flex items-center justify-between mb-1">
-        <div className="font-bold text-gray-700 text-sm">{task.title}</div>
+        <div className="font-bold text-gray-700 text-base">{task.title}</div>
         {task.urgency && <span className={`text-sm font-bold px-2 py-0.5 rounded-full border ${urgencyClass}`}>{task.urgency}</span>}
       </div>
       {task.note && <div className="text-sm text-gray-600 mb-1">{task.note}</div>}
@@ -1904,7 +1905,7 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <span className="text-xl">{task.emoji}</span>
-            <span className="font-bold text-gray-700 text-sm">{task.name}</span>
+            <span className="font-bold text-gray-700 text-base">{task.name}</span>
           </div>
           <LevelBadge ratio={ratio} />
         </div>
@@ -1939,7 +1940,7 @@ function TaskCard({ task, entry, target, ratio, col, flowerEmoji, onChange, onRe
       <div className="flex items-center gap-2 mb-2">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="font-bold text-gray-700 text-sm">{task.name}</span>
+            <span className="font-bold text-gray-700 text-base">{task.name}</span>
             {task.custom && <span className="text-sm bg-rose-50 text-rose-400 font-bold px-1.5 py-0.5 rounded-full">riêng</span>}
             {onShowWaterTimes && (
               <button onClick={onShowWaterTimes} className="text-sm text-sky-500 font-bold underline">
@@ -2103,7 +2104,7 @@ function AssignSection({ data, setData, activeProfile }) {
       </div>
 
       <div>
-        <div className="text-sm font-bold text-gray-600 uppercase px-1 mb-2">{nameOf(data, other)} giao cho bạn</div>
+        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">{nameOf(data, other)} giao cho bạn</div>
         {givenToMe.length === 0 && <div className="text-sm text-gray-600 px-1">Chưa có thử thách nào hôm nay 🌤️</div>}
         <div className="space-y-2">
           {givenToMe.map((t) => {
@@ -2111,7 +2112,7 @@ function AssignSection({ data, setData, activeProfile }) {
             return (
               <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3">
                 <div className="flex items-center justify-between">
-                  <div className="font-bold text-gray-700 text-sm">{t.title}</div>
+                  <div className="font-bold text-gray-700 text-base">{t.title}</div>
                   <LevelBadge ratio={ratio} />
                 </div>
                 {t.note && <div className="text-sm text-gray-600">{t.note}</div>}
@@ -2125,7 +2126,7 @@ function AssignSection({ data, setData, activeProfile }) {
       </div>
 
       <div>
-        <div className="text-sm font-bold text-gray-600 uppercase px-1 mb-2">Bạn đã tạo</div>
+        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Bạn đã tạo</div>
         {givenByMe.length === 0 && <div className="text-sm text-gray-600 px-1">Bạn chưa tạo gì hôm nay 📝</div>}
         <div className="space-y-2">
           {givenByMe.map((t) => {
@@ -2133,7 +2134,7 @@ function AssignSection({ data, setData, activeProfile }) {
             return (
               <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3 flex items-center justify-between">
                 <div>
-                  <div className="font-bold text-gray-700 text-sm">{t.title}</div>
+                  <div className="font-bold text-gray-700 text-base">{t.title}</div>
                   <div className="text-sm text-amber-500 font-bold">
                     {t.value || 0} / {t.target} {t.unit} · 🎯 {assignedTickets(t)} phiếu
                   </div>
@@ -2249,12 +2250,12 @@ function SharedSection({ data, setData, activeProfile, onCelebrate }) {
       </div>
 
       <div>
-        <div className="text-sm font-bold text-gray-600 uppercase px-1 mb-2">Đang thực hiện</div>
+        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Đang thực hiện</div>
         {ongoing.length === 0 && <div className="text-sm text-gray-600 px-1">Chưa có nhiệm vụ chung nào 🌷</div>}
         <div className="space-y-2">
           {ongoing.map((t) => (
             <div key={t.id} className="bg-white rounded-xl border border-gray-100 p-3">
-              <div className="font-bold text-gray-700 text-sm">{t.title}</div>
+              <div className="font-bold text-gray-700 text-base">{t.title}</div>
               {t.desc && <div className="text-sm text-gray-600 mt-0.5">{t.desc}</div>}
               <div className="flex items-center justify-between mt-2">
                 <div className="flex items-center gap-1.5 text-sm font-bold">
@@ -2273,7 +2274,7 @@ function SharedSection({ data, setData, activeProfile, onCelebrate }) {
 
       {done.length > 0 && (
         <div>
-          <div className="text-sm font-bold text-gray-600 uppercase px-1 mb-2">Đã hoàn thành cùng nhau 🎉</div>
+          <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Đã hoàn thành cùng nhau 🎉</div>
           <div className="space-y-1.5">
             {done.map((t) => (
               <div key={t.id} className="bg-emerald-50 border border-emerald-100 rounded-xl px-3 py-2 text-sm text-gray-600">
@@ -2357,7 +2358,7 @@ function MoodTab({ data, setData, activeProfile, onEncourage }) {
   return (
     <div className="px-4 py-4 space-y-5 pb-6">
       <div className="rounded-3xl p-5 text-center bg-gradient-to-b from-rose-50 to-amber-50 border border-rose-100">
-        <div className="text-sm font-bold text-gray-600 uppercase mb-1">Hoa cảm xúc hôm nay (tổng hợp từ 3 buổi)</div>
+        <div className="text-base font-bold text-gray-600 uppercase mb-1">Hoa cảm xúc hôm nay (tổng hợp từ 3 buổi)</div>
         <div className={`text-6xl mb-1 inline-block transition-all duration-500 ${stage.scale} ${stage.opacity} ${stage.gray}`}>
           {stage.emoji}
         </div>
@@ -2394,7 +2395,7 @@ function MoodTab({ data, setData, activeProfile, onEncourage }) {
           ))}
         </div>
 
-        <div className="text-sm font-bold text-gray-600 uppercase mb-2">Thời tiết</div>
+        <div className="text-base font-bold text-gray-600 uppercase mb-2">Thời tiết</div>
         <div className="flex flex-wrap gap-2 mb-4">
           {WEATHERS.map((w) => (
             <button
@@ -2420,7 +2421,7 @@ function MoodTab({ data, setData, activeProfile, onEncourage }) {
       </div>
 
       <div>
-        <div className="text-sm font-bold text-gray-600 uppercase px-1 mb-2">7 ngày gần đây</div>
+        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">7 ngày gần đây</div>
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-50">
           {days.map((day) => {
             const s1 = freshnessStage(moodFreshnessScore(data, day, "p1"), FLOWERS.find((f) => f.id === data.profiles.p1.flower)?.emoji);
@@ -2559,7 +2560,7 @@ function GiftTab({ data, setData, activeProfile, onReveal }) {
 
       {myOpened.length > 0 && (
         <div>
-          <div className="text-sm font-bold text-gray-600 uppercase px-1 mb-2">Quà bạn đã mở</div>
+          <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Quà bạn đã mở</div>
           <div className="space-y-1.5">
             {myOpened.map((g) => (
               <div key={g.id} className="bg-amber-50 border border-amber-100 rounded-xl px-3 py-2 text-sm text-gray-600">
@@ -2712,7 +2713,7 @@ function FinanceTab({ data, setData, activeProfile }) {
           </div>
         </div>
 
-        <div className="text-sm font-bold text-gray-600 uppercase mb-1.5">Tổng chi</div>
+        <div className="text-base font-bold text-gray-600 uppercase mb-1.5">Tổng chi</div>
         {["p1", "p2"].map((pid) => (
           <div key={pid} className="flex items-center gap-2 mb-2">
             <span className="text-sm w-7">{data.profiles[pid].emoji}</span>
@@ -2723,7 +2724,7 @@ function FinanceTab({ data, setData, activeProfile }) {
           </div>
         ))}
 
-        <div className="text-sm font-bold text-gray-600 uppercase mb-1.5 mt-3">Tổng thu</div>
+        <div className="text-base font-bold text-gray-600 uppercase mb-1.5 mt-3">Tổng thu</div>
         {["p1", "p2"].map((pid) => (
           <div key={pid} className="flex items-center gap-2 mb-2">
             <span className="text-sm w-7">{data.profiles[pid].emoji}</span>
@@ -2751,7 +2752,7 @@ function FinanceTab({ data, setData, activeProfile }) {
       )}
 
       <div>
-        <div className="text-sm font-bold text-gray-600 uppercase px-1 mb-2">Hôm nay</div>
+        <div className="text-base font-bold text-gray-600 uppercase px-1 mb-2">Hôm nay</div>
         {todayList.length === 0 && <div className="text-sm text-gray-600 px-1">Chưa có khoản nào hôm nay 🌤️</div>}
         <div className="space-y-1.5">
           {todayList.map((e) => (
@@ -2832,7 +2833,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
               onChange={(e) => (pid === "p1" ? setP1Name(e.target.value) : setP2Name(e.target.value))}
               className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm mt-1 mb-2"
             />
-            <div className="text-sm font-bold text-gray-600 uppercase mb-1">Giới tính</div>
+            <div className="text-base font-bold text-gray-600 uppercase mb-1">Giới tính</div>
             <div className="flex flex-wrap gap-1.5 mb-2">
               {GENDERS.map((g) => (
                 <button
@@ -2846,7 +2847,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
                 </button>
               ))}
             </div>
-            <div className="text-sm font-bold text-gray-600 uppercase mb-1">Hoa yêu thích</div>
+            <div className="text-base font-bold text-gray-600 uppercase mb-1">Hoa yêu thích</div>
             <div className="flex flex-wrap gap-1.5 mb-2">
               {FLOWERS.map((f) => (
                 <button
@@ -2860,7 +2861,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
                 </button>
               ))}
             </div>
-            <div className="text-sm font-bold text-gray-600 uppercase mb-1">Là gì của người kia</div>
+            <div className="text-base font-bold text-gray-600 uppercase mb-1">Là gì của người kia</div>
             <div className="flex flex-wrap gap-1.5">
               {ROLE_TITLES.map((r) => (
                 <button
@@ -2905,7 +2906,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
         ))}
 
         <div className="mb-4">
-          <div className="text-sm font-bold text-gray-600 uppercase mb-2">Thang mức độ ưu tiên nhiệm vụ</div>
+          <div className="text-base font-bold text-gray-600 uppercase mb-2">Thang mức độ ưu tiên nhiệm vụ</div>
           <div className="flex flex-wrap gap-1.5 mb-2">
             {urgencyLevels.map((u) => (
               <span key={u} className="text-sm font-bold px-2.5 py-1 rounded-full bg-gray-50 border border-gray-200 flex items-center gap-1">
@@ -2937,7 +2938,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
         </div>
 
         <div className="mb-5">
-          <div className="text-sm font-bold text-gray-600 uppercase mb-2">Mã phòng của hai bạn</div>
+          <div className="text-base font-bold text-gray-600 uppercase mb-2">Mã phòng của hai bạn</div>
           <div className="flex items-center justify-between bg-rose-50 border border-rose-100 rounded-xl px-4 py-3">
             <span className="text-lg font-extrabold tracking-[0.25em] text-rose-500" style={{ fontFamily: DISPLAY_FONT }}>
               {coupleId}
@@ -2958,7 +2959,7 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
         </div>
 
         <div className="mb-5">
-          <div className="text-sm font-bold text-gray-600 uppercase mb-2">Thông báo trên thiết bị</div>
+          <div className="text-base font-bold text-gray-600 uppercase mb-2">Thông báo trên thiết bị</div>
           <button
             onClick={onRequestNotif}
             className="w-full bg-sky-50 text-sky-600 border border-sky-200 font-bold py-2.5 rounded-xl text-sm"
