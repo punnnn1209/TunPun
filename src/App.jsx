@@ -905,7 +905,7 @@ function CelebrationOverlay({ celebration }) {
 /* Ambient critters — slow, wandering, mid-screen cute moments             */
 /* ---------------------------------------------------------------------- */
 
-const AMBIENT_TYPES = ["cat", "kiss", "bunny", "paw"];
+const AMBIENT_TYPES = ["cat", "kiss", "bunny", "paw", "dog", "chick", "heart", "star", "bird", "bee", "unicorn"];
 
 function AmbientCritters() {
   const [critter, setCritter] = useState(null);
@@ -966,6 +966,69 @@ function AmbientCritters() {
             </span>
           ))}
         </div>
+      )}
+      {critter.type === "dog" && (
+        <span
+          key={critter.key}
+          className="absolute text-5xl"
+          style={{ top: `${critter.top}vh`, animation: "catRun 11s ease-in-out forwards" }}
+        >
+          🐶
+        </span>
+      )}
+      {critter.type === "unicorn" && (
+        <span
+          key={critter.key}
+          className="absolute text-5xl"
+          style={{ top: `${critter.top}vh`, animation: "catRun 13s ease-in-out forwards" }}
+        >
+          🦄
+        </span>
+      )}
+      {critter.type === "chick" && (
+        <span
+          key={critter.key}
+          className="absolute text-4xl"
+          style={{ top: `${critter.top}vh`, animation: "bunnyHop 9s ease-in-out forwards" }}
+        >
+          🐥
+        </span>
+      )}
+      {critter.type === "heart" && (
+        <span
+          key={critter.key}
+          className="absolute text-3xl"
+          style={{ top: `${critter.top}vh`, animation: "heartDrift 14s ease-in-out forwards" }}
+        >
+          💕
+        </span>
+      )}
+      {critter.type === "star" && (
+        <span
+          key={critter.key}
+          className="absolute text-3xl"
+          style={{ top: `${critter.top}vh`, left: 0, animation: "starGlide 2.8s ease-in forwards" }}
+        >
+          🌟
+        </span>
+      )}
+      {critter.type === "bird" && (
+        <span
+          key={critter.key}
+          className="absolute text-4xl"
+          style={{ top: `${critter.top}vh`, animation: "birdFly 7s ease-in-out forwards" }}
+        >
+          🐦
+        </span>
+      )}
+      {critter.type === "bee" && (
+        <span
+          key={critter.key}
+          className="absolute text-3xl"
+          style={{ top: `${critter.top}vh`, left: 0, animation: "flutter 9s ease-in-out forwards" }}
+        >
+          🐝
+        </span>
       )}
     </div>
   );
@@ -3584,6 +3647,30 @@ export default function App() {
           0% { opacity: 0; transform: scale(0.6); }
           40% { opacity: 0.55; transform: scale(1); }
           100% { opacity: 0; transform: scale(1); }
+        }
+          @keyframes heartDrift {
+          0% { left: -10%; transform: translateY(0) scale(0.7); opacity: 0; }
+          12% { opacity: 1; transform: scale(1); }
+          30% { transform: translateY(-14px) scale(1.05); }
+          50% { transform: translateY(8px) scale(1); }
+          70% { transform: translateY(-10px) scale(1.05); }
+          88% { opacity: 1; }
+          100% { left: 105%; transform: translateY(0) scale(0.9); opacity: 0; }
+        }
+        @keyframes starGlide {
+          0% { transform: translate(-15vw, -8vh) scale(0.6) rotate(0deg); opacity: 0; }
+          10% { opacity: 1; }
+          60% { transform: translate(70vw, 35vh) scale(1.1) rotate(180deg); opacity: 1; }
+          100% { transform: translate(130vw, 70vh) scale(0.7) rotate(320deg); opacity: 0; }
+        }
+        @keyframes birdFly {
+          0% { left: -10%; transform: translateY(0); opacity: 0; }
+          8% { opacity: 1; }
+          30% { transform: translateY(-10px); }
+          50% { transform: translateY(6px); }
+          70% { transform: translateY(-8px); }
+          92% { opacity: 1; }
+          100% { left: 110%; transform: translateY(0); opacity: 0; }
         }
         @keyframes heroPop {
           0% { transform: scale(0.7) rotate(-8deg); }
