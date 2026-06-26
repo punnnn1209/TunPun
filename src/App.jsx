@@ -949,14 +949,15 @@ function AmbientCritters() {
 function BlobBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute -top-10 -left-10 w-56 h-56 rounded-full bg-rose-200 opacity-40 blur-3xl" />
-      <div className="absolute top-1/3 -right-12 w-64 h-64 rounded-full bg-amber-200 opacity-40 blur-3xl" />
-      <div className="absolute bottom-0 left-1/4 w-56 h-56 rounded-full bg-violet-200 opacity-30 blur-3xl" />
+      <div className="absolute -top-10 -left-10 w-56 h-56 rounded-full bg-indigo-300 opacity-30 blur-3xl" />
+      <div className="absolute top-1/3 -right-12 w-64 h-64 rounded-full bg-blue-300 opacity-30 blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-56 h-56 rounded-full bg-sky-200 opacity-40 blur-3xl" />
+      <div className="absolute bottom-10 right-0 w-40 h-40 rounded-full bg-cyan-100 opacity-50 blur-3xl" />
     </div>
   );
 }
 
-function ProfileSetupForm({ initial, accentText, accentBorder, onSubmit, submitLabel }) {
+function ProfileSetupForm({ initial, accentText, accentBorder, accentRing, accentSolid, onSubmit, submitLabel }) {
   const [name, setName] = useState(initial?.name || "");
   const [emoji, setEmoji] = useState(initial?.emoji || PROFILE_EMOJI_CHOICES[0]);
   const [flower, setFlower] = useState(initial?.flower || FLOWERS[0].id);
@@ -970,7 +971,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, onSubmit, submitL
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="VD: Bống"
-        className="w-full mt-1 mb-3 rounded-xl border border-gray-200 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-200"
+        className={`w-full mt-1 mb-3 rounded-xl border border-gray-200 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 ${accentRing || "focus:ring-sky-200"}`}
         style={{ fontFamily: BODY_FONT }}
       />
 
@@ -1039,7 +1040,7 @@ function ProfileSetupForm({ initial, accentText, accentBorder, onSubmit, submitL
       <button
         onClick={() => onSubmit({ name: name.trim(), emoji, flower, gender, roleTitle })}
         disabled={!name.trim()}
-        className="w-full bg-rose-400 hover:bg-rose-500 disabled:opacity-40 text-white font-bold py-3 rounded-2xl shadow-sm transition-colors text-lg"
+        className={`w-full ${accentSolid || "bg-sky-400 hover:bg-sky-500"} disabled:opacity-40 text-white font-bold py-3 rounded-2xl shadow-sm transition-colors text-lg`}
         style={{ fontFamily: DISPLAY_FONT }}
       >
         {submitLabel}
@@ -1056,7 +1057,7 @@ function ContactField({ method, setMethod, contact, setContact }) {
         <button
           onClick={() => setMethod("gmail")}
           className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-bold border ${
-            method === "gmail" ? "bg-rose-50 border-rose-300 text-rose-500" : "border-gray-200 text-gray-400"
+            method === "gmail" ? "bg-sky-50 border-sky-300 text-sky-500" : "border-gray-200 text-gray-400"
           }`}
         >
           <Mail size={15} /> Gmail
@@ -1064,7 +1065,7 @@ function ContactField({ method, setMethod, contact, setContact }) {
         <button
           onClick={() => setMethod("phone")}
           className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-bold border ${
-            method === "phone" ? "bg-rose-50 border-rose-300 text-rose-500" : "border-gray-200 text-gray-400"
+            method === "phone" ? "bg-sky-50 border-sky-300 text-sky-500" : "border-gray-200 text-gray-400"
           }`}
         >
           <Phone size={15} /> Số điện thoại
@@ -1074,7 +1075,7 @@ function ContactField({ method, setMethod, contact, setContact }) {
         value={contact}
         onChange={(e) => setContact(e.target.value)}
         placeholder={method === "gmail" ? "ten@gmail.com" : "09xxxxxxxx"}
-        className="w-full rounded-xl border border-gray-200 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-200"
+        className="w-full rounded-xl border border-gray-200 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-200"
       />
       <p className="text-[11px] text-gray-400 mt-1.5">* Chỉ để hiển thị trong hồ sơ, không dùng để đăng nhập — phòng của bạn được bảo vệ bằng mã kết nối riêng.</p>
     </div>
@@ -1083,11 +1084,11 @@ function ContactField({ method, setMethod, contact, setContact }) {
 
 function WelcomeScreen({ onPickCreate, onPickJoin }) {
   return (
-    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-rose-50 via-orange-50 to-amber-50">
+    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-blue-100 via-sky-50 to-white">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
         <div className="text-5xl mb-3">💌</div>
-        <h1 className="text-3xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
+        <h1 className="text-3xl font-extrabold text-blue-600 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
           {APP_NAME}
         </h1>
         <p className="text-sm text-gray-500 mb-8 text-center max-w-xs">
@@ -1095,14 +1096,14 @@ function WelcomeScreen({ onPickCreate, onPickJoin }) {
         </p>
         <button
           onClick={onPickCreate}
-          className="w-full max-w-sm bg-rose-400 hover:bg-rose-500 text-white font-bold py-3.5 rounded-2xl shadow-sm mb-3 flex items-center justify-center gap-2 text-lg"
+          className="w-full max-w-sm bg-sky-500 hover:bg-sky-600 text-white font-bold py-3.5 rounded-2xl shadow-sm mb-3 flex items-center justify-center gap-2 text-lg"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           <Link2 size={18} /> Tạo phòng mới
         </button>
         <button
           onClick={onPickJoin}
-          className="w-full max-w-sm bg-white border border-rose-200 text-rose-500 font-bold py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2 text-lg"
+          className="w-full max-w-sm bg-white border border-sky-200 text-sky-600 font-bold py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2 text-lg"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           <KeyRound size={18} /> Tham gia bằng mã
@@ -1119,7 +1120,7 @@ function CreateRoomScreen({ onBack, onCreated }) {
   const [error, setError] = useState("");
 
   return (
-    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-rose-50 via-orange-50 to-amber-50">
+    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-blue-50 via-sky-50 to-white">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
         <button onClick={onBack} className="self-start mb-3 text-xs font-bold text-gray-400">
@@ -1129,14 +1130,16 @@ function CreateRoomScreen({ onBack, onCreated }) {
         <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
           Tạo phòng của hai bạn
         </h1>
-        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Điền thông tin của bạn, app sẽ tạo một mã riêng để người ấy tham gia.</p>
+        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Điền thông tin của bạn, app sẽ tạo một link riêng để người ấy bấm vào tham gia.</p>
 
         <ContactField method={method} setMethod={setMethod} contact={contact} setContact={setContact} />
         {error && <div className="text-xs text-rose-500 font-bold mb-2 text-center">{error}</div>}
 
         <ProfileSetupForm
-          accentText="text-rose-500"
-          accentBorder="border-rose-400"
+          accentText="text-sky-600"
+          accentBorder="border-sky-400"
+          accentRing="focus:ring-sky-200"
+          accentSolid="bg-sky-500 hover:bg-sky-600"
           submitLabel={creating ? "Đang tạo phòng..." : "Tạo phòng & tiếp tục 💞"}
           onSubmit={async ({ name, emoji, flower, gender, roleTitle }) => {
             if (creating) return;
@@ -1160,38 +1163,65 @@ function CreateRoomScreen({ onBack, onCreated }) {
 }
 
 function RoomCodeReveal({ code, onContinue }) {
-  const [copied, setCopied] = useState(false);
-  const copy = () => {
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
+  const shareLink = (() => {
+    try {
+      return `${window.location.origin}${window.location.pathname}?join=${code}`;
+    } catch {
+      return code;
+    }
+  })();
+  const copyLink = () => {
+    try {
+      navigator.clipboard.writeText(shareLink);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 1500);
+    } catch {
+      // clipboard not available; ignore
+    }
+  };
+  const copyCode = () => {
     try {
       navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      setCopiedCode(true);
+      setTimeout(() => setCopiedCode(false), 1500);
     } catch {
       // clipboard not available; ignore
     }
   };
   return (
-    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-rose-50 via-orange-50 to-amber-50">
+    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-blue-50 via-sky-50 to-white">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
         <div className="text-5xl mb-3">🎉</div>
         <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
           Phòng của bạn đã sẵn sàng!
         </h1>
-        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Gửi mã này cho người ấy để cùng tham gia {APP_NAME} 💌</p>
+        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Gửi link này cho người ấy — bấm vào là vào thẳng phòng luôn, không cần nhập gì thêm 💌</p>
 
-        <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-rose-100 p-6 text-center mb-4">
-          <div className="text-4xl font-extrabold tracking-[0.3em] text-rose-500 mb-3" style={{ fontFamily: DISPLAY_FONT }}>
-            {code}
-          </div>
-          <button onClick={copy} className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-400 bg-rose-50 px-3 py-1.5 rounded-full">
-            <Copy size={13} /> {copied ? "Đã sao chép!" : "Sao chép mã"}
+        <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-sky-100 p-5 text-center mb-4">
+          <div className="text-[11px] font-bold text-gray-400 uppercase mb-1.5">Link mời (cách nhanh nhất)</div>
+          <div className="text-xs text-sky-700 font-bold bg-sky-50 rounded-xl p-3 mb-3 break-all">{shareLink}</div>
+          <button onClick={copyLink} className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-full">
+            <Copy size={13} /> {copiedLink ? "Đã sao chép link!" : "Sao chép link mời"}
           </button>
+
+          <div className="text-[11px] text-gray-400 mt-4 mb-1">Hoặc đọc mã cho người ấy tự nhập:</div>
+          <div className="flex items-center justify-center gap-2">
+            <span className="text-lg font-extrabold tracking-[0.25em] text-gray-500" style={{ fontFamily: DISPLAY_FONT }}>
+              {code}
+            </span>
+            <button onClick={copyCode} className="text-gray-400">
+              <Copy size={14} />
+            </button>
+          </div>
+          {copiedCode && <div className="text-[10px] text-emerald-500 font-bold mt-1">Đã sao chép mã!</div>}
         </div>
 
         <button
           onClick={onContinue}
-          className="w-full max-w-sm bg-rose-400 hover:bg-rose-500 text-white font-bold py-3.5 rounded-2xl shadow-sm text-lg"
+          className="w-full max-w-sm bg-sky-500 hover:bg-sky-600 text-white font-bold py-3.5 rounded-2xl shadow-sm text-lg"
           style={{ fontFamily: DISPLAY_FONT }}
         >
           Vào app ngay 🚀
@@ -1201,26 +1231,32 @@ function RoomCodeReveal({ code, onContinue }) {
   );
 }
 
-function JoinRoomScreen({ onBack, onJoined }) {
-  const [code, setCode] = useState("");
+function JoinRoomScreen({ onBack, onJoined, initialCode }) {
+  const [code, setCode] = useState(initialCode || "");
   const [checking, setChecking] = useState(false);
   const [validRoom, setValidRoom] = useState(null);
+  const [fullRoom, setFullRoom] = useState(null); // { code, profiles } — room already has both people, let the rightful owner pick who they are
   const [error, setError] = useState("");
   const [method, setMethod] = useState("gmail");
   const [contact, setContact] = useState("");
   const [joining, setJoining] = useState(false);
 
-  const checkCode = async () => {
-    const val = code.trim().toUpperCase();
+  const checkCode = async (overrideVal) => {
+    const val = (overrideVal ?? code).trim().toUpperCase();
     if (val.length < 4) return;
     setChecking(true);
     setError("");
+    setFullRoom(null);
     try {
       const roomData = await getCoupleData(val);
       if (!roomData) {
         setError("Không tìm thấy phòng với mã này, kiểm tra lại nhé 💌");
-      } else if (roomData.profiles?.p2?.name) {
-        setError("Phòng này đã có đủ hai người rồi 💞");
+      } else if (roomData.profiles?.p1?.name && roomData.profiles?.p2?.name) {
+        // Both slots already taken. Instead of blocking, let whoever knows the code
+        // pick which of the two people they are — this is also how re-installing the
+        // app (e.g. "Add to Home Screen" on iOS keeps a separate, empty storage area
+        // from regular Safari) gets back into an existing room on the same device.
+        setFullRoom({ code: val, profiles: roomData.profiles });
       } else {
         setValidRoom(val);
       }
@@ -1231,9 +1267,61 @@ function JoinRoomScreen({ onBack, onJoined }) {
     }
   };
 
+  // Arrived via a one-tap invite link (?join=CODE) — skip straight to checking it.
+  useEffect(() => {
+    if (initialCode) checkCode(initialCode);
+  }, []);
+
+  if (fullRoom) {
+    return (
+      <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-50 via-blue-50 to-white">
+        <BlobBackground />
+        <div className="relative z-10 flex flex-col items-center w-full">
+          <div className="text-4xl mb-2">🔑</div>
+          <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
+            Phòng này đã có đủ hai người
+          </h1>
+          <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">
+            Nếu đây là phòng của bạn (đổi máy, đổi trình duyệt, hoặc vừa cài app...), chọn đúng vai trò của mình để vào lại nhé.
+          </p>
+
+          <div className="w-full max-w-sm space-y-3 mb-4">
+            {["p1", "p2"].map((pid) => {
+              const p = fullRoom.profiles[pid];
+              if (!p?.name) return null;
+              return (
+                <button
+                  key={pid}
+                  onClick={() => onJoined(fullRoom.code, pid)}
+                  className="w-full bg-white rounded-2xl border-2 border-blue-200 hover:border-blue-400 p-4 flex items-center gap-3 text-left shadow-sm"
+                >
+                  <span className="text-3xl">{p.emoji}</span>
+                  <span className="font-bold text-gray-700">Tôi là {p.name}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={() => {
+              setFullRoom(null);
+              setCode("");
+            }}
+            className="text-xs font-bold text-gray-400 underline"
+          >
+            Không phải phòng của tôi, thử mã khác
+          </button>
+          <button onClick={onBack} className="mt-3 text-xs font-bold text-gray-400">
+            ← Quay lại
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (validRoom) {
     return (
-      <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-violet-50 via-rose-50 to-amber-50">
+      <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-50 via-blue-50 to-white">
         <BlobBackground />
         <div className="relative z-10 flex flex-col items-center w-full">
           <div className="text-4xl mb-2">👋</div>
@@ -1245,8 +1333,10 @@ function JoinRoomScreen({ onBack, onJoined }) {
           <ContactField method={method} setMethod={setMethod} contact={contact} setContact={setContact} />
 
           <ProfileSetupForm
-            accentText="text-violet-500"
-            accentBorder="border-violet-400"
+            accentText="text-indigo-500"
+            accentBorder="border-indigo-400"
+            accentRing="focus:ring-indigo-200"
+            accentSolid="bg-indigo-500 hover:bg-indigo-600"
             submitLabel={joining ? "Đang tham gia..." : "Hoàn tất, vào app 🚀"}
             onSubmit={async ({ name, emoji, flower, gender, roleTitle }) => {
               if (joining) return;
@@ -1254,7 +1344,7 @@ function JoinRoomScreen({ onBack, onJoined }) {
               try {
                 const profile = { name, emoji, flower, gender, roleTitle, login: contact.trim().toLowerCase(), createdAt: todayKey() };
                 await setCouplePath(validRoom, "profiles/p2", profile);
-                onJoined(validRoom);
+                onJoined(validRoom, "p2");
               } catch {
                 setJoining(false);
               }
@@ -1266,7 +1356,7 @@ function JoinRoomScreen({ onBack, onJoined }) {
   }
 
   return (
-    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-violet-50 via-rose-50 to-amber-50">
+    <div className="min-h-screen relative flex flex-col items-center justify-center px-5 py-10 bg-gradient-to-b from-indigo-50 via-blue-50 to-white">
       <BlobBackground />
       <div className="relative z-10 flex flex-col items-center w-full">
         <button onClick={onBack} className="self-start mb-3 text-xs font-bold text-gray-400">
@@ -1276,7 +1366,7 @@ function JoinRoomScreen({ onBack, onJoined }) {
         <h1 className="text-2xl font-extrabold text-gray-700 mb-1 text-center" style={{ fontFamily: DISPLAY_FONT }}>
           Tham gia phòng
         </h1>
-        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Nhập mã 6 ký tự mà người ấy đã gửi cho bạn.</p>
+        <p className="text-sm text-gray-500 mb-6 text-center max-w-xs">Nhập mã 6 ký tự mà người ấy đã gửi cho bạn (hoặc bấm thẳng vào link mời sẽ tự điền sẵn).</p>
 
         <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-gray-100 p-5">
           <input
@@ -1287,14 +1377,14 @@ function JoinRoomScreen({ onBack, onJoined }) {
             }}
             placeholder="VD: K7XQ2P"
             maxLength={8}
-            className="w-full text-center text-2xl font-extrabold tracking-[0.2em] rounded-xl border border-gray-200 px-3 py-3 text-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-200 mb-2"
+            className="w-full text-center text-2xl font-extrabold tracking-[0.2em] rounded-xl border border-gray-200 px-3 py-3 text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 mb-2"
             style={{ fontFamily: DISPLAY_FONT }}
           />
           {error && <div className="text-xs text-rose-500 font-bold mb-2 text-center">{error}</div>}
           <button
-            onClick={checkCode}
+            onClick={() => checkCode()}
             disabled={checking}
-            className="w-full bg-violet-400 hover:bg-violet-500 disabled:opacity-50 text-white font-bold py-3 rounded-2xl shadow-sm text-lg"
+            className="w-full bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 text-white font-bold py-3 rounded-2xl shadow-sm text-lg"
             style={{ fontFamily: DISPLAY_FONT }}
           >
             {checking ? "Đang kiểm tra..." : "Tiếp tục"}
@@ -2897,6 +2987,19 @@ function SettingsModal({ data, setData, coupleId, onClose, onLogout, notifPermis
 /* Root App                                                                */
 /* ---------------------------------------------------------------------- */
 
+// Lets a shared link like https://yourapp.com/?join=K7XQ2P drop the other person
+// straight into the join flow with the code already filled in — no separate
+// "open link, then copy the code, then paste it" steps.
+function getJoinCodeFromUrl() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("join");
+    return code ? code.trim().toUpperCase() : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function App() {
   const [coupleId, setCoupleId] = useState(() => loadSession()?.coupleId || null);
   const [activeProfile, setActiveProfile] = useState(() => loadSession()?.profileId || null);
@@ -2904,7 +3007,7 @@ export default function App() {
   const [connecting, setConnecting] = useState(!!loadSession());
   const [connectError, setConnectError] = useState(null); // "denied" | "timeout" | "notfound" | null
   const [retryKey, setRetryKey] = useState(0);
-  const [screen, setScreen] = useState("welcome"); // welcome | create | join | reveal
+  const [screen, setScreen] = useState(() => (getJoinCodeFromUrl() ? "join" : "welcome")); // welcome | create | join | reveal
   const [revealCode, setRevealCode] = useState(null);
 
   const [tab, setTab] = useState("today");
@@ -3066,7 +3169,8 @@ export default function App() {
       return (
         <JoinRoomScreen
           onBack={() => setScreen("welcome")}
-          onJoined={(code) => handleLoggedIntoRoom(code, "p2")}
+          onJoined={(code, profileId) => handleLoggedIntoRoom(code, profileId || "p2")}
+          initialCode={getJoinCodeFromUrl()}
         />
       );
     }
@@ -3076,7 +3180,7 @@ export default function App() {
   // Paired, but still waiting on the first snapshot from Firebase.
   if (connecting) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-rose-50 gap-2">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-sky-50 gap-2">
         <div className="text-3xl animate-pulse">💞</div>
         <div className="text-xs font-bold text-gray-400">Đang kết nối với phòng của hai bạn...</div>
       </div>
@@ -3101,7 +3205,7 @@ export default function App() {
     };
     const m = messages[connectError] || messages.notfound;
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-rose-50 gap-3 px-6 text-center">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-sky-50 gap-3 px-6 text-center">
         <div className="text-4xl">😵</div>
         <div className="font-extrabold text-gray-700" style={{ fontFamily: DISPLAY_FONT }}>
           {m.title}
@@ -3110,7 +3214,7 @@ export default function App() {
         <div className="flex gap-2 mt-2">
           <button
             onClick={() => setRetryKey((k) => k + 1)}
-            className="bg-rose-400 hover:bg-rose-500 text-white font-bold px-5 py-2.5 rounded-full text-sm"
+            className="bg-sky-500 hover:bg-sky-600 text-white font-bold px-5 py-2.5 rounded-full text-sm"
           >
             Thử lại
           </button>
@@ -3130,7 +3234,7 @@ export default function App() {
   const alertCount = computeAlerts(data).filter((a) => a.profileId !== activeProfile).length;
 
   return (
-    <div className="min-h-screen bg-rose-50 flex flex-col" style={{ fontFamily: BODY_FONT }}>
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-blue-50 to-white flex flex-col" style={{ fontFamily: BODY_FONT }}>
       <style>{`
         ${FONT_IMPORT}
         @keyframes giftPop {
