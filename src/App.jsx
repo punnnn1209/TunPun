@@ -2719,7 +2719,7 @@ function GiftTab({ data, setData, activeProfile, onReveal }) {
       <RoutineComparisonCard data={data} setData={setData} activeProfile={active} />
 
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-        <div className="text-base font-extrabold text-gray-700 mb-2">🤫 Hãy tặng thêm phần thưởng bí mật cho {nameOf(data, other)} dấu y của bạn nào</div>
+        <div className="text-base font-extrabold text-gray-700 mb-2">🤫 Hãy tặng thêm phần thưởng bí mật cho {nameOf(data, other)} dấu yêu của bạn nào</div>
         <div className="text-base font-bold text-gray-600 mb-1.5">Chọn nhanh từ gợi ý</div>
         <div className="flex flex-wrap gap-1.5 mb-3">
           {PRESET_GIFTS.map((g) => (
